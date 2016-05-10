@@ -1,0 +1,8 @@
+package DesignPatterns.FactoryPattern;
+
+/**
+ * Created by Syril on 09-05-2016.
+ */
+public interface Dough {
+    void getName();
+}
