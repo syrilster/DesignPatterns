@@ -1,7 +1,7 @@
-package DesignPatterns.FactoryPattern;
+package designPattern.factoryPattern;
 
 /**
- * Created by Syril on 09-05-2016.
+ * Created by syrils on 5/10/16.
  */
 public class CheesePizza extends Pizza {
     PizzaIngredientFactory ingredientFactory;
@@ -13,8 +13,18 @@ public class CheesePizza extends Pizza {
 
     @Override
     void prepare() {
-        System.out.println("Preparing.." + name);
+        System.out.println("Preparing pizza ... " + name);
         dough = ingredientFactory.createDough();
         sauce = ingredientFactory.createSauce();
+
+    }
+
+    @Override
+    void cut() {
+        if (ingredientFactory instanceof ChicagoPizzaIngredientFactory) {
+            System.out.println("Cutting into square slices !!!");
+        } else {
+            super.cut();
+        }
     }
 }
