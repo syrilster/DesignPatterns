@@ -8,6 +8,8 @@ public class RemoteControl {
     Command[] onCommands;
     Command[] offCommands;
 
+    Command undoCommand;
+
     public RemoteControl() {
         onCommands = new Command[7];
         offCommands = new Command[7];
@@ -19,6 +21,7 @@ public class RemoteControl {
             onCommands[i] = noCommand;
             offCommands[i] = noCommand;
         }
+        undoCommand = noCommand;
     }
 
     /**
@@ -37,10 +40,16 @@ public class RemoteControl {
     //When on and off button is pressed, this method takes care of calling the corresponding execute methods.
     public void onButtonWasPushed(int slot) {
         onCommands[slot].execute();
+        undoCommand = onCommands[slot];
     }
 
     public void offButtonWasPushed(int slot) {
         offCommands[slot].execute();
+        undoCommand = offCommands[slot];
+    }
+
+    public void undoButtonWasPushed() {
+        undoCommand.undo();
     }
 
     @Override
