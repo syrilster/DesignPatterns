@@ -1,3 +1,17 @@
+---
+layout: pattern
+title: Builder
+categories: Creational
+tags:
+ - Java
+ - Gang Of Four
+---
+
+## Intent
+Separate the construction of a complex object from its
+representation so that the same construction process can create different
+representations.
+
 Builder design pattern is a creational design pattern like Factory Pattern and Abstract Factory Pattern. This pattern was introduced to solve some of the problems with Factory and Abstract Factory design patterns when the Object contains a lot of attributes.
 
 There are three major issues with Factory and Abstract Factory design patterns when the Object contains a lot of attributes.
