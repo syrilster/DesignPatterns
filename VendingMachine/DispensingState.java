@@ -1,7 +1,7 @@
-package DesignPatterns.VendingMachine;
+package designPattern.VendingMachine;
 
 /**
- * Created by Syril on 18-07-2016.
+ * Created by syrils on 7/19/16.
  */
 public class DispensingState implements VendingState {
     VendingMachine vendingMachine;
@@ -12,7 +12,7 @@ public class DispensingState implements VendingState {
 
     @Override
     public void insertCoin(int amount) {
-        System.out.println("Please while.. Machine is dispensing !!");
+        System.out.println("Please wait.. Machine is dispensing !!");
     }
 
     @Override
