@@ -1,7 +1,7 @@
-package DesignPatterns.VendingMachine;
+package designPattern.VendingMachine;
 
 /**
- * Created by Syril on 18-07-2016.
+ * Created by syrils on 7/19/16.
  */
 public class VendingMachine {
     VendingState coinInsertedState;
@@ -24,14 +24,14 @@ public class VendingMachine {
         this.dispensingState = new DispensingState(this);
 
         this.vendingState = noCoinInsertedState;
-        this.setChipsCapacity(10);
+        this.setChipsCapacity(1);
         this.setColaCapacity(10);
         this.setBiscuitCapacity(10);
 
         /*Command Pattern */
         dispenseCommand = new Command[7];
         Command noCommand = new NoCommand();
-        for (int i = 0; i < 7; i++) {
+        for (int i = 1; i < 7; i++) {
             dispenseCommand[i] = noCommand;
         }
     }
