@@ -1,17 +1,21 @@
-package DesignPatterns.VendingMachine;
+package designPattern.VendingMachine;
 
 /**
- * Created by Syril on 19-07-2016.
+ * Created by syrils on 7/19/16.
  */
-public class ChipsVendingCommand implements Command {
+public class ChipsVendingCommand implements Command{
     Chips chips;
+    VendingMachine vendingMachine;
 
-    ChipsVendingCommand(Chips chips) {
+    ChipsVendingCommand(Chips chips, VendingMachine vendingMachine) {
         this.chips = chips;
+        this.vendingMachine = vendingMachine;
     }
 
     @Override
     public void execute() {
         chips.dispense();
+        int capacity = this.vendingMachine.getChipsCapacity();
+        this.vendingMachine.setChipsCapacity(--capacity);
     }
 }
