@@ -1,4 +1,4 @@
-package DesignPatterns.ATMDesign;
+package ATMDesign;
 
 /**
  * Created by Syril on 18-05-2016.

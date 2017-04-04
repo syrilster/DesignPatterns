@@ -1,4 +1,4 @@
-package designPattern.command;
+package Command;
 
 /**
  * Created by syrils on 5/11/16.

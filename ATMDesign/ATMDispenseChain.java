@@ -1,4 +1,4 @@
-package DesignPatterns.ATMDesign;
+package ATMDesign;
 
 import java.util.Scanner;
 

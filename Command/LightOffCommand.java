@@ -1,4 +1,4 @@
-package designPattern.command;
+package Command;
 
 /**
  * Created by syrils on 5/11/16.
@@ -14,5 +14,9 @@ public class LightOffCommand implements Command {
     @Override
     public void execute() {
         light.off();
+    }
+
+    @Override
+    public void undo() {
     }
 }
