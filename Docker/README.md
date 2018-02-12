@@ -39,8 +39,8 @@ docker ps
 docker ps -a
 
 ## Build own docker image
-From --> Base image from which the container id built
-RUN --> command to execute on this image
+* From --> Base image from which the container id built
+* RUN --> command to execute on this image
 
 docker build command
 
