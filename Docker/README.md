@@ -1,7 +1,7 @@
-Virtualization vs containerization
-Docker?
-Docker Architecture
-Some Examples
+* Virtualization vs containerization
+* Docker?
+* Docker Architecture
+* Few Examples
 
 Hypervisors : A hypervisor is a program that would enable you to host several different virtual machines on a single hardware. Each one of these virtual machines or operating systems you have will be able to run its own programs, as it will appear that the system has the host hardware's processor, memory and resources. In reality, however, it is actually the hypervisor that is allocating those resources to the virtual machines.
 
