@@ -44,7 +44,7 @@ docker ps -a
 
 docker build command
 
-Ex: docker run --name anyname -p <host-port>:<container:port> <image_name:tag>
+Docker Run command Ex: docker run --name anyname -p <host-port>:<container:port> <image_name:tag>
 
 start/stop containers
 delete container / images
