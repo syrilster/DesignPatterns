@@ -48,3 +48,15 @@ Docker Run command Ex: docker run --name anyname -p <host-port>:<container:port>
 
 start/stop containers
 delete container / images
+
+## Moving a Docker container to another machine
+docker commit
+docker save mynewimage > /tmp/mynewimage.tar
+docker run <container ID/imagename>
+
+or
+
+docker export somename | gzip > image.tar.gz
+tar xvzf image.tar.gz | docker import - image-name
+docker run -t -i image-name /bin/bash
+
