@@ -1,1 +1,8 @@
-
+## EJB specification details how an application server provides the following responsibilities:
+* Transaction processing
+* Integration with persistance API like JPA
+* Concurrency Control
+* Event driven programming using JMS and JCA (Java connector architecture)
+* Asynchronous method invocation
+* Security
+* Deployment of software components in and application server
