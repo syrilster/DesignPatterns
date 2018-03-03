@@ -1,0 +1,1 @@
+## Single-responsiblity principle
