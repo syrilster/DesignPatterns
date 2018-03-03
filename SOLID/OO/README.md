@@ -5,5 +5,7 @@ Indications of Bad code:
 * Coupling - Tight coupling between high level and low level modules. A good software will have well managed dependencies.
 
 ## What is OO?
-Poly: Ability to create one module calling an other yet have the compile time dependency against the flow of control instead of with the flow of control. This allows absolute control over the dependency structure which helps to avoid the above mentioned conditions of bad code.
+Polymorphism: Ability to create one module calling an other yet have the compile time dependency against the flow of control instead of with the flow of control. This allows absolute control over the dependency structure which helps to avoid the above mentioned conditions of bad code.
+
+OO is about managing dependencies by selectively inverting the key dependencies in an architecture to prevent bad code (Rigid, fragile, coupling)
 
