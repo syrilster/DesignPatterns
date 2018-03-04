@@ -25,5 +25,32 @@ Problems with above code:
 * Having a switch class does not allow for the flexibilty to package this class seperately.
 * Code needs a re compilation when a new ShapeType is added.
 
+This can be re-factored as follows:
+
+```
+Interface Shape {
+    public void draw();
+}
+
+Class square implements Shape {
+    public void draw(){
+        // Draw logic here
+    }
+}
+
+Class circle implements Shape {
+    public void draw(){
+        // Draw logic here
+    }
+}
+
+public void drawAllShapes() {
+    for(int i=0; i<n; i++){
+        list[i].draw();
+    }
+}
+
+```
+
 
 
