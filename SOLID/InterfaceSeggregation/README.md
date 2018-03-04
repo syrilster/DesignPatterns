@@ -9,6 +9,8 @@ interface stream {
   void write();
 }
 
+// Above interface could be refactored like the interfaces shown below.
+
 interface ReadableStream {
   void reset();
   void read();
