@@ -8,7 +8,7 @@ In the below picture, SRP can be used effectively:
 
 ```
 Interface Printer {
-void printPage(int page);
+  void printPage(int page);
 }
 
 Class PlainTextPrinter implements Printer {
