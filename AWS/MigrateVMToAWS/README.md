@@ -13,7 +13,8 @@ user@example:/home$ openssl md5 -binary /bin/bash |base64
 Let’s suppose we want to split a file into 2 chunk output files. Use ‘-n’ option with split command limit the number of split output files.
 
 split -n2 filename
-Step 3: Initiate the multipart message upload to Amazon S3
+
+## Step 3: Initiate the multipart message upload to Amazon S3
 Using the aws s3api create-multipart-upload to retrieve the unique UploadId value that associates the original file with the file parts: 
 
 aws s3api create-multipart-upload --bucket <bucket_name> --key <bucket_key_name> --metadata md5=<md5_of_this_part>
@@ -30,8 +31,7 @@ Output:
 }
 ```
 
-
-Step 4: Upload the file parts to Amazon S3
+## Step 4: Upload the file parts to Amazon S3
 In this example, the command to upload the first message part specifies the target bucket, the original file name, the first file part, the UploadId value, and the base64 MD5 checksum for the first file part: 
 
 aws s3api upload-part --bucket <bucket_name> --key <bucket_key_name> --part-number 1 --body MR2-Payara-part1 --upload-id <upload_id_of_main_file> --content-md5 <md5_of_part1>
@@ -50,9 +50,9 @@ aws s3api list-parts --bucket <bucket_name> --key <bucket_key_name> --upload-id 
 aws s3api list-parts --bucket mirthpayaraappliance --key MR2-Payara-OVF.ova --upload-id O4B8jS6KxR5HE2voW4k6oSMli5N3h_PRoijDRar_yxzXMUF6ZHMNpvsUJ_a7dEfgk2Nkvon8.FlnvYCK10iYrJIzaxcCTFyKvuUnii3kZXVKO8OiiL7VdhZZFqtNWoTA
 
 
-Step 5: Complete the multi-part upload process
+## Step 5: Complete the multi-part upload process
 Create a file with the following contents:
-
+```json
 {
     "Parts": [
     {
@@ -65,19 +65,19 @@ Create a file with the following contents:
     }
     ]
 }
-
+```
 
 aws s3api complete-multipart-upload --multipart-upload fileparts --bucket mirthpayaraappliance --key MR2-Payara-OVF.ova --upload-id O4B8jS6KxR5HE2voW4k6oSMli5N3h_PRoijDRar_yxzXMUF6ZHMNpvsUJ_a7dEfgk2Nkvon8.FlnvYCK10iYrJIzaxcCTFyKvuUnii3kZXVKO8OiiL7VdhZZFqtNWoTA
 
 If this final step is successful, then output similar to the following appears:
-
+```json
 {
     "ETag": "\\"13115fdae01633ff0af167d925cad279-2\\"",
     "Bucket": "multirecv",
     "Location": "https://multirecv.s3.amazonaws.com/testfile",
     "Key": "testfile"
 }
-
+```
 
 Once the .vmdk file has been uploaded to S3, spin up a small (t2.micro is fine) EC2 instance that uses the Amazon Linux AMI, you’re only going to be using this temporarily to convert the OVA or .vmdk file to an AMI, and you don’t need anything resource intensive. You want the Amazon flavour because it comes pre-baked with all of the cli tools, and the right versions. 
 
@@ -111,6 +111,7 @@ aws ec2 import-image --cli-input-json "{  \"Description\": \"Mirth Results Payar
 If you didn’t get any errors, you should now be able to watch your import progress by running aws ec2 describe-import-image-tasks:
 
 $ aws ec2 describe-import-image-tasks
+```json
 {
  "ImportImageTasks": [
  {
@@ -136,7 +137,7 @@ $ aws ec2 describe-import-image-tasks
  }
  ]
 }
-
+```
 
 Once that completes (it can take a while) you should be able to launch an EC2 instance, from your AMI. Login to AWS, Goto EC2 -> AMIs -> select your AMI then Launch!
 
