@@ -2,13 +2,14 @@ The first thing you want to do is upload the OVA archive or VMDK file into an S3
 
 https://aws.amazon.com/premiumsupport/knowledge-center/s3-multipart-upload-cli/
 
-Step 1: Obtain the base64 MD5 checksum of the file to be uploaded
+## Step 1: Obtain the base64 MD5 checksum of the file to be uploaded
 
 openssl md5 -binary PATH/TO/FILE |base64
 Output:
 user@example:/home$ openssl md5 -binary /bin/bash |base64
 +e9lnJtCrdoKwYqg9wlFwA==
-Step 2: Split the file to be uploaded into multiple parts
+
+## Step 2: Split the file to be uploaded into multiple parts
 Let’s suppose we want to split a file into 2 chunk output files. Use ‘-n’ option with split command limit the number of split output files.
 
 split -n2 filename
@@ -21,11 +22,13 @@ aws s3api create-multipart-upload --bucket <bucket_name> --key <bucket_key_name>
 aws s3api create-multipart-upload --bucket mirthpayaraappliance --key MR2-Payara-OVF.ova --metadata md5=gKGETBgvT5/DFHPSJLtveA==
 Output:
 
+```json
 {
 "Bucket": "mirthpayaraappliance",
 "UploadId": "O4B8jS6KxR5HE2voW4k6oSMli5N3h_PRoijDRar_yxzXMUF6ZHMNpvsUJ_a7dEfgk2Nkvon8.FlnvYCK10iYrJIzaxcCTFyKvuUnii3kZXVKO8OiiL7VdhZZFqtNWoTA",
 "Key": "MR2-Payara-OVF.ova"
 }
+```
 
 
 Step 4: Upload the file parts to Amazon S3
