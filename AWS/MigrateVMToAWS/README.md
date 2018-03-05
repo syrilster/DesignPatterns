@@ -67,7 +67,7 @@ Create a file with the following contents:
 }
 ```
 
-aws s3api complete-multipart-upload --multipart-upload fileparts --bucket mirthpayaraappliance --key MR2-Payara-OVF.ova --upload-id O4B8jS6KxR5HE2voW4k6oSMli5N3h_PRoijDRar_yxzXMUF6ZHMNpvsUJ_a7dEfgk2Nkvon8.FlnvYCK10iYrJIzaxcCTFyKvuUnii3kZXVKO8OiiL7VdhZZFqtNWoTA
+aws s3api complete-multipart-upload --multipart-upload file://fileparts --bucket mirthpayaraappliance --key MR2-Payara-OVF.ova --upload-id O4B8jS6KxR5HE2voW4k6oSMli5N3h_PRoijDRar_yxzXMUF6ZHMNpvsUJ_a7dEfgk2Nkvon8.FlnvYCK10iYrJIzaxcCTFyKvuUnii3kZXVKO8OiiL7VdhZZFqtNWoTA
 
 If this final step is successful, then output similar to the following appears:
 ```json
