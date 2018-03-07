@@ -9,3 +9,5 @@ In a distributed cache, each of its nodes own part of the cached data. Typically
   **Cons:** How to resolve a missing node. Some distributed caches get around this by using redundant nodes; however, you can imagine how this logic can get complicated quickly, especially when you add or remove nodes from the request layer.
 * **Global Cache**
 A global cache is just as it sounds: all the nodes use the same single cache space. This involves adding a server, or file store of some sort, faster than your original store and accessible by all the request layer nodes. Each of the request nodes queries the cache in the same way it would a local one.
+* **Content Distribution Network (CDN)**
+CDNs are a kind of cache that comes into play for sites serving large amounts of static media. In a typical CDN setup, a request will first ask the CDN for a piece of static media; the CDN will serve that content if it has it locally available. If it isn’t available, the CDN will query the back-end servers for the file and then cache it locally and serve it to the requesting user. Ex: Amazon CloudFront
