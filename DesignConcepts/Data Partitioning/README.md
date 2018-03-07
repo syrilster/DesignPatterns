@@ -25,6 +25,6 @@ The key to sharding by region is that your data within a specific geography does
 Under this scheme, we apply a hash function to some key attribute of the entity we are storing, that yields the partition number. For example, if we have 100 DB servers and our ID is a numeric value that gets incremented by one, each time a new record is inserted. In this example, the hash function could be ‘ID % 100’, which will give us the server number where we can store/read that record. This approach should ensure a uniform allocation of data among servers. The fundamental problem with this approach is that it effectively fixes the total number of DB servers, since adding new servers means changing the hash function which would require redistribution of data and downtime for the service. A workaround for this problem is to use Consistent Hashing.
 * Time partitioning
 The final approach to sharding is one that certain apps naturally gravitate to. If you’re working on data where time is the primary axis, then partitioning by day, week, hour, month is right. Time partitioning is incredibly common when looking at some form of event data.
- * You generate your reporting/alerts by doing analysis on the data with time as one axis.
- * You’re regularly rolling off data so that you have a limited retention of it.
+   * You generate your reporting/alerts by doing analysis on the data with time as one axis.
+   * You’re regularly rolling off data so that you have a limited retention of it.
   
