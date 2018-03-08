@@ -42,5 +42,5 @@ On a sharded database, there are certain extra constraints on the different oper
 * **Referential integrity:** As we saw that performing a cross-shard query on a partitioned database is not feasible, similarly trying to enforce data integrity constraints such as foreign keys in a sharded database can be extremely difficult.
 * **Rebalancing:** There could be many reasons we have to change our sharding scheme:
 
-  * The data distribution is not uniform, e.g., there are a lot of places for a particular ZIP code, that cannot fit into one database partition.
-  * There are a lot of load on a shard, e.g., there are too many requests being handled by the DB shard dedicated to user photos.
+  * The data distribution is not uniform, e.g there are a lot of places for a particular ZIP code, that cannot fit into one database partition.
+  * There are a lot of load on a shard, e.g there are too many requests being handled by the DB shard dedicated to user photos.
