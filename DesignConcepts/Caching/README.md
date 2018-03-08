@@ -34,3 +34,7 @@ Following are some of the most common cache eviction policies:
 * Most Recently Used (MRU): Discards, in contrast to LRU, the most recently used items first.
 * Least Frequently Used (LFU): Counts how often an item is needed. Those that are used least often are discarded first.
 * Random Replacement (RR): Randomly selects a candidate item and discards it to make space when necessary.
+
+##  Common Problems of Sharding
+On a sharded database, there are certain extra constraints on the different operations that can be performed. Most of these constraints are due to the fact that, operations across multiple tables or multiple rows in the same table, will no longer run on the same server.
+
