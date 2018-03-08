@@ -38,3 +38,9 @@ Following are some of the most common cache eviction policies:
 ##  Common Problems of Sharding
 On a sharded database, there are certain extra constraints on the different operations that can be performed. Most of these constraints are due to the fact that, operations across multiple tables or multiple rows in the same table, will no longer run on the same server.
 
+*  **Joins and Denormalization:** Performing joins on a database which is running on one server is straightforward, but once a database is partitioned and spread across multiple machines it is often not feasible to perform joins that span database shards. Such joins will not be performance efficient since data has to be compiled from multiple servers. A common workaround for this problem is to denormalize the database so that queries that previously required joins can be performed from a single table. Of course, the service now has to deal with all the perils of denormalization such as data inconsistency.
+* **Referential integrity:** As we saw that performing a cross-shard query on a partitioned database is not feasible, similarly trying to enforce data integrity constraints such as foreign keys in a sharded database can be extremely difficult.
+* **Rebalancing:** There could be many reasons we have to change our sharding scheme:
+
+  * The data distribution is not uniform, e.g., there are a lot of places for a particular ZIP code, that cannot fit into one database partition.
+  * There are a lot of load on a shard, e.g., there are too many requests being handled by the DB shard dedicated to user photos.
