@@ -3,3 +3,21 @@ Queues are used to effectively manage requests in a large-scale distributed syst
 **JMS (ActiveMQ is a JMS broker implementation)** can be used as a mechanism to allow asynchronous request processing. You may wish to do this because the request take a long time to complete or because several parties may be interested in the actual request. Another reason for using it is to allow multiple clients (potentially written in different languages) to access information via JMS. ActiveMQ is a good example here because you can use the STOMP protocol to allow access from a C#/Java/Ruby client.
 
 JNDI is a service that provides a set of objects to be used by application. This service is usually provided by application server or web server or a dedicated LDAP server. If the tutorial you are trying to follow explains the JMS tutorial in the context of web application, then most likely there are some setups to be done in the application server (e.g. Glassfish, JBoss) or web server (e.g. Tomcat). The way to access JNDI also depends on the provider. Usually, this involves a configuration file (either properties file, or XML file). Another alternative to use JMS is to utilize a dedicated JMS provider such as ActiveMQ. This way, you don't need any application server. Your application can just be a standalone java application (i.e. not necessarily a web application).
+
+Application server (domain.xml)
+<admin-object-resource res-adapter="jmsra" res-type="javax.jms.Queue" jndi-name="jms/NotificationMDB">
+   <property name="Name" value="NotificationMDB"></property>
+</admin-object-resource>
+
+<servers>
+    <server config-ref="server-config" name="server">
+      <resource-ref ref="jdbc/dbresourcename"></resource-ref>
+      <resource-ref ref="jms/NotificationMDB"></resource-ref>
+    </server>
+</servers>
+
+In session Bean (To create a connection and start using)
+    @Resource(mappedName = "jms/QueueConnectionFactory")
+    private ConnectionFactory queueConnectionFactory;
+    @Resource(mappedName = "jms/PatientDirectoryMDB")
+    private Queue patientDirectoryMDB;
