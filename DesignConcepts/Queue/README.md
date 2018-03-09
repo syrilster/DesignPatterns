@@ -24,3 +24,21 @@ private ConnectionFactory queueConnectionFactory;
 @Resource(mappedName = "jms/PatientDirectoryMDB")
 private Queue patientDirectoryMDB;
 ```
+## Queue vs Topic
+
+**Queue:**
+* Point-to-point model
+* Only one consumer gets the message
+* Messages have to be delivered in the order sent
+* A JMS queue only guarantees that each message is processed only once.
+* The Queue knows who the consumer or the JMS client is. The destination is known.
+* The JMS client (the consumer) does not have to be  active or connected to the queue all the time to receive or read the message.
+
+**Topic:**
+* Publish/subscribe model
+* Multiple clients subscribe to the message
+* There is no guarantee messages have to be delivered in the order sent
+* There is no guarantees that each message is processed only once. -- As this can be sensed from the model 
+* The Topic, have multiple subscribers and there is a chance that the topic does not know all the subscribers. The destination is unknown.
+* The subscriber / JMS client needs to the active when the messages are produced by the producer, unless the subscription was a durable subscription. 
+
