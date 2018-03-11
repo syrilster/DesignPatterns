@@ -4,3 +4,11 @@
 * Method Area - Part of heap area which has information of references to class which got loaded during class loading.
 * Native memory - All other language specific code. Ex: Socket connections details.
 * PC Register - Sequence of instructions which needs to be executed next. One PC register per thread. Tells the thread what to do next.
+
+## JMM
+Heap - Young generation, Old generation
+* Young Generation - 
+    * Eden
+    * Survivor 1
+    * Survivor 2
+* Old/Tenured Generation
