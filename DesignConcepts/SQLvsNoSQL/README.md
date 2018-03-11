@@ -13,3 +13,9 @@ Following are most common types of NoSQL:
     APPL, APPL, APPL, IBM, IBM --> APPL(3), IBM(2)
 * But the above compression example can't be used for all columns. like for example a stock price column which is floating point and changes too often. Here a different compression technique should be applied.
 * For analytic SQL queries, column representation can provide order of magnitude reductions in query time.
+
+**Key-Value Stores:** Data is stored in an array of key-value pairs. The ‘key’ is an attribute name, which is linked to a ‘value’. Well-known key value stores include Redis, Voldemort and Amazon Dynamo DB.
+
+**Document Databases:** In these databases data is stored in documents, instead of rows and columns in a table, and these documents are grouped together in collections. Each document can have an entirely different structure. Document databases include the CouchDB and MongoDB.
+
+**Graph Databases:** These databases are used to store data whose relations are best represented in a graph. Data is saved in graph structures with nodes (entities), properties (information about the entities) and lines (connections between the entities). Examples of graph database include Neo4J and InfiniteGraph.
