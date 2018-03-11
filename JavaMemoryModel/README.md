@@ -24,3 +24,4 @@ Heap - Young generation, Old generation
 * Concurrent Mark Sweep - Low pause collectors. Minor GC uses parallel GC algo and CMS is used for old generation area. Uses concurrency to have less stop the world pauses.
 * G1 Garbage first GC - Divides the heap space into multiple equally sized areas and when a GC is required it first collects the area with lesser live data.
 
+## PermGen vs Meta Space
