@@ -7,8 +7,8 @@
 
 ## JMM
 Heap - Young generation, Old generation
-* Young Generation - 
-    * Eden
-    * Survivor 1
-    * Survivor 2
-* Old/Tenured Generation
+* Young Generation - All new objects created here. Minor GC happens here when this area is full.
+    * Eden - All new objects in here. 
+    * Survivor 1 - Objects which did not get GC'ed moves here. 
+    * Survivor 2 - Objects which did not get GC'ed moves here.
+* Old/Tenured Generation - Objects which survived the young generation GC's after several lifecycles(Threshold can be defined) move here. i.e long lived objects. Major GC happens here. 
