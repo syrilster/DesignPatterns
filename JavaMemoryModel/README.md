@@ -35,6 +35,7 @@ Heap - Young generation, Old generation
 * Results in OutOfMemory error due to lack of permGen space.
 
 **Taking thread dumps**
+
 Using jstack command line tool.
 
 * ps -ef | grep java to get process id of a running java application
