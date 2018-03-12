@@ -3,6 +3,13 @@
 * Docker Architecture
 * Few Examples
 
+* Docker is a computer program that performs operating-system-level virtualization also known as containerization.
+
+## Advantages of docker
+* Light weight compared to a traditional VM.
+* Based on open standards. Can be run on any OS like windows, Linux, Mac etc or on cloud.
+* Isolates the need for tight coupling from the underlying infrastructure.
+
 ## Hypervisors: 
 A hypervisor is a program that would enable you to host several different virtual machines on a single hardware. Each one of these virtual machines or operating systems you have will be able to run its own programs, as it will appear that the system has the host hardware's processor, memory and resources. In reality, however, it is actually the hypervisor that is allocating those resources to the virtual machines.
 
