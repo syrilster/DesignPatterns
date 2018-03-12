@@ -33,3 +33,10 @@ Heap - Young generation, Old generation
 **PermGen**
 * Used to store objects of methods and classes.
 * Results in OutOfMemory error due to lack of permGen space.
+
+**Taking thread dumps**
+Using jstack command line tool.
+
+* ps -ef | grep java to get process id of a running java application
+* jstack -l <pid> to get thread dump
+* jvisual - Visually monitors, troubleshoots, and profiles Java applications.
