@@ -25,3 +25,10 @@ Heap - Young generation, Old generation
 * G1 Garbage first GC - Divides the heap space into multiple equally sized areas and when a GC is required it first collects the area with lesser live data.
 
 ## PermGen vs Meta Space
+**Meta Space**
+* Part of native memory i.e OS level memory consuming the OS memory.
+* Process sizes can go large since the meta space goes to the OS.
+* Too many class loading can bring down the server. As memory is the OS memory and not allocated on the heap.
+**PermGen**
+* Used to store objects of methods and classes.
+* Results in OutOfMemory error due to lack of permGen space.
