@@ -29,6 +29,7 @@ Heap - Young generation, Old generation
 * Part of native memory i.e OS level memory consuming the OS memory.
 * Process sizes can go large since the meta space goes to the OS.
 * Too many class loading can bring down the server. As memory is the OS memory and not allocated on the heap.
+
 **PermGen**
 * Used to store objects of methods and classes.
 * Results in OutOfMemory error due to lack of permGen space.
