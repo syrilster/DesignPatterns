@@ -16,7 +16,8 @@ In Consistent Hashing when the hash table is resized (e.g. a new cache host is a
 
 In consistent hashing objects are mapped to the same host if possible. When a host is removed from the system, the objects on that host are shared by other hosts; and when a new host is added, it takes its share from a few hosts without touching other’s shares.
 
-How it works?
+## How it works?
+
 As a typical hash function, consistent hashing maps a key to an integer. Suppose the output of the hash function is in the range of [0, 256]. Imagine that the integers in the range are placed on a ring such that the values are wrapped around.
 
 Here’s how consistent hashing works:
