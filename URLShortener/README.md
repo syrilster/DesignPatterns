@@ -1,3 +1,11 @@
+## Background and strategic fit
+We currently use the Google URL shortening API (goo.gl) to create a short URL to the appointment confirmation link that is sent in appointment reminder SMS messages.  A short URL is needed because SMS messages are limited to 160 characters total, and the full URL to the appointment confirmation page, combined with the other text in the message, is much longer than 160 characters.
+
+The goo.gl service is free, but Google has a rate limit of 100 calls per 100 seconds to the API.  It has also been observed that the call can take up to 2 or 3 seconds to return a shortened URL.  This has caused issues in our SMS appointment reminder service, because we depend on the shortened URLs to include in the message text.  The goo.gl service returns many failures, likely due to the rate limiter.  We have been getting around this by running the SMS process multiple times per day, as customer usage and SMS volume increases, the SMS process is running later and later into the day.
+
+**Google API Limits:**
+The API limits requests to 1 request / per second / per user. A user is defined as a unique IP address. So if you were doing your load testing from a single IP this would have cause your rate limit issue.
+
 ## Skeleton Design: (Few Q&A)
 How should we define our APIs?
 * ShorteningAPI(url) {store the url_mapping and return hash(url)}
