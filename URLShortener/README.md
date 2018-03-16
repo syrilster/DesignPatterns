@@ -30,7 +30,7 @@ Since URL shortening is nothing but a huge hash map. We need to have a **Bijecti
 * Base URL https://temp.healthfusionclaims.com/portal/appointmentconfirmsms.do?id=
 * Confirm Params: PRACTICE_ID=413779&MEMBER_ID=3002358&APPOINTMENT_ID=1041419&TIMESTAMP=1490172292231
 * Final Long URL: https://temp.healthfusionclaims.com/portal/appointmentconfirmsms.do?id=UFJBQ1RJQ0VfSUQ9NDEzNzc5Jk1FTUJFUl9JRD0zMDAyMzU4JkFQUE9JTlRNRU5UX0lEPTEwNDE0MTkmVElNRVNUQU1QPTE0OTAxNzIyOTIyMzE=
-Final Short URL: https://hfsn.us/b3DBKS
+* Final Short URL: https://hfsn.us/b3DBKS
 
 ## Low Level Design:
 **Solution 1 (Simple but dependent on a RDBMS database):**
