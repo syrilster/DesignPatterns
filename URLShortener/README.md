@@ -6,6 +6,9 @@ The goo.gl service is free, but Google has a rate limit of 100 calls per 100 sec
 **Google API Limits:**
 The API limits requests to 1 request / per second / per user. A user is defined as a unique IP address. So if you were doing your load testing from a single IP this would have cause your rate limit issue.
 
+## Data Constraints:
+There will able around 5k to 10K URL's to be generated per day. So roughly around 300,000 new URL's per month.
+
 ## Skeleton Design: (Few Q&A)
 How should we define our APIs?
 * ShorteningAPI(url) {store the url_mapping and return hash(url)}
