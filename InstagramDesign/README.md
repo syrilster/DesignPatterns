@@ -13,3 +13,7 @@ The system would be read-heavy, so we will focus on building a system that can r
 * Practically users can upload as many photos as they like. Efficient management of storage should be a crucial factor while designing this system.
 * Low latency is expected while reading images.
 * Data should be 100% reliable. If a user uploads an image, the system will guarantee that it will never be lost.
+
+## Important Read
+https://www.scribd.com/document/89025069/Mike-Krieger-Instagram-at-the-Airbnb-tech-talk-on-Scaling-Instagram
+
