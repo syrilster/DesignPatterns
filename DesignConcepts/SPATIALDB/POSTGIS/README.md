@@ -10,12 +10,13 @@ Implementing a table that has a column with a data type of **tsvector** and I am
 
 * Gin consists of a B-tree index constructed over entries (ET, entries tree), where each entry is an element of the indexed value (element of array, lexeme for tsvector) and where each tuple in a leaf page is either a pointer to a B-tree over item pointers (PT, posting tree), or a list of item pointers (PL, posting list) if the tuple is small enough.
 
-## If you have a problem that involves finding the things within X distance of other things or finding what things have nothing within X distance do not use ST_Distance for filtering:
+## If you have a problem that involves finding the things within X distance of other things 
 Finding closest things within 1609 meters (~1 mile)
 
-SELECT roads.roadname, pois.poiname
+SELECT roads.roadname, pois.poiname, ST_Distance(pois.geog, 'POINT(-73.98 40.77)')
  FROM roads INNER JOIN pois 
-   ON ST_DWithin(roads.geog, pois.geog, 1609);
+   ON ST_DWithin(roads.geog, pois.geog, 1609)
+ WHERE ts @@ to_tsquery('english', 'oak & tree');
    
 **CARTO (formerly CartoDB)** is a Software as a Service (SaaS) cloud computing platform that provides GIS and web mapping tools for display in a web browser. 
 The company is positioned as a Location Intelligence platform due to tools with an aptitude for data analysis and visualization that do not require previous GIS or development experience.
