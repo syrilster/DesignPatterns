@@ -1,7 +1,7 @@
 postgress - support for native full text search
 full text search --> Meaning the ability to identify that run and running are the same.
 
-Implementing a table that has a column with a data type of ** tsvector ** and I am trying to understand what index would be better to use?
+Implementing a table that has a column with a data type of **tsvector** and I am trying to understand what index would be better to use?
 
 * GIN stands for Generalized Inverted Index. GIN is designed for handling cases where the items to be indexed are composite values, and the queries to be handled by the index need to search for element values that appear within the composite items. 
   For example, the items could be documents, and the queries could be searches for documents containing specific words.
@@ -10,7 +10,7 @@ Implementing a table that has a column with a data type of ** tsvector ** and I 
 
 * Gin consists of a B-tree index constructed over entries (ET, entries tree), where each entry is an element of the indexed value (element of array, lexeme for tsvector) and where each tuple in a leaf page is either a pointer to a B-tree over item pointers (PT, posting tree), or a list of item pointers (PL, posting list) if the tuple is small enough.
 
-If you have a problem that involves finding the things within X distance of other things or finding what things have nothing within X distance do not use ST_Distance for filtering:
+## If you have a problem that involves finding the things within X distance of other things or finding what things have nothing within X distance do not use ST_Distance for filtering:
 Finding closest things within 1609 meters (~1 mile)
 
 SELECT roads.roadname, pois.poiname
