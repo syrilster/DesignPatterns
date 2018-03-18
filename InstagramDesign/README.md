@@ -46,4 +46,14 @@ One simple approach for storing the above schema would be to use an RDBMS like M
 
 ![insta comp design](https://user-images.githubusercontent.com/6800366/37567408-a2e7e048-2aec-11e8-9247-5b589534b1b3.png)
 
+## Reliability and Redundancy
+* Losing files is not an option for our service. Therefore, we will store multiple copies of each file, so that if one storage server dies, we can retrieve the image from the other copy present on a different storage server.
+
+* This principle also applies to other components of the system. If we want to have high availability of the system, we need to have multiple replicas of services running in the system. So that if a few services die down, the system is still available and serving. Redundancy removes the single point of failures in the system.
+
+* If only one instance of a service is required to be running at any point, we can run a redundant secondary copy of the service that is not serving any traffic but whenever primary has any problem it can take control after the failover.
+
+* Creating redundancy in a system can remove single point of failure and provide a backup or spare functionality if needed in a crisis. For example, if there are two instances of the same service running in production, and one fails or degrades, the system can failover to the healthy copy. Failover can happen automatically or require manual intervention.
+
+![insta replicas](https://user-images.githubusercontent.com/6800366/37567469-788c828a-2aed-11e8-8b16-60c9a7b0ca67.png)
 
