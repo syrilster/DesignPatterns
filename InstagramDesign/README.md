@@ -57,3 +57,40 @@ One simple approach for storing the above schema would be to use an RDBMS like M
 
 ![insta replicas](https://user-images.githubusercontent.com/6800366/37567469-788c828a-2aed-11e8-8b16-60c9a7b0ca67.png)
 
+## Data Sharding
+Different schemes for metadata sharding:
+
+* **Partitioning based on UserID:** Let’s assume we shard based on the UserID so that we can keep all photos of a user on the same shard. If one DB shard is 4TB, we will have 712/4 => 178 shards. Let’s assume for future growths we keep 200 shards.
+
+So we will find the shard number by UserID % 200 and then store the data there. To uniquely identify any photo in our system, we can append shard number with each PhotoID.
+
+How can we generate PhotoIDs? Each DB shard can have its own auto-increment sequence for PhotoIDs, and since we will append ShardID with each PhotoID, it will make it unique throughout our system.
+
+**What are different issues with this partitioning scheme?
+
+How would we handle hot users? Several people follow such hot users, and any photo they upload is seen by a lot of other people.
+Some users will have a lot of photos compared to others, thus making a non-uniform distribution of storage.
+What if we cannot store all pictures of a user on one shard? If we distribute photos of a user onto multiple shards, will it cause higher latencies?
+Storing all pictures of a user on one shard can cause issues like unavailability of all of the user’s data if that shard is down or higher latency if it is serving high load etc.
+
+* **Partitioning based on PhotoID:** If we can generate unique PhotoIDs first and then find shard number through PhotoID % 200, this can solve above problems. We would not need to append ShardID with PhotoID in this case as PhotoID will itself be unique throughout the system.
+
+**How can we generate PhotoIDs?** Here we cannot have an auto-incrementing sequence in each shard to define PhotoID since we need to have PhotoID first to find the shard where it will be stored. One solution could be that we dedicate a separate database instance to generate auto-incrementing IDs. If our PhotoID can fit into 64 bits, we can define a table containing only a 64 bit ID field. So whenever we would like to add a photo in our system, we can insert a new row in this table and take that ID to be our PhotoID of the new photo.
+
+Wouldn’t this key generating DB be a single point of failure? Yes, it will be. A workaround for that could be, we can define two such databases, with one generating even numbered IDs and the other odd numbered. For MySQL following script can define such sequences:
+
+```
+KeyGeneratingServer1:
+auto-increment-increment = 2
+auto-increment-offset = 1
+
+KeyGeneratingServer2:
+auto-increment-increment = 2
+auto-increment-offset = 2
+```
+We can put a **load balancer** in front of both of these databases to round robin between them and to deal with down time. Both these servers could be out of sync with one generating more keys than the other, but this will not cause any issue in our system. We can extend this design by defining separate ID tables for Users, Photo-Comments or other objects present in our system.
+
+Alternately, we can implement a key generation scheme.
+
+**How can we plan for future growth of our system?** We can have a large number of logical partitions to accommodate future data growth, such that, in the beginning, multiple logical partitions reside on a single physical database server. Since each database server can have multiple database instances on it, we can have separate databases for each logical partition on any server. So whenever we feel that a certain database server has a lot of data, we can migrate some logical partitions from it to another server. We can maintain a config file (or a separate database) that can map our logical partitions to database servers; this will enable us to move partitions around easily. Whenever we want to move a partition, we just have to update the config file to announce the change.
+
