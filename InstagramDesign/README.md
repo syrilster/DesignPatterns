@@ -66,7 +66,7 @@ So we will find the shard number by UserID % 200 and then store the data there. 
 
 How can we generate PhotoIDs? Each DB shard can have its own auto-increment sequence for PhotoIDs, and since we will append ShardID with each PhotoID, it will make it unique throughout our system.
 
-**What are different issues with this partitioning scheme?
+**What are different issues with this partitioning scheme?**
 
 How would we handle hot users? Several people follow such hot users, and any photo they upload is seen by a lot of other people.
 Some users will have a lot of photos compared to others, thus making a non-uniform distribution of storage.
