@@ -17,3 +17,8 @@ The system would be read-heavy, so we will focus on building a system that can r
 ## Important Read
 https://www.scribd.com/document/89025069/Mike-Krieger-Instagram-at-the-Airbnb-tech-talk-on-Scaling-Instagram
 
+## High Level System Design
+At a high-level, we need to support two scenarios, one to upload photos and the other to view/search photos. Our service would need some block storage servers to store photos and also some database servers to store metadata information about the photos.
+
+![insta design](https://user-images.githubusercontent.com/6800366/37567179-38a5655a-2ae9-11e8-9fd6-5b6aa7547d93.png)
+
