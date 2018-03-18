@@ -22,3 +22,18 @@ At a high-level, we need to support two scenarios, one to upload photos and the 
 
 ![insta design](https://user-images.githubusercontent.com/6800366/37567179-38a5655a-2ae9-11e8-9fd6-5b6aa7547d93.png)
 
+## Database Schema
+* We need to store data about users, their uploaded photos, and people they follow. Photo table will store all data related to a photo, we need to have an index on (PhotoID, CreationDate) since we need to fetch recent photos first.
+
+![insta db](https://user-images.githubusercontent.com/6800366/37567382-2ea79232-2aec-11e8-988c-48b7b35fa31e.png)
+
+One simple approach for storing the above schema would be to use an RDBMS like MySQL since we require joins. But relational databases come with their challenges, especially when we need to scale them. For details, please take a look at SQL vs. NoSQL.
+
+* We can store photos in a distributed file storage like HDFS or S3.
+
+* We can store the above schema in a distributed key-value store to enjoy benefits offered by NoSQL. All the metadata related to photos can go to a table, where the ‘key’ would be the ‘PhotoID’ and the ‘value’ would be an object containing PhotoLocation, UserLocation, CreationTimestamp, etc.
+
+* We also need to store relationships between users and photos, to know who owns which photo. Another relationship we would need to store is the list of people a user follows. For both of these tables, we can use a wide-column datastore like Cassandra. For the ‘UserPhoto’ table, the ‘key’ would be ‘UserID’ and the ‘value’ would be the list of ‘PhotoIDs’ the user owns, stored in different columns. We will have a similar scheme for the ‘UserFollow’ table.
+
+* Cassandra or key-value stores in general, always maintain a certain number of replicas to offer reliability. Also, in such data stores, deletes don’t get applied instantly, data is retained for certain days (to support undeleting) before getting removed from the system permanently.
+
