@@ -37,3 +37,13 @@ One simple approach for storing the above schema would be to use an RDBMS like M
 
 * Cassandra or key-value stores in general, always maintain a certain number of replicas to offer reliability. Also, in such data stores, deletes don’t get applied instantly, data is retained for certain days (to support undeleting) before getting removed from the system permanently.
 
+## Component Design
+* Writes or photo uploads could be slow as they have to go to the disk, whereas reads could be faster, especially, if they are being served from cache.
+
+* Uploading users can consume all the connections, as uploading would be a slower process. This means reads cannot be served if the system gets busy with all the write requests. To handle this bottleneck we can split out read and writes into separate services. **Since web servers have connection limit**, we should keep this thing in mind before designing our system. Let’s assume if a web server can have maximum 500 connections at any time, which means it can’t have more than 500 concurrent uploads or reads. This guides us to have separate dedicated servers for reads and writes so that uploads don’t hog the system.
+
+* Separating image read and write requests will also allow us to scale or optimize each of them independently.
+
+![insta comp design](https://user-images.githubusercontent.com/6800366/37567408-a2e7e048-2aec-11e8-9247-5b589534b1b3.png)
+
+
