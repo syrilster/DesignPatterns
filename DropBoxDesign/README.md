@@ -12,3 +12,12 @@ Here are the top-level requirements for our system:
 * The system should support storing large files up to a GB.
 * ACID-ity is required. Atomicity, Consistency, Isolation and Durability of all file operations should be guaranteed.
 Our system should support offline editing. Users should be able to add/delete/modify files while offline, and as soon as they come * online, all their changes should be synced to the remote servers and other online devices.
+
+## Some Design Considerations
+* We should expect huge read and write volumes.
+* Read to write ratio is expected to be nearly the same.
+* Internally, files can be stored in small parts or chunks (say 4MB), this can provide a lot of benefits e.g. all failed operations shall only be retried for smaller parts of a file. If a user fails to upload a file, then only the failing chunk will be retried.
+* We can reduce the amount of data exchange by transferring updated chunks only.
+* By removing duplicate chunks, we can save storage space and bandwidth usage.
+* Keeping a local copy of the metadata (file name, size, etc.) with the client can save us a lot of round trips to the server.
+* For small changes, clients can intelligently upload the diffs instead of the whole chunk.
