@@ -21,3 +21,14 @@ Our system should support offline editing. Users should be able to add/delete/mo
 * By removing duplicate chunks, we can save storage space and bandwidth usage.
 * Keeping a local copy of the metadata (file name, size, etc.) with the client can save us a lot of round trips to the server.
 * For small changes, clients can intelligently upload the diffs instead of the whole chunk.
+
+## High Level Design
+The user will specify a folder as the workspace on their device. Any file/photo/folder placed in this folder will be uploaded to the cloud, and whenever a file is modified or deleted, it will be reflected in the same way in the cloud storage. The user can specify similar workspaces on all their devices and any modification done on one device will be propagated to all other devices to have the same view of the workspace everywhere.
+
+At a high level, we need to store files and their metadata information like File Name, File Size, Directory, etc., and who this file is shared with. So, we need some servers that can help the clients to upload/download files to Cloud Storage and some servers that can facilitate updating metadata about files and users. We also need some mechanism to notify all clients whenever an update happens so they can synchronize their files.
+
+As shown in the diagram below, Block servers will work with the clients to upload/download files from cloud storage, and Metadata servers will keep metadata of files updated in a SQL or NoSQL database. Synchronization servers will handle the workflow of notifying all clients about different changes for synchronization.
+
+![hdd dropbox](https://user-images.githubusercontent.com/6800366/37654722-1f26be36-2c69-11e8-8f38-4be5b3d36ad5.png)
+
+
