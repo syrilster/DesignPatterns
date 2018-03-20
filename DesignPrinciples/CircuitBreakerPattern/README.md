@@ -48,5 +48,18 @@ The Circuit Breaker framework monitors communications between the services and p
 
 **Hystrix is a latency and fault tolerance library designed to isolate points of access to remote systems, services and 3rd party libraries, stop cascading failure and enable resilience in complex distributed systems where failure is inevitable.**
 
+## What Problem Does Hystrix Solve?
+Applications in complex distributed architectures have dozens of dependencies, each of which will inevitably fail at some point. If the host application is not isolated from these external failures, it risks being taken down with them.
+
+For example, for an application that depends on 30 services where each service has 99.99% uptime, here is what you can expect:
+
+99.9930 = 99.7% uptime
+0.3% of 1 billion requests = 3,000,000 failures
+2+ hours downtime/month even if all dependencies have excellent uptime.
+
+**Reality is generally worse.**
+
+Even when all dependencies perform well the aggregate impact of even 0.01% downtime on each of dozens of services equates to potentially hours a month of downtime if you do not engineer the whole system for resilience.
+
 ## Additional Reads
 https://medium.com/netflix-techblog/fault-tolerance-in-a-high-volume-distributed-system-91ab4faae74a
