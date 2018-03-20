@@ -67,7 +67,15 @@ A solution to above problem could be to use **HTTP long polling.** With long pol
 
 ![dropbox comp](https://user-images.githubusercontent.com/6800366/37657076-f6cd308a-2c6f-11e8-92a5-4cfe8b14dfec.png)
 
+## Metadata Database
+The Metadata Database is responsible for maintaining the versioning and metadata information about files/chunks, users, and workspaces. The Metadata Database can be a relational database such as MySQL, or a NoSQL database service such as DynamoDB. Regardless of the type of the database, the Synchronization Service should be able to provide a consistent view of the files using a database, especially if more than one user work with the same file simultaneously. Using a relational database can simplify the implementation of the Synchronization Service as they natively support ACID properties.
 
+Metadata Database should be storing information about following objects:
+* Chunks
+* Files
+* User
+* Devices
+* Workspace (sync folders)
 
 
 
