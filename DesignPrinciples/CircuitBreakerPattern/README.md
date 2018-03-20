@@ -15,3 +15,13 @@
 ## Circuit breaker vs Retry pattern
 
 The purpose of the Circuit Breaker pattern is different than the Retry pattern. The Retry pattern enables an application to retry an operation in the expectation that it'll succeed. The Circuit Breaker pattern prevents an application from performing an operation that is likely to fail. An application can combine these two patterns by using the Retry pattern to invoke an operation through a circuit breaker. However, the retry logic should be sensitive to any exceptions returned by the circuit breaker and abandon retry attempts if the circuit breaker indicates that a fault is not transient.
+
+## Principles of Resiliency
+Here are some of the key principles that informed our thinking as we set out to make the API more resilient.
+
+* A failure in a service dependency should not break the user experience for members
+* The API should automatically take corrective action when one of its service dependencies fails
+* The API should be able to show us what’s happening right now, in addition to what was happening 15–30 minutes ago, yesterday, last week, etc
+
+## Additional Reads
+https://medium.com/netflix-techblog/fault-tolerance-in-a-high-volume-distributed-system-91ab4faae74a
