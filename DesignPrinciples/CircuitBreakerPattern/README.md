@@ -46,5 +46,7 @@ The method can respond to the failure in several ways:
 
 The Circuit Breaker framework monitors communications between the services and provides quality of service analysis on each circuit through a health monitor. Teams can define criteria to designate when outbound requests will no longer go to a failing service but will instead be routed to the fallback method. Criteria can include success/failure ratios, latent response ratios, and pool size. The fallback method is called until the failing service is functional again.
 
+**Hystrix is a latency and fault tolerance library designed to isolate points of access to remote systems, services and 3rd party libraries, stop cascading failure and enable resilience in complex distributed systems where failure is inevitable.**
+
 ## Additional Reads
 https://medium.com/netflix-techblog/fault-tolerance-in-a-high-volume-distributed-system-91ab4faae74a
