@@ -33,5 +33,18 @@ Here are some of the key principles that informed our thinking as we set out to 
 * For handling access to local private resources in an application, such as in-memory data structure. In this environment, using a circuit breaker would add overhead to your system.
 * As a substitute for handling exceptions in the business logic of your applications.
 
+## Implementing the Circuit Breaker pattern
+To implement the Circuit Breaker pattern, each invocation of a remote service requires the caller to extend an abstract class. The class provides the logic to manage the execution of the action and call a fallback method when the service is unavailable.
+
+The method can respond to the failure in several ways:
+
+* **Fail silently:** Return null or an empty set. In the earlier example, this method would work.
+
+* **Fail quickly:** Throw an exception. For example, if an authentication service is unavailable, no new users can log in to the application. However, anyone who was already logged in can continue to use the application.
+
+* **Best effort:** Return a close approximation of the requested data. For example, if a cached copy of the requested data exists, that copy can be used instead of data from the remote service if that service fails. In this way, users can still proceed.
+
+The Circuit Breaker framework monitors communications between the services and provides quality of service analysis on each circuit through a health monitor. Teams can define criteria to designate when outbound requests will no longer go to a failing service but will instead be routed to the fallback method. Criteria can include success/failure ratios, latent response ratios, and pool size. The fallback method is called until the failing service is functional again.
+
 ## Additional Reads
 https://medium.com/netflix-techblog/fault-tolerance-in-a-high-volume-distributed-system-91ab4faae74a
