@@ -23,5 +23,15 @@ Here are some of the key principles that informed our thinking as we set out to 
 * The API should automatically take corrective action when one of its service dependencies fails
 * The API should be able to show us what’s happening right now, in addition to what was happening 15–30 minutes ago, yesterday, last week, etc
 
+## When to use this pattern
+
+**Use this pattern:**
+* To prevent an application from trying to invoke a remote service or access a shared resource if this operation is highly likely to fail.
+
+**This pattern isn't recommended:**
+
+* For handling access to local private resources in an application, such as in-memory data structure. In this environment, using a circuit breaker would add overhead to your system.
+* As a substitute for handling exceptions in the business logic of your applications.
+
 ## Additional Reads
 https://medium.com/netflix-techblog/fault-tolerance-in-a-high-volume-distributed-system-91ab4faae74a
