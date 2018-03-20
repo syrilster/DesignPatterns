@@ -65,6 +65,7 @@ A solution to above problem could be to use **HTTP long polling.** With long pol
 
 * **Indexer** will process the events received from the Watcher and update the internal metadata database with information about the chunks of the modified files. Once the chunks are successfully submitted/downloaded to the Cloud Storage, the Indexer will communicate with the remote Synchronization Service to broadcast changes to other clients and update remote metadata database.
 
+![dropbox comp](https://user-images.githubusercontent.com/6800366/37657076-f6cd308a-2c6f-11e8-92a5-4cfe8b14dfec.png)
 
 
 
