@@ -103,4 +103,40 @@ Clients will open a connection to the chat server to send a message; the server 
 
 ![detailed fb msgr design](https://user-images.githubusercontent.com/6800366/37707423-0fae733e-2d29-11e8-9896-aa4fd65c0003.png)
 
+## Data partitioning
+Since we will be storing a lot of data (3.6PB for five years), we need to distribute it onto multiple database servers.
+
+**Partitioning based on UserID:** Let’s assume we partition based on the hash of the UserID, so that we can keep all messages of a user on the same database. If one DB shard is 4TB, we will have “3.6PB/4TB ~= 900” shards for five years. For simplicity, let’s assume we keep 1K shards. So we will find the shard number by “hash(UserID) % 1000”, and then store/retrieve the data from there. This partitioning scheme will also be very quick to fetch chat history for any user.
+
+In the beginning, we can start with fewer database servers with **multiple shards residing on one physical server**. Since we can have **multiple database instances on a server**, we can easily store multiple partitions on a single server. Our hash function needs to understand this **logical partitioning scheme** so that it can map multiple logical partitions on one physical server.
+
+**Partitioning based on MessageID:** If we store different messages of a user on separate database shard, fetching a range of messages of a chat would be very slow, so we should not adopt this scheme.
+
+## Cache
+We can cache a few recent messages (say last 15) in a few recent conversations that are visible in user’s viewport (say last 5). Since we decided to store all of the user’s messages on one shard, cache for a user should completely reside on one machine too.
+
+## Load balancing
+We will need a load balancer in front of our chat servers; that can map each UserID to a server that holds the connection for the user and then direct the request to that server. Similarly, we would need a load balancer for our cache servers.
+
+## Fault tolerance and Replication
+What will happen when a chat server fails? Our chat servers are holding connections with the users. If a server goes down, should we devise a mechanism to transfer those connections to some other server? It’s extremely hard to failover TCP connections to other servers; an easier approach can be to have clients automatically reconnect if the connection is lost.
+
+**Should we store multiple copies of user messages?**
+We cannot have only one copy of user’s data, because if the server holding the data crashes or is down permanently, we don’t have any mechanism to recover that data. For this either we have to store multiple copies of the data on different servers or use techniques like **Reed-Solomon encoding** to distribute and replicate it.
+
+Ex: Data uploaded onto Backblaze's data center is sharded into 17 data shards plus three parity shards for each file. Parity shard bits are computed by the Reed–Solomon error correction algorithm. The shards are stored in 20 storage pods, each in a separate cabinet to increase resilience to a power loss to an entire cabinet. Backblaze states that its Vault architecture is designed with 99.99999% annual durability. https://www.youtube.com/watch?v=jgO09opx56o
+
+##  Extended Requirements
+**Group chat**
+We can have separate group-chat objects in our system that can be stored on the chat servers. A group-chat object is identified by GroupChatID and will also maintain a list of people who are part of that chat. Our load balancer can direct each group chat message based on GroupChatID and the server handling that group chat can iterate through all the users of the chat to find the server handling the connection of each user to deliver the message.
+
+In databases, we can store all the group chats in a separate table partitioned based on GroupChatID.
+
+**Push notifications**
+* In our current design user’s can only send messages to active users and if the receiving user is offline, we send a failure to the sending user. Push notifications will enable our system to send messages to offline users.
+
+* For Push notifications, each user can opt-in from their device (or a web browser) to get notifications whenever there is a new message or event.
+
+* To have push notifications in our system, we would need to set up a Notification server, which will take the messages for offline users and send them to manufacture’s push notification server, which will then send them to the user’s device.
+
 
