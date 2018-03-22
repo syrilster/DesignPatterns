@@ -8,6 +8,13 @@ The idea is to break the data into multiple pieces (i.e maintain different shard
 
 ![reed solomon encoding](https://user-images.githubusercontent.com/6800366/37762274-d3445332-2de1-11e8-870c-4b6c375291af.PNG)
 
+If a server node goes down, the following can be done:
+* Remaining shards and the parity shard combined together form the matrix.
+* Multiply this with the inverse encoding.
+* This will result in the original file.
+
+![reed solomon encoding inverse](https://user-images.githubusercontent.com/6800366/37762466-5b134d18-2de2-11e8-8325-20b540cda397.PNG)
+
 
 ## More of the use case example here:
 https://www.youtube.com/watch?v=jgO09opx56o
