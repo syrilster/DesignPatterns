@@ -1,6 +1,5 @@
-DataReplication by BackBlaze data storage provider.
+## DataReplication by BackBlaze data storage provider
 
-## Data replication
 * Data uploaded onto Backblaze's data center is sharded into 17 data shards plus three parity shards for each file. (Parity servers are there to recalculate the file if some piece of the file is missing)
 * Parity shard bits are computed by the Reed–Solomon error correction algorithm. 
 * The shards are stored in 20 storage pods, each in a separate cabinet to increase resilience to a power loss to an entire cabinet. Backblaze states that its Vault architecture is designed with 99.99999% annual durability.
