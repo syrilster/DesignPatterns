@@ -73,3 +73,27 @@ To recover from these situations either we have to repartition/redistribute our 
 This approach solves the problem of hot users, but in contrast to sharding by UserID, we have to query all database partitions to find tweets of a user, which can result in **higher latencies.**
 
 We can further improve our performance by introducing cache to store hot tweets in front of the database servers.
+
+**Sharding based on Tweet creation time:** Storing tweets based on recency will give us the advantage of fetching all the top tweets quickly, and we only have to query a very small set of servers. But the problem here is that the traffic load will not be distributed, e.g: while writing, all new tweets will be going to one server, and the remaining servers will be sitting idle. Similarly while reading, the server holding latest data will have a very high load as compared to servers holding old data.
+
+**What if we can combine sharding by TweedID and Tweet creation time?** If we don’t store tweet creation time separately and use TweetID to reflect that, we can get benefits of both the approaches. This way it will be quite quick to find latest Tweets. For this, we must make each TweetID universally unique in our system, and each TweetID should contain timestamp too.
+
+**We can use epoch time for this.** Let’s say our TweetID will have two parts; the first part will be representing epoch seconds and the second part will be an auto-incrementing sequence. So, to make a new TweetID, we can take the current epoch time and append an auto-incrementing number to it. We can figure out shard number from this TweetID and store it there.
+
+**What could be the size of our TweetID?** Let’s say our epoch time starts today, how many bits we would need to store the number of seconds for next 50 years?
+
+86400 sec/day * 365 (days a year) * 50 (years) => 1.6B
+We would need 31 bits to store this number. Since on average we are expecting 1150 new tweets per second, we can allocate 17 bits to store auto incremented sequence; this will make our TweetID 48 bits long. So, every second we can store (2^17 => 130K) new tweets. We can reset our auto incrementing sequence every second. For fault tolerance and better performance, we can have two database servers to generate auto-incrementing keys for us, one generating even numbered keys and the other generating odd numbered keys.
+
+![twitter shard strategy](https://user-images.githubusercontent.com/6800366/37862956-d8727866-2f7b-11e8-9217-07b616e0540e.png)
+
+
+If we assume our current epoch seconds are “1483228800”, our TweetID will look like this:
+
+1483228800 000001
+1483228800 000002
+1483228800 000003
+1483228800 000004
+…
+
+If we make our TweetID 64bits (8 bytes) long, we can easily store tweets for next 100 years and also store them for mili-seconds granularity.
