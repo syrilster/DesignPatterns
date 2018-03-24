@@ -39,3 +39,20 @@ tweet(api_dev_key, tweet_data, tweet_location, user_location, media_ids, maximum
 
 Returns: (string)
 A successful post will return the URL to access that tweet. Otherwise, an appropriate HTTP error is returned.
+
+## High Level System Design
+It is clear from the requirements that this will be a read-heavy system.
+
+At a high level, we need multiple application servers to serve all these requests with load balancers in front of them for traffic distributions. On the backend, we need an efficient database that can store all the new tweets and can support a huge number of reads. We would also need some file storage to store photos and videos.
+
+![twitterhdd](https://user-images.githubusercontent.com/6800366/37862869-4349fa58-2f7a-11e8-864b-05dfbac40448.png)
+
+Although our expected daily write load is 100 million and read load is 28 billion tweets. This means, on an average our system will receive around 1160 new tweets and 325K read requests per second. This traffic will be distributed unevenly throughout the day, though, at peak time we should expect at least a few thousand write requests and around 1M read requests per second.
+
+## Database Schema
+We need to store data about users, their tweets, their favorite tweets, and people they follow.
+
+![twitter db design](https://user-images.githubusercontent.com/6800366/37862883-7a094b66-2f7a-11e8-868c-1f151fc89dda.png)
+
+
+
