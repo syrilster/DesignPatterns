@@ -23,3 +23,19 @@
 * Tweet Notification.
 * Who to follow? Suggestions?
 * Moments.
+
+##  System APIs
+We can have SOAP or REST APIs to expose the functionality of our service. The definition of the API for posting a new tweet:
+
+```
+tweet(api_dev_key, tweet_data, tweet_location, user_location, media_ids, maximum_results_to_return)
+```
+**Parameters:**
+* api_dev_key (string): The API developer key of a registered account. This will be used to, among other things, throttle users based on their allocated quota.
+* tweet_data (string): The text of the tweet, typically up to 140 characters.
+* tweet_location (string): Optional location (longitude, latitude) this Tweet refers to. 
+* user_location (string): Optional location (longitude, latitude) of the user adding the tweet.
+* media_ids (number[]): Optional list of media_ids to be associated with the Tweet. (All the media photo, video, etc.) need to be uploaded separately.
+
+Returns: (string)
+A successful post will return the URL to access that tweet. Otherwise, an appropriate HTTP error is returned.
