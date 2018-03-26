@@ -86,3 +86,51 @@ For each **video comment**, we need to store following information:
 **User data storage - MySql**
 UserID, Name, email, address, age, registration details etc.
 
+## Detailed Component Design
+The service would be read-heavy, so we will focus on building a system that can retrieve videos quickly. We can expect our read:write ratio as 200:1, which means for every video upload there are 200 video views.
+
+**Where would videos be stored?** Videos can be stored in a distributed file storage system like HDFS or GlusterFS.
+
+**How should we efficiently manage read traffic?** We should segregate our read traffic from write. Since we will be having multiple copies of each video, we can distribute our read traffic on different servers. For metadata, we can have master-slave configurations, where writes will go to master first and then replayed at all the slaves. Such configurations can cause some staleness in data, e.g. when a new video is added, its metadata would be inserted in the master first, and before it gets replayed at the slave, our slaves would not be able to see it and therefore will be returning stale results to the user. This staleness might be acceptable in our system, as it would be very short lived and the user will be able to see the new videos after a few milliseconds.
+
+**Where would thumbnails be stored?** There will be a lot more thumbnails than videos. If we assume that every video will have five thumbnails, we need to have a very efficient storage system that can serve a huge read traffic. There will be two consideration before deciding which storage system will be used for thumbnails:
+
+* Thumbnails are small files, say maximum 5KB each.
+* Read traffic for thumbnails will be huge compared to videos. Users will be watching one video at a time, but they might be looking at a page that has 20 thumbnails of other videos.
+
+Let’s evaluate storing all the thumbnails on disk. Given that we have a huge number of files; to read these files we have to perform a lot of seeks to different locations on the disk. This is quite **inefficient** and will result in higher latencies.
+
+**Bigtable** can be a reasonable choice here, as it combines multiple files into one block to store on the disk and is very efficient in reading a small amount of data. Both of these are the two biggest requirements of our service. Keeping hot thumbnails in the cache will also help in improving the latencies, and given that thumbnails files are small in size, we can easily cache a large number of such files in memory.
+
+**Video Uploads:** Since videos could be huge, if while uploading, the connection drops, we should support resuming from the same point.
+
+**Video Encoding:** Newly uploaded videos are stored on the server, and a new task is added to the processing queue to encode the video into multiple formats. Once all the encoding is completed; uploader is notified, and video is made available for view/sharing.
+
+![youutbe detailed design](https://user-images.githubusercontent.com/6800366/37890622-c553696a-30ee-11e8-9c10-8bdf9a58d543.png)
+
+## Metadata Sharding
+Since we have a huge number of new videos every day and our read load is extremely high too, we need to distribute our data onto multiple machines so that we can perform read/write operations efficiently. We have many options to shard our data. 
+
+**Sharding based on UserID:** We can try storing all the data for a particular user on one server. While storing, we can pass the UserID to our hash function which will map the user to a database server where we will store all the metadata for that user’s videos. While querying for videos of a user, we can ask our hash function to find the server holding user’s data and then read it from there. To search videos by titles, we will have to query all servers, and each server will return a set of videos. A centralized server will then aggregate and rank these results before returning them to the user.
+
+This approach has a couple of issues:
+
+* What if a user becomes popular? There could be a lot of queries on the server holding that user, creating a performance bottleneck. This will affect the overall performance of our service.
+* Over time, some users can end up storing a lot of videos compared to others. Maintaining a uniform distribution of growing user’s data is quite difficult.
+
+To recover from these situations either we have to repartition/redistribute our data or use consistent hashing to balance the load between servers.
+
+**Sharding based on VideoID:** Our hash function will map each VideoID to a random server where we will store that Video’s metadata. To find videos of a user we will query all servers, and each server will return a set of videos. A centralized server will aggregate and rank these results before returning them to the user. This approach solves our problem of popular users but shifts it to popular videos.
+
+We can further improve our performance by introducing cache to store hot videos in front of the database servers.
+
+## Video Deduplication
+With a huge number of users, uploading a massive amount of video data, our service will have to deal with widespread video duplication. Duplicate videos often differ in aspect ratios or encodings, can contain overlays or additional borders, or can be excerpts from a longer, original video. The proliferation of duplicate videos can have an impact on many levels:
+
+* Data Storage: We could be wasting storage space by keeping multiple copies of the same video.
+* Caching: Duplicate videos would result in degraded cache efficiency by taking up space that could be used for unique content.
+* Network usage: Increasing the amount of data that must be sent over the network to in-network caching systems.
+* Energy consumption: Higher storage, inefficient cache, and network usage will result in energy wastage.
+For the end user, these inefficiencies will be realized in the form of duplicate search results, longer video startup times, and interrupted streaming.
+
+For our service, deduplication makes **most sense early**, when a user is uploading a video; as compared to post-processing it to find duplicate videos later. Inline deduplication will save us a lot of resources that can be used to encode, transfer and store the duplicate copy of the video. As soon as any user starts uploading a video, our service can run **video matching algorithms (e.g., Block Matching, Phase Correlation, etc.) to find duplications**. If we already have a copy of the video being uploaded, we can either stop the upload and use the existing copy or use the newly uploaded video if it is of higher quality. If the newly uploaded video is a subpart of an existing video or vice versa, we can intelligently divide the video into smaller chunks, so that we only upload those parts that are missing.
