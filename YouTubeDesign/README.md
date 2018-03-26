@@ -15,3 +15,36 @@
 * Users should have real time experience while watching videos and should not feel any lag.
 
 Not in scope: Video recommendation, most popular videos, channels, and subscriptions, watch later, favorites, etc.
+
+## System APIs
+We can have SOAP or REST APIs to expose the functionality of our service. Following could be the definitions of the APIs for uploading and searching videos:
+
+```
+uploadVideo(api_dev_key, video_title, vide_description, tags[], category_id, default_language, 
+                        recording_details, video_contents)
+```
+
+**Parameters:**
+* api_dev_key (string): The API developer key of a registered account. This will be used to, among other things, throttle users based on their allocated quota.
+* video_title (string): Title of the video.
+* video_description (string): Optional description of the video.
+* tags (string[]): Optional tags for the video.
+* category_id (string): Category of the video, e.g., Film, Song, People, etc.
+* default_language (string): For example English, Mandarin, Hindi, etc.
+* recording_details (string): Location where the video was recorded.
+* video_contents (stream): Video to be uploaded.
+
+Returns: (string)
+A successful upload will return HTTP 202 (request accepted), and once the video encoding is completed, the user is notified through email with a link to access the video. We can also expose a queryable API to let users know the current status of their uploaded video.
+```
+searchVideo(api_dev_key, search_query, user_location, maximum_videos_to_return, page_token)
+```
+**Parameters:**
+* api_dev_key (string): The API developer key of a registered account of our service.
+* search_query (string): A string containing the search terms.
+* user_location (string): Optional location of the user performing the search.
+* maximum_videos_to_return (number): Maximum number of results returned in one request.
+* page_token (string): This token will specify a page in the result set that should be returned.
+
+Returns: (JSON)
+A JSON containing information about the list of video resources matching the search query. Each video resource will have a video title, a thumbnail, a video creation date and how many views it has.
