@@ -61,27 +61,27 @@ At a high-level we would need following components:
 
 ![youutbe hdd](https://user-images.githubusercontent.com/6800366/37888191-95db6ecc-30e3-11e8-9594-2126a3966936.png)
 
-##Database Schema
+## Database Schema
 **Video metadata storage - MySql**
 Videos metadata can be stored in a SQL database. Following information should be stored with each video:
 
-VideoID
-Title
-Description
-Size
-Thumbnail
-Uploader/User
-Total number of likes
-Total number of dislikes
-Total number of views
+* VideoID
+* Title
+* Description
+* Size
+* Thumbnail
+* Uploader/User
+* Total number of likes
+* Total number of dislikes
+* Total number of views
 
 For each **video comment**, we need to store following information:
 
-CommentID
-VideoID
-UserID
-Comment
-TimeOfCreation
+* CommentID
+* VideoID
+* UserID
+* Comment
+* TimeOfCreation
 
 **User data storage - MySql**
 UserID, Name, email, address, age, registration details etc.
