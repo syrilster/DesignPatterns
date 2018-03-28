@@ -50,7 +50,8 @@ On a sharded database, there are certain extra constraints on the different oper
 **Redis (REmote DIctionary Server)** is an in-memory, key-value database, commonly referred to as a data structure server. One of the key differences between Redis and other key-value databases is Redis’s ability to store and manipulate high-level data types. These data types are fundamental data structures (lists, maps, sets, and sorted sets) that most developers are familiar with. Redis’s exceptional performance, simplicity, and atomic manipulation of data structures lends itself to solving problems that are difficult or perform poorly when implemented with traditional relational databases.
 To implement dictionaries (used for the main dictionary, but also for hash and set objects, and in conjunction with a skip list for zset objects), Redis use separate chaining hash tables, whose access complexity is O(1+n/k) where n is the number of items and k the number of buckets.
 
-**Common Use Cases**
+## Common Use Cases
+
 * Caching – Due to its high performance, developers have turned to Redis when the volume of read and write operations exceed the capabilities of traditional databases. With Redis’s capability to easily persist the data to disk, it is a superior alternative to the traditional memcached solution for caching.
 * Publish and Subscribe – Since version 2.0, Redis provides the capability to distribute data utilizing the Publish/Subscribe messaging paradigm. Some organizations have moved to Redis and away from other message queuing systems (i.e., RabbitMQ, zeromq) due to Redis’s simplicity and performance.
 * Queues – Projects such as Resque use Redis as the backend for queueing background jobs.
@@ -68,7 +69,7 @@ To implement dictionaries (used for the main dictionary, but also for hash and s
 * Redis is well suited to solving challenges encountered when developing real-time systems, thanks to the predictability of operations applied to the data in the database.
 * Redis attributes much of its performance to that fact that the data always resides in-memory. Data can be persisted to disk, but incorrect configuration could lead to data loss when Redis is shutdown improperly.
 
-**How does Redis achieve O(1) complexity for most of their operations?**
+## How does Redis achieve O(1) complexity for most of their operations?
 
 Redis makes sure the number of buckets grows with the number of items so that in practice n/k is kept low. This rehashing activity is done incrementally in background. When the number of items is significant, the complexity is close to O(1) (amortized).
 
