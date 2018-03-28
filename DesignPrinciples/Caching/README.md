@@ -47,8 +47,9 @@ On a sharded database, there are certain extra constraints on the different oper
   
 ## Additional Read - REDIS
 
-**Redis (REmote DIctionary Server)** is an in-memory, key-value database, commonly referred to as a data structure server. One of the key differences between Redis and other key-value databases is Redis’s ability to store and manipulate high-level data types. These data types are fundamental data structures (lists, maps, sets, and sorted sets) that most developers are familiar with. Redis’s exceptional performance, simplicity, and atomic manipulation of data structures lends itself to solving problems that are difficult or perform poorly when implemented with traditional relational databases.
-To implement dictionaries (used for the main dictionary, but also for hash and set objects, and in conjunction with a skip list for zset objects), Redis use separate chaining hash tables, whose access complexity is O(1+n/k) where n is the number of items and k the number of buckets.
+**Redis (REmote DIctionary Server)** is an in-memory, key-value database, commonly referred to as a data structure server. 
+
+One of the key differences between Redis and other key-value databases is Redis’s ability to store and manipulate high-level data types. These data types are fundamental data structures (lists, maps, sets, and sorted sets) that most developers are familiar with. Redis’s exceptional performance, simplicity, and atomic manipulation of data structures lends itself to solving problems that are difficult or perform poorly when implemented with traditional relational databases.
 
 ## Common Use Cases
 
