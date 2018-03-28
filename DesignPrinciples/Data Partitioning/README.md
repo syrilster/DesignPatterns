@@ -28,4 +28,19 @@ One more approach to sharding is the one that certain apps naturally gravitate t
    * You generate your reporting/alerts by doing analysis on the data with time as one axis.
    * You’re regularly rolling off data so that you have a limited retention of it.
 * **Round-robin partitioning** This is a very simple strategy that ensures uniform data distribution. With ‘n’ partitions, the ‘i’ tuple is assigned to partition (i mod n).   
+
+## Additional Read: Redis Cluster data sharding
+Redis Cluster **does not use consistent hashing**, but a different form of sharding where every key is conceptually part of what we call an **hash slot**.
+
+There are 16384 hash slots in Redis Cluster, and to compute what is the hash slot of a given key, we simply take the CRC16 of the key modulo 16384.
+
+Every node in a Redis Cluster is responsible for a subset of the hash slots, so for example you may have a cluster with 3 nodes, where:
+
+* Node A contains hash slots from 0 to 5500.
+* Node B contains hash slots from 5501 to 11000.
+* Node C contains hash slots from 11001 to 16383.
+
+This allows to add and remove nodes in the cluster easily. For example if I want to add a new node D, I need to move some hash slot from nodes A, B, C to D. Similarly if I want to remove node A from the cluster I can just move the hash slots served by A to B and C. When the node A will be empty I can remove it from the cluster completely.
+
+Because moving hash slots from a node to another does not require to stop operations, adding and removing nodes, or changing the percentage of hash slots hold by nodes, does not require any downtime.
   
