@@ -57,6 +57,7 @@ To implement dictionaries (used for the main dictionary, but also for hash and s
 * Counters – Atomic commands such as HINCRBY(HINCRBY key field increment), allow for a simple and thread-save implementation of counters. Creating a counter is as simple as determining a name for a key and issuing the HINCRBY command. There is no need to read the data before incrementing, and there are no database schemas to update. Since these are atomic operations, the counters will maintain consistency when accessed from multiple application servers.
 
 **How does Redis achieve O(1) complexity for most of their operations?**
+
 Redis makes sure the number of buckets grows with the number of items so that in practice n/k is kept low. This rehashing activity is done incrementally in background. When the number of items is significant, the complexity is close to O(1) (amortized).
 
 Other stores (Cassandra for instance) are designed to store data on disk while minimizing the number of random I/Os for performance reasons. A hash table is not a good data structure for this, because it does not enforce the locality of the data (it does not benefit from buffer caching very well). So disk based stores usually use B-tree variants (most RDBMS) or log-structured merge (LSM) trees variants (Cassandra), which have O(log n) complexity.
