@@ -50,11 +50,23 @@ On a sharded database, there are certain extra constraints on the different oper
 **Redis (REmote DIctionary Server)** is an in-memory, key-value database, commonly referred to as a data structure server. One of the key differences between Redis and other key-value databases is Redis’s ability to store and manipulate high-level data types. These data types are fundamental data structures (lists, maps, sets, and sorted sets) that most developers are familiar with. Redis’s exceptional performance, simplicity, and atomic manipulation of data structures lends itself to solving problems that are difficult or perform poorly when implemented with traditional relational databases.
 To implement dictionaries (used for the main dictionary, but also for hash and set objects, and in conjunction with a skip list for zset objects), Redis use separate chaining hash tables, whose access complexity is O(1+n/k) where n is the number of items and k the number of buckets.
 
-**COMMON USE CASES**
+**Common Use Cases**
 * Caching – Due to its high performance, developers have turned to Redis when the volume of read and write operations exceed the capabilities of traditional databases. With Redis’s capability to easily persist the data to disk, it is a superior alternative to the traditional memcached solution for caching.
 * Publish and Subscribe – Since version 2.0, Redis provides the capability to distribute data utilizing the Publish/Subscribe messaging paradigm. Some organizations have moved to Redis and away from other message queuing systems (i.e., RabbitMQ, zeromq) due to Redis’s simplicity and performance.
 * Queues – Projects such as Resque use Redis as the backend for queueing background jobs.
 * Counters – Atomic commands such as HINCRBY(HINCRBY key field increment), allow for a simple and thread-save implementation of counters. Creating a counter is as simple as determining a name for a key and issuing the HINCRBY command. There is no need to read the data before incrementing, and there are no database schemas to update. Since these are atomic operations, the counters will maintain consistency when accessed from multiple application servers.
+
+## Companies Using Redis
+
+* Twitter – Deployed a massive Redis cluster to store the timelines for all users. Utilizing the list data structure, Twitter stores the 800 most recent incoming tweets for a given user. View the presentation given by Twitter on how they distribute timelines at scale.
+* Pinterest – Stores the user follower graphs in a Redis cluster where data is sharded across hundreds of instances. Pinterest turned to Redis after finding that their original solution of MySQL and memcached was reaching its limits. More on how Pinterest is using Redis.
+* Github – An early adopter of the Redis project, Github has developed and open-sourced the library, Resque, to facilitate the execution of background jobs that have been placed on a queue. Github developers took advantage of the fact that Redis had solved many of the difficult queueing issues, so the developers could stay focused on the difficult worker scheduling issues. More on how Github uses Redis for their job queueing needs.
+
+## What makes Redis so special?
+
+* The combination of high-level data structures, high performance, and overall intuitiveness allow Redis to fill the role as the Swiss Army knife of data stores for a developer.
+* Redis is well suited to solving challenges encountered when developing real-time systems, thanks to the predictability of operations applied to the data in the database.
+* Redis attributes much of its performance to that fact that the data always resides in-memory. Data can be persisted to disk, but incorrect configuration could lead to data loss when Redis is shutdown improperly.
 
 **How does Redis achieve O(1) complexity for most of their operations?**
 
