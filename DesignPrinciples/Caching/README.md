@@ -44,3 +44,21 @@ On a sharded database, there are certain extra constraints on the different oper
 
   * The data distribution is not uniform, e.g there are a lot of places for a particular ZIP code, that cannot fit into one database partition.
   * There are a lot of load on a shard, e.g there are too many requests being handled by the DB shard dedicated to user photos.
+  
+## Additional Read - REDIS
+
+**Redis (REmote DIctionary Server)** is an in-memory, key-value database, commonly referred to as a data structure server. One of the key differences between Redis and other key-value databases is Redis’s ability to store and manipulate high-level data types. These data types are fundamental data structures (lists, maps, sets, and sorted sets) that most developers are familiar with. Redis’s exceptional performance, simplicity, and atomic manipulation of data structures lends itself to solving problems that are difficult or perform poorly when implemented with traditional relational databases.
+To implement dictionaries (used for the main dictionary, but also for hash and set objects, and in conjunction with a skip list for zset objects), Redis use separate chaining hash tables, whose access complexity is O(1+n/k) where n is the number of items and k the number of buckets.
+
+**COMMON USE CASES**
+* Caching – Due to its high performance, developers have turned to Redis when the volume of read and write operations exceed the capabilities of traditional databases. With Redis’s capability to easily persist the data to disk, it is a superior alternative to the traditional memcached solution for caching.
+* Publish and Subscribe – Since version 2.0, Redis provides the capability to distribute data utilizing the Publish/Subscribe messaging paradigm. Some organizations have moved to Redis and away from other message queuing systems (i.e., RabbitMQ, zeromq) due to Redis’s simplicity and performance.
+* Queues – Projects such as Resque use Redis as the backend for queueing background jobs.
+* Counters – Atomic commands such as HINCRBY(HINCRBY key field increment), allow for a simple and thread-save implementation of counters. Creating a counter is as simple as determining a name for a key and issuing the HINCRBY command. There is no need to read the data before incrementing, and there are no database schemas to update. Since these are atomic operations, the counters will maintain consistency when accessed from multiple application servers.
+
+**How does Redis achieve O(1) complexity for most of their operations?**
+Redis makes sure the number of buckets grows with the number of items so that in practice n/k is kept low. This rehashing activity is done incrementally in background. When the number of items is significant, the complexity is close to O(1) (amortized).
+
+Other stores (Cassandra for instance) are designed to store data on disk while minimizing the number of random I/Os for performance reasons. A hash table is not a good data structure for this, because it does not enforce the locality of the data (it does not benefit from buffer caching very well). So disk based stores usually use B-tree variants (most RDBMS) or log-structured merge (LSM) trees variants (Cassandra), which have O(log n) complexity.
+
+So yes, Redis offers O(1) for many operations, but there is a constraint: all data should fit in memory. There is no magic here.
