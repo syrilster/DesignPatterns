@@ -58,3 +58,17 @@ Assume our rate limiter is allowing three requests per minute per user, so whene
     * If ‘Count < 3’, increment the Count and allow the request.
     * If ‘Count >= 3’, reject the request.
 
+## What are the some problems with this algorithm?
+
+* This is a Fixed Window algorithm, as we’re resetting the ‘StartTime’ at the end of every minute, which means it can potentially allow twice the number of requests per minute. Imagine if Kristie sends three requests at the last second of a minute, then she can immediately send three more requests at the very first second of the next minute, resulting in 6 requests in the span of two seconds. The solution to this problem would be a sliding window algorithm.
+
+* Atomicity: In a distributed environment, the “read-and-then-write” behavior can create a race condition. Imagine if user’s current ‘Count’ is “2” and that they issue two more requests. If two separate processes served each of these requests and concurrently read the Count before either of them updated it, each process would think the user can have one more request and that he/she had not hit the rate limit.
+
+![image](https://user-images.githubusercontent.com/6800366/38097822-070f72c0-3394-11e8-9cf2-7d21b3893dea.png)
+
+If we are using Redis to store our key-value, one solution to resolve the atomicity problem is to use Redis lock for the duration of the read-update operation. This, however, would come at the expense of slowing down concurrent requests from the same user and introducing another layer of complexity. We can use Memcached, but it would have comparable complications.
+
+If we are using a simple hash-table, we can have a custom implementation for ‘locking’ each record to solve our atomicity problems.
+
+
+
