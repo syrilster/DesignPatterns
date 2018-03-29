@@ -20,3 +20,13 @@ Rate limiting is also used to prevent revenue loss, to reduce infrastructure cos
 
 ## How to do Rate Limiting?
 Rate Limiting is a process that is used to define the rate and speed at which consumers can access APIs. Throttling can be defined at the application level and/or API level. When a throttle limit is crossed, the server returns “429” as HTTP status to the user with message content as “Too many requests”.
+
+## What are different types of throttling?
+
+* Hard Throttling: The number of API requests cannot exceed the throttle limit.
+* Soft Throttling: In this type, we can set the API request limit to exceed a certain percentage. For example, if we have rate-limit of 100 messages a minute and 10% exceed limit. Our rate limiter will allow up to 110 messages per minute.
+* Elastic or Dynamic Throttling: Under Elastic throttling, the number of requests can go beyond the threshold if the system has some resources available. For example, if a user is allowed only 100 messages a minute, we can let the user send more than 100 messages a minute if there are free resources available in the system.
+
+
+
+
