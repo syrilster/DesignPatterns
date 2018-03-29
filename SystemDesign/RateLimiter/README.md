@@ -36,3 +36,25 @@ Following are the two types of algorithms used for Rate Limiting:
 
 * **Rolling Window Algorithm:** In this algorithm, the time window is considered from the fraction of the time at which the request is made plus the time window length. For example, if there are two messages sent at 300th millisecond and 400th millisecond of a second, we’ll count them as two messages from 300th millisecond of that second up to the 300th millisecond of next second. In the above diagram, keeping two messages a second, we’ll throttle ‘m3’ and ‘m4’.
 
+## High level design for Rate Limiter
+Once a new request arrives, Web Server first asks the Rate Limiter to decide if it will be served or throttled. If the request is not throttled, then it’ll be passed to the API servers.
+
+![image](https://user-images.githubusercontent.com/6800366/38092757-c15782e8-3386-11e8-8a01-5e1c2fdea4b3.png)
+
+## System Design and Algorithm
+
+**limit the number of requests per user**
+for each unique user, we would keep a count representing how many requests the user has made and a timestamp when we started counting the requests. We can keep it in a hashtable, where the ‘key’ would be the ‘UserID’ and ‘value’ would be a structure containing an integer for the ‘Count’ and an integer for the Epoch time:
+
+![image](https://user-images.githubusercontent.com/6800366/38092826-f2bab594-3386-11e8-892a-c52d9c3c85ac.png)
+
+Assume our rate limiter is allowing three requests per minute per user, so whenever a new request comes in, our rate limiter will perform following steps:
+
+* If the ‘UserID’ is not present in the hash-table, insert it and set the ‘Count’ to 1 and ‘StarteTime’ to the current time (normalized to a minute) , and allow the request.
+
+* Otherwise, find the record of the ‘UserID’ and if ‘CurrentTime – StartTime >= 1 min’, set the ‘StartTime’ to the current time and ‘Count’ to 1, and allow the request.
+
+* If ‘CurrentTime - StartTime <= 1 min’ and
+    * If ‘Count < 3’, increment the Count and allow the request.
+    * If ‘Count >= 3’, reject the request.
+
