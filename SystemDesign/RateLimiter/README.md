@@ -27,6 +27,12 @@ Rate Limiting is a process that is used to define the rate and speed at which co
 * Soft Throttling: In this type, we can set the API request limit to exceed a certain percentage. For example, if we have rate-limit of 100 messages a minute and 10% exceed limit. Our rate limiter will allow up to 110 messages per minute.
 * Elastic or Dynamic Throttling: Under Elastic throttling, the number of requests can go beyond the threshold if the system has some resources available. For example, if a user is allowed only 100 messages a minute, we can let the user send more than 100 messages a minute if there are free resources available in the system.
 
+# What are different types of algorithms used for Rate Limiting?
+Following are the two types of algorithms used for Rate Limiting:
 
+* **Fixed Window Algorithm:** In this algorithm, the time window is considered from the start of the time-unit to the end of the time-unit. For example, a period would be considered as 0-60 seconds for a minute irrespective of the time frame at which the API request has been made. In the diagram below, there are two messages between 0-1 second and three messages between 1-2 second. If we’ve a rate limiting of two messages a second, this algorithm will reject m5.
 
+![image](https://user-images.githubusercontent.com/6800366/38092641-7087aad2-3386-11e8-99fa-9fbb40dc3686.png)
+
+* **Rolling Window Algorithm:** In this algorithm, the time window is considered from the fraction of the time at which the request is made plus the time window length. For example, if there are two messages sent at 300th millisecond and 400th millisecond of a second, we’ll count them as two messages from 300th millisecond of that second up to the 300th millisecond of next second. In the above diagram, keeping two messages a second, we’ll throttle ‘m3’ and ‘m4’.
 
