@@ -73,9 +73,11 @@ If we are using a simple hash-table, we can have a custom implementation for ‘
 ## Sliding Window algorithm
 We can maintain a sliding window if we can keep track of each request per user. We can store the timestamp of each request in a Redis Sorted Set in our ‘value’ field of hash-table. 
 
-For Example: UserId: {Sorted Set<UnixTime>}
-             Syril: {1499818000, 1499818500, 1499818860}
-
+For Example: 
+```
+UserId: {Sorted Set<UnixTime>}
+Syril: {1499818000, 1499818500, 1499818860}
+```
 
 Assuming our rate limiter is allowing three requests per minute per user, so whenever a new request comes in the Rate Limiter will perform following steps:
 
