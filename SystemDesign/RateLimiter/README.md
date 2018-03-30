@@ -87,4 +87,12 @@ Assuming our rate limiter is allowing three requests per minute per user, so whe
 
 ![rate limiter](https://user-images.githubusercontent.com/6800366/38122432-937fe092-33f2-11e8-899f-d775e3c1e4c6.PNG)
 
+**Problems**
+Sliding Window Algorithm will take a lot of memory(overhead for hash-table and overhead for the Sorted Set) compared to the Fixed Window; this would be a scalability issue. What if we can combine the above two algorithms to optimize our memory usage?
+
+## Sliding Window with Counters
+What if we keep track of request counts for each user using multiple fixed time windows. For example, if we’ve an hourly rate limit, we can keep a count for each minute and calculate the sum of all counters in the past hour when we receive a new request to calculate the throttling limit. This would reduce our memory footprint. Let’s take an example where we rate limit at 500 requests per hour with an additional limit of 10 requests per minute. This means that when the sum of the counters with timestamps in the past hour exceeds the request threshold (500), user has exceeded the rate limit. In addition to that, he/she can’t send more than ten requests per minute. This would be a reasonable and a practical consideration, as none of the real users would send frequent requests. Even if they do, they will see success with retries since their limits get reset every minute.
+
+We can store our counters in a Redis Hash - as it offers extremely efficient storage for fewer than 100 keys. When each request increments a counter in the hash, it also sets the hash to expire an hour later. We’ll normailze each ‘time’ to a minute.
+
 
