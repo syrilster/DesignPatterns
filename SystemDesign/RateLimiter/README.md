@@ -95,4 +95,8 @@ What if we keep track of request counts for each user using multiple fixed time 
 
 We can store our counters in a Redis Hash - as it offers extremely efficient storage for fewer than 100 keys. When each request increments a counter in the hash, it also sets the hash to expire an hour later. We’ll normailze each ‘time’ to a minute.
 
+![rate limiter](https://user-images.githubusercontent.com/6800366/38125129-e72e845c-3404-11e8-9d04-cc09390b1212.PNG)
+
+So, the ‘Sliding Window with Counters’ algorithm uses less memory than simple sliding window algorithm.
+
 
