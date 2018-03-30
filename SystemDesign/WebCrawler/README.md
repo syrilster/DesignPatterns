@@ -128,3 +128,40 @@ Let’s assume our crawler is running on one server, and all the crawling is don
     The disadvantage to using a bloom filter for the URL seen test is that each false positive will cause the URL not to be added to the frontier, and therefore the document will never be downloaded. The chance of a false positive can be reduced by making the bit vector larger.
 
 * **Checkpointing:** A crawl of the entire Web takes weeks to complete. To guard against failures, our crawler can write regular snapshots of its state to disk. An interrupted or aborted crawl can easily be restarted from the latest checkpoint.
+
+## Fault tolerance
+We should use consistent hashing for distribution among crawling servers. Extended hashing will not only help in replacing a dead host but also help in distributing load among crawling servers.
+
+All our crawling servers will be performing regular checkpointing and storing their FIFO queues to disks. If a server goes down, we can replace it. Meanwhile, extended hashing should shift the load to other servers.
+
+## Data Partitioning
+Our crawler will be dealing with three kinds of data: 
+
+* URLs to visit 
+* URL checksums for dedupe 
+* Document checksums for dedupe.
+
+Since we are distributing URLs based on the hostnames, we can store these data on the same host. So, each host will store its set of URLs that need to be visited, checksums of all the previously visited URLs and checksums of all the downloaded documents. Since we will be using extended hashing, we can assume that URLs will be redistributed from overloaded hosts.
+
+Each host will perform checkpointing periodically and dump a snapshot of all the data it is holding into a remote server. This will ensure that if a server dies down, another server can replace it by taking its data from the last snapshot.
+
+## Crawler Traps
+There are many crawler traps, spam sites, and cloaked content. A crawler trap is a URL or set of URLs that cause a crawler to crawl indefinitely. Some crawler traps are unintentional. For example, a symbolic link within a file system can create a cycle. Other crawler traps are introduced intentionally. For example, people have written traps that dynamically generate an infinite Web of documents. The motivations behind such traps vary. Anti-spam traps are designed to catch crawlers used by spammers looking for email addresses, while other sites use traps to catch search engine crawlers to boost their search ratings.
+
+AOPIC algorithm (Adaptive Online Page Importance Computation), can help mitigating common types of bot-traps. AOPIC solves this problem by using a credit system.
+
+* Get a set of N seed pages.
+* Allocate X amount of credit to each page, such that each page has X/N credit (i.e. equal amount of credit) before crawling has started.
+* Select a page P, where the P has the highest amount of credit (or if all pages have the same amount of credit, then crawl a random page).
+* Crawl page P (let's say that P had 100 credits when it was crawled).
+* Extract all the links from page P (let's say there are 10 of them).
+* Set the credits of P to 0.
+* Take a 10% "tax" and allocate it to a Lambda page.
+* Allocate an equal amount of credits each link found on page P from P's original credit - the tax: so (100 (P credits) - 10 (10% tax))/10 (links) = 9 credits per each link.
+* Repeat from step 3.
+
+Since the Lambda page continuously collects tax, eventually it will be the page with the largest amount of credit and we'll have to "crawl" it. I say "crawl" in quotes, because we don't actually make an HTTP request for the Lambda page, we just take its credits and distribute them equally to all of the pages in our database.
+
+Since bot traps only give internal links credits and they rarely get credit from the outside, they will continually leak credits (from taxation) to the Lambda page. The Lambda page will distribute that credits out to all of the pages in the database evenly and upon each cycle the bot trap page will lose more and more credits, until it has so little credits that it almost never gets crawled again. This will not happen with good pages, because they often get credits from back-links found on other pages. This also results in a dynamic page rank and what you will notice is that any time you take a snapshot of your database, order the pages by the amount of credits they have, then they will most likely be ordered roughly according to their true page rank.
+
+This only avoid bot traps of the infinite-loop kind, but there are many other bot traps which you should watch out for and there are ways to get around them too.
