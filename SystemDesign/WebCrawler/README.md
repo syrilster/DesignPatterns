@@ -119,7 +119,7 @@ Let’s assume our crawler is running on one server, and all the crawling is don
 
     **Can we use bloom filters for deduping?**
 
-    In a nutshell, a bloom filter is a space-efficient probabilistic data structure that allows you to test if an element is in a set. However, it may have false positive. In other words, if a bloom filter can tell you either a URL is definitely not in the pool or it probably is in the pool.
+    In a nutshell, a bloom filter is a space-efficient probabilistic data structure that allows you to test if an element is in a set. However, it may have false positive i.e. a bloom filter can indicate either a URL is definitely not in the pool or it is probably in the pool.
 
     To briefly explain how bloom filter works, an empty bloom filter is a bit array of m bits (all 0). There are also k hash functions that map each element to one of the m bits. So when we add a new element (URL) into the bloom filter, we will get k bits from the hash functions and set all of them to 1. Thus, when we check the existence of an element, we first get the k bits for it and if any of them is not 1, we know immediately that the element doesn’t exist. However, if all of the k bits are 1, this can come from the combination of several other elements.
 
