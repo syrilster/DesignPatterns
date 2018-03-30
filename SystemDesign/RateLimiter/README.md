@@ -70,5 +70,15 @@ If we are using Redis to store our key-value, one solution to resolve the atomic
 
 If we are using a simple hash-table, we can have a custom implementation for ‘locking’ each record to solve our atomicity problems.
 
+## Sliding Window algorithm
+We can maintain a sliding window if we can keep track of each request per user. We can store the timestamp of each request in a Redis Sorted Set in our ‘value’ field of hash-table.
+
+Assuming our rate limiter is allowing three requests per minute per user, so whenever a new request comes in the Rate Limiter will perform following steps:
+
+* Remove all the timestamps from the Sorted Set that are older than “CurrentTime - 1 minute”.
+* Count the total number of elements in the sorted set. Reject the request if this count is greater than our throttling limit of 3.
+* Insert the current time in the sorted set, and accept the request.
+
+![rate limiter](https://user-images.githubusercontent.com/6800366/38122432-937fe092-33f2-11e8-899f-d775e3c1e4c6.PNG)
 
 
