@@ -20,6 +20,30 @@ When a page is referenced, the required page may be in the memory. If it is in t
 
 Here’s how it works. when resource A is requested, we check the hash table to see if A exists in the cache. If exists, we can immediately locate the corresponding queue node and return the resource. If not, we’ll add A into the cache. If there are enough space, we just add a to the end of the queue and update the hash table. Otherwise, we need to delete the least recently used entry. To do that, we can easily remove the head of the queue and the corresponding entry from the hash table.
 
+## Eviction policy
+When the cache is full, we need to remove existing items for new resources. In fact, deleting the least recently used item is just one of the most common approaches. So are there other ways to do that?
+
+As mentioned above, The strategy is to maximum the chance that the requesting resource exists in the cache. I’ll briefly mention several approaches here:
+
+Random Replacement (RR) – As the term suggests, we can just randomly delete an entry.
+Least frequently used (LFU) – We keep the count of how frequent each item is requested and delete the one least frequently used.
+W-TinyLFU – I’d also like to talk about this modern eviction policy. In a nutshell, the problem of LFU is that sometimes an item is only used frequently in the past, but LFU will still keep this item for a long while. W-TinyLFU solves this problem by calculating frequency within a time window. It also has various optimizations of storage. 
+
+## Concurrency
+To discuss concurrency, I’d like to talk about why there is concurrency issue with cache and how can we address it.
+
+It falls into the classic reader-writer problem. When multiple clients are trying to update the cache at the same time, there can be conflicts. For instance, two clients may compete for the same cache slot and the one who updates the cache last wins.
+
+The common solution of course is using a lock. The downside is obvious – it affects the performance a lot. How can we optimize this?
+
+One approach is to split the cache into multiple shards and have a lock for each of them so that clients won’t wait for each other if they are updating cache from different shards. However, given that hot entries are more likely to be visited, certain shards will be more often locked than others.
+
+An alternative is to use commit logs. To update the cache, we can store all the mutations into logs rather than update immediately. And then some background processes will execute all the logs asynchronously. This strategy is commonly adopted in database design.
+
+## Distributed cache
+When the system gets to certain scale, we need to distribute the cache to multiple machines.
+
+The general strategy is to keep a hash table that maps each resource to the corresponding machine. Therefore, when requesting resource A, from this hash table we know that machine M is responsible for cache A and direct the request to M. At machine M, it works similar to local cache discussed above. Machine M may need to fetch and update the cache for A if it doesn’t exist in memory. After that, it returns the cache back to the original server.
 
 In case you want a cache system to retain values based on how often they were accessed: 
 
