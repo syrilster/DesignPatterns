@@ -23,16 +23,15 @@ Here’s how it works. when resource A is requested, we check the hash table to 
 ## Eviction policy
 When the cache is full, we need to remove existing items for new resources. In fact, deleting the least recently used item is just one of the most common approaches. So are there other ways to do that?
 
-As mentioned above, The strategy is to maximum the chance that the requesting resource exists in the cache. I’ll briefly mention several approaches here:
+As mentioned above, The strategy is to maximum the chance that the requesting resource exists in the cache. 
 
-Random Replacement (RR) – As the term suggests, we can just randomly delete an entry.
-Least frequently used (LFU) – We keep the count of how frequent each item is requested and delete the one least frequently used.
-W-TinyLFU – I’d also like to talk about this modern eviction policy. In a nutshell, the problem of LFU is that sometimes an item is only used frequently in the past, but LFU will still keep this item for a long while. W-TinyLFU solves this problem by calculating frequency within a time window. It also has various optimizations of storage. 
+* Random Replacement (RR) – As the term suggests, we can just randomly delete an entry.
+* Least frequently used (LFU) – We keep the count of how frequent each item is requested and delete the one least frequently used.
+* W-TinyLFU – I’d also like to talk about this modern eviction policy. In a nutshell, the problem of LFU is that sometimes an item is only used frequently in the past, but LFU will still keep this item for a long while. W-TinyLFU solves this problem by calculating frequency within a time window. It also has various optimizations of storage. 
 
 ## Concurrency
-To discuss concurrency, I’d like to talk about why there is concurrency issue with cache and how can we address it.
 
-It falls into the classic reader-writer problem. When multiple clients are trying to update the cache at the same time, there can be conflicts. For instance, two clients may compete for the same cache slot and the one who updates the cache last wins.
+When multiple clients are trying to update the cache at the same time, there can be conflicts. For instance, two clients may compete for the same cache slot and the one who updates the cache last wins. This is the classic reader-writer problem.
 
 The common solution of course is using a lock. The downside is obvious – it affects the performance a lot. How can we optimize this?
 
@@ -45,13 +44,11 @@ When the system gets to certain scale, we need to distribute the cache to multip
 
 The general strategy is to keep a hash table that maps each resource to the corresponding machine. Therefore, when requesting resource A, from this hash table we know that machine M is responsible for cache A and direct the request to M. At machine M, it works similar to local cache discussed above. Machine M may need to fetch and update the cache for A if it doesn’t exist in memory. After that, it returns the cache back to the original server.
 
-In case you want a cache system to retain values based on how often they were accessed: 
+**In case you want a cache system to retain values based on how often they were accessed:**
 
-LFU (Least Frequently Used)
-cache design which counts how often an item is needed. Those that are used least often are discarded first. 
+* LFU (Least Frequently Used): This is a cache design which counts how often an item is needed. Those that are used least often are discarded first. 
 
-ARC (Adaptive Replacement Cache)
-which balances between LRU and LFU, to give improved result. It dynamically updates the size of protected segment and the probationary segment so to make optimum use of available cache space.
+* ARC (Adaptive Replacement Cache): This is a balance between LRU and LFU, to give improved result. It dynamically updates the size of protected segment and the probationary segment so to make optimum use of available cache space.
 
 
 
