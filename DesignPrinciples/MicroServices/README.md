@@ -6,3 +6,8 @@
 
 ![micro vs monolith](https://user-images.githubusercontent.com/6800366/38198456-8e38812e-36aa-11e8-9924-7fd3b5b93490.PNG)
 
+## Common characteristics of microservices
+
+
+
+
