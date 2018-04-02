@@ -43,11 +43,11 @@ When multiple clients are trying to update the cache at the same time, there can
 The common solution of course is using a lock. The downside is obvious – it affects the performance a lot. How can we optimize this?
 
 **Lock Striping to the rescue**
-In case you have only one lock for the whole data structure like Array or Map and you are synchronizing it and using it in a multi-threaded environment. Then, effectively at any given point in time, only one thread can manipulate the map as there is only a single lock. All the other threads would be waiting to get the monitor.
+In case you have only one lock for the whole data structure like Array or Map and you are synchronizing it and using it in a multi-threaded environment, then effectively at any given point in time, only one thread can manipulate the map as there is only a single lock. All the other threads would be waiting to get the monitor.
 
-If there can be separate locks for separate buckets. Then the thread contention won't be at the whole data structure level but at the bucket level. That's the concept of lock striping. Having separate locks for a portion of a data structure where each lock is locking on a variable sized set of independent objects.
+If there can be separate locks for separate buckets, thread contention won't be at the whole data structure level but at the bucket level. That's the concept of lock striping. Having separate locks for a portion of a data structure where each lock is locking on a variable sized set of independent objects.
 
-This might then be improved through lock striping by splitting the cache into many smaller independent regions i.e. to split the cache into multiple shards and have a lock for each of them so that clients won’t wait for each other if they are updating cache from different shards. However, given that hot entries are more likely to be visited, certain shards will be more often locked than others.
+Lock striping works by splitting the cache into many smaller independent regions i.e. to split the cache into multiple shards and have a lock for each of them so that clients won’t wait for each other if they are updating cache from different shards. However, given that hot entries are more likely to be visited, certain shards will be more often locked than others.
 
 An alternative is to use commit logs. To update the cache, we can store all the mutations into logs rather than update immediately. And then some background processes will execute all the logs asynchronously. This strategy is commonly adopted in database design.
 
