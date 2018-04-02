@@ -27,7 +27,12 @@ As mentioned above, The strategy is to maximum the chance that the requesting re
 
 * Random Replacement (RR) – As the term suggests, we can just randomly delete an entry.
 * Least frequently used (LFU) – We keep the count of how frequent each item is requested and delete the one least frequently used.
-* W-TinyLFU – I’d also like to talk about this modern eviction policy. In a nutshell, the problem of LFU is that sometimes an item is only used frequently in the past, but LFU will still keep this item for a long while. W-TinyLFU solves this problem by calculating frequency within a time window. It also has various optimizations of storage. 
+* W-TinyLFU – This is a modern eviction policy. In a nutshell, the problem of LFU is that sometimes an item is only used frequently in the past, but LFU will still keep this item for a long while. W-TinyLFU solves this problem by calculating frequency within a time window. It also has various optimizations of storage. 
+
+W-TinyLFU uses the Segmented LRU (SLRU) policy for long term retention. An entry starts in the probationary segment and on a subsequent access it is promoted to the protected segment (capped at 80% capacity). When the protected segment is full it evicts into the probationary segment, which may trigger a probationary entry to be discarded. This ensures that entries with a small reuse interval (the hottest) are retained and those that are less often reused (the coldest) become eligible for eviction.
+
+![image](https://user-images.githubusercontent.com/6800366/38196857-e80f9082-36a2-11e8-9b7a-30cb0fdd6661.png)
+
 
 ## Concurrency
 
