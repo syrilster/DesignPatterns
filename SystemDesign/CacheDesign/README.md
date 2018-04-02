@@ -29,9 +29,11 @@ As mentioned above, The strategy is to maximum the chance that the requesting re
 * Least frequently used (LFU) – We keep the count of how frequent each item is requested and delete the one least frequently used.
 * W-TinyLFU – This is a modern eviction policy. In a nutshell, the problem of LFU is that sometimes an item is only used frequently in the past, but LFU will still keep this item for a long while. W-TinyLFU solves this problem by calculating frequency within a time window. It also has various optimizations of storage. 
 
-W-TinyLFU uses the Segmented LRU (SLRU) policy for long term retention. An entry starts in the probationary segment and on a subsequent access it is promoted to the protected segment (capped at 80% capacity). When the protected segment is full it evicts into the probationary segment, which may trigger a probationary entry to be discarded. This ensures that entries with a small reuse interval (the hottest) are retained and those that are less often reused (the coldest) become eligible for eviction.
+   W-TinyLFU uses the Segmented LRU (SLRU) policy for long term retention. An entry starts in the probationary segment and on a subsequent access it is promoted to the protected segment (capped at 80% capacity). When the protected segment is full it evicts into the probationary segment, which may trigger a probationary entry to be discarded. This ensures that entries with a small reuse interval (the hottest) are retained and those that are less often reused (the coldest) become eligible for eviction.
 
-![image](https://user-images.githubusercontent.com/6800366/38196857-e80f9082-36a2-11e8-9b7a-30cb0fdd6661.png)
+   ![image](https://user-images.githubusercontent.com/6800366/38196857-e80f9082-36a2-11e8-9b7a-30cb0fdd6661.png)
+
+* ARC (Adaptive Replacement Cache): This is a balance between LRU and LFU, to give improved result. It dynamically updates the size of protected segment and the probationary segment so to make optimum use of available cache space.
 
 
 ## Concurrency
@@ -53,12 +55,6 @@ An alternative is to use commit logs. To update the cache, we can store all the 
 When the system gets to certain scale, we need to distribute the cache to multiple machines.
 
 The general strategy is to keep a hash table that maps each resource to the corresponding machine. Therefore, when requesting resource A, from this hash table we know that machine M is responsible for cache A and direct the request to M. At machine M, it works similar to local cache discussed above. Machine M may need to fetch and update the cache for A if it doesn’t exist in memory. After that, it returns the cache back to the original server.
-
-**In case you want a cache system to retain values based on how often they were accessed:**
-
-* LFU (Least Frequently Used): This is a cache design which counts how often an item is needed. Those that are used least often are discarded first. 
-
-* ARC (Adaptive Replacement Cache): This is a balance between LRU and LFU, to give improved result. It dynamically updates the size of protected segment and the probationary segment so to make optimum use of available cache space.
 
 ## Distributed key-value store
 
