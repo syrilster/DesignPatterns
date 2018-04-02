@@ -88,7 +88,7 @@ To evaluate a distributed system, one key metric is system availability. For ins
 
 Apparently, if someone requests resources from this machine, we won’t be able to return the correct response. You may not consider this issue when building a side project. However, if you are serving millions of users with tons of servers, this happens quite often and you can’t afford to manually restart the server every time. This is why availability is essential in every distributed system nowadays. So how to address this issue?
 
-he most common solution is replication. By setting machines with duplicate resources, we can significantly reduce the system downtime. If a single machine has 10% of chance to crash every month, then with a single backup machine, we reduce the probability to 1% when both are down.
+The most common solution is replication. By setting machines with duplicate resources, we can significantly reduce the system downtime. If a single machine has 10% of chance to crash every month, then with a single backup machine, we reduce the probability to 1% when both are down.
 
 ## Replica VS sharding
 At first glance, replica is quite similar to sharding. So what’s the relation of these two? And how would you choose between replica and sharding when designing a distributed key-value store?
