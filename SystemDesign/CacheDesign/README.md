@@ -52,9 +52,9 @@ Lock striping works by splitting the cache into many smaller independent regions
 An alternative is to use commit logs. To update the cache, we can store all the mutations into logs rather than update immediately. And then some background processes will execute all the logs asynchronously. This strategy is commonly adopted in database design.
 
 ## Distributed cache
-When the system gets to certain scale, we need to distribute the cache to multiple machines.
+When the system gets to a certain scale, we need to distribute the cache to multiple machines.
 
-The general strategy is to keep a hash table that maps each resource to the corresponding machine. Therefore, when requesting resource A, from this hash table we know that machine M is responsible for cache A and direct the request to M. At machine M, it works similar to local cache discussed above. Machine M may need to fetch and update the cache for A if it doesn’t exist in memory. After that, it returns the cache back to the original server.
+The general strategy is to maintain a hash table that maps each resource to the corresponding machine. Therefore, when requesting resource A, from this hash table we know that machine M is responsible for cache A and direct the request to M. At machine M, it works similar to local cache discussed above. Machine M may need to fetch and update the cache for A if it doesn’t exist in memory. After that, it returns the cache back to the original server.
 
 ## Distributed key-value store
 
