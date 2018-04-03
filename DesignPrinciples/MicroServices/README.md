@@ -58,6 +58,10 @@ Usually big companies organize their teams around technology i.e UI, Server, DBA
    * Use tools like Chaos Monkey. **Chaos Monkey** is a tool invented by Netflix to test the resilience of its IT infrastructure. It works by intentionally disabling computers in Netflix's production network to test how remaining systems respond to the outage. Chaos Monkey is now part of a larger suite of tools called the Simian Army designed to simulate and test responses to various system failures and edge cases.
    
    ![chaos monkey](https://user-images.githubusercontent.com/6800366/38235031-5db16762-373d-11e8-94f6-505a6d451e48.PNG)
+   
+## Are Microservices just SOA?   
+
+
 
 
 
