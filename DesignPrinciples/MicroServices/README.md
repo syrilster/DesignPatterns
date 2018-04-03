@@ -46,6 +46,9 @@ Usually big companies organize their teams around technology i.e UI, Server, DBA
    * This opens up the flexibilty for each service to have it's own database vendor like MongoDB or PostgreSQL moving away from one common DB.
    * Languages and tools also can be choosen by individual services. For example, one service can be writtem in Java language and an other service can be on Ruby.
 
+![data management](https://user-images.githubusercontent.com/6800366/38227616-b3318d96-371c-11e8-90ff-9d21f5c9f243.PNG)
+
+
 * **Infrastructre Automation**:
 
 
