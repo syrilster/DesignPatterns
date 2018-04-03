@@ -61,7 +61,28 @@ Usually big companies organize their teams around technology i.e UI, Server, DBA
    
 ## Are Microservices just SOA?   
 
+* Microservice is a subset of SOA's usage. Microservice carves out a consistent space within SOA.
 
+## Monolith vs Microservices
+
+**Monolith**
+
+* Simplicity - Upto a certian size.
+* Consistency
+* Inter module refactoring - Easy to identify module boundaries
+
+**MicroService**
+
+* Partial Deployment - Deploy independent piece without much fuss.
+* Availability - Example in shopping cart application, user do not care if the recommendation service is down as long as they are able to continue to shop. But this will lead to a compromise in consistency. It is hard to have consistency with microservice applications and you will have to embrace eventual consistency.
+* Preserve Modularity - Easy to make sure that you don't share mutable state.
+* Multiple Platforms - One service making use of Java and other services on Closure etc.
+
+**If on Microservice**
+* Be ready for rapid provisioning using cloud providers.
+* Basic Monitoring
+* Rapid Application Deployment - Have your deployment done in minutes and not accross several days.
+* Devops culture - Team members need to be able to do devops related work.
 
 
 
