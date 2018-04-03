@@ -9,7 +9,11 @@
 
 ![micro vs monolith](https://user-images.githubusercontent.com/6800366/38198456-8e38812e-36aa-11e8-9924-7fd3b5b93490.PNG)
 
+
 ## Common characteristics of microservices
+
+* **Componentization via Services:** 
+In MicroServices world services are out-of-process components who communicate with a mechanism such as a web service request, or remote procedure call. One main reason for using services as components (rather than libraries) is that services are **independently deployable.**
 
 
 
