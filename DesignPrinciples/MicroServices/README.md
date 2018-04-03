@@ -10,6 +10,7 @@
 ![micro vs monolith](https://user-images.githubusercontent.com/6800366/38198456-8e38812e-36aa-11e8-9924-7fd3b5b93490.PNG)
 
 
+
 ## Common characteristics of microservices
 
 * **Componentization via Services:** 
@@ -75,7 +76,7 @@ Usually big companies organize their teams around technology i.e UI, Server, DBA
 
 * Partial Deployment - Deploy independent piece without much fuss.
 * Availability - Example in shopping cart application, user do not care if the recommendation service is down as long as they are able to continue to shop. But this will lead to a compromise in consistency. It is hard to have consistency with microservice applications and you will have to embrace eventual consistency.
-* Preserve Modularity - Easy to make sure that you don't share mutable state.
+* Preserve Modularity (Seperation of concerns) - Easy to make sure that you don't share mutable state.
 * Multiple Platforms - One service making use of Java and other services on Closure etc.
 
 **If on Microservice**
