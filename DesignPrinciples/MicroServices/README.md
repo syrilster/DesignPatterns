@@ -13,6 +13,8 @@
 ## Common characteristics of microservices
 
 * **Componentization via Services:** 
+    * Components should be independently replaceable.
+    * Components should be independently upgradeabe.
 In the MicroServices world services are out-of-process components who communicate with a mechanism such as a web service request, or remote procedure call. One main reason for using services as components (rather than libraries) is that services are **independently deployable.**
 * **Organized around Business Capabilities**:
 
