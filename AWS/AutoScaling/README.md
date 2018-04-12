@@ -32,4 +32,18 @@ Launching an EC2 instance into AS group because of following:
 * Due to cloud watch metric 
 * Scheduled Event i.e. predicted scaling
 
+**Load Balancer Configurations**
+
+* LB will have a listener which is default. Example a HTTP port 80 listener forwarding the request to a target group and it can also have aditional listeners to have special conditional logic. i.e. domain based routing to a different target group.
+* Can have the Availability Zone configured. i.e. Load shared between these configured AZ for high availability.
+* Security Group to restrict access.
+* Target group are just simple EC2 instances to serve the incoming requests.
+
+**Auto Scaling Group configs**
+
+* Launch configuration(what part): Mention AMI or EC2 instance type, AZ, Security Group,IAM role, custom scripts etc.
+* Autoscaling groups(where and when parts)
+
+
+
 
