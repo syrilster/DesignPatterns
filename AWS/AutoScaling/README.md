@@ -8,3 +8,12 @@ As show above Cloud watch health check, AutoScaling and ELB work together to cre
 * Classic Load Balancer - Basic Load balancing at request and connection level.
 * Application Load Balancer - Best suited for load balancing HTTP and HTTPS traffic and it provides advanced request routing of modern appliaction architectures, including microservices and containers.
 * Network Load Balancers - Best suited for load balancing of TCP traffic where extreme performance is required.
+
+## How does Auto Scaling work 
+
+* **Launch configuration(what?)** - What needs to be launched? An AMI or and EC2 instance etc.
+* **Auto Scaling Group(where?)** - Where to launch the group. Like AZ, subnet etc.
+* **Auto Scaling policy(When?)** - Specifies when to increase or decrease EC2 instances based on cloud watch alarms. Example: Based on CPU utilization.
+* A schedule action - Tells Auto Scaling to perform a scaling action at a certain time in the future. Example a black friday sale on Amazon website.
+
+**Auto Scaling Groups**  - 
