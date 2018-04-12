@@ -16,4 +16,13 @@ As show above Cloud watch health check, AutoScaling and ELB work together to cre
 * **Auto Scaling policy(When?)** - Specifies when to increase or decrease EC2 instances based on cloud watch alarms. Example: Based on CPU utilization.
 * A schedule action - Tells Auto Scaling to perform a scaling action at a certain time in the future. Example a black friday sale on Amazon website.
 
-**Auto Scaling Groups**  - 
+## Auto Scaling Groups
+
+* Contain a collection of EC2 instances that share similar characteristics.
+* Instances in an Auto Scaling group are treated as a logical grouping for the purpose of instance scaling and management.
+* Minimum Size: Smallest number of EC2's that this group should never go below.
+* Desired Capacity: The ideal EC2 instances that we would like to run at any point in time.
+* Maximum Size: This should always be set to protect from having too many EC2 instances spun up erroneously.
+
+
+
