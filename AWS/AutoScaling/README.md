@@ -23,6 +23,13 @@ As show above Cloud watch health check, AutoScaling and ELB work together to cre
 * Minimum Size: Smallest number of EC2's that this group should never go below.
 * Desired Capacity: The ideal EC2 instances that we would like to run at any point in time.
 * Maximum Size: This should always be set to protect from having too many EC2 instances spun up erroneously.
+* Scaling out as and when required based on cloud watch metrics. This will never go beyond the maximum size defined.
 
+## Auto Scaling basic lifecycle
+
+Launching an EC2 instance into AS group because of following:
+
+* Due to cloud watch metric 
+* Scheduled Event i.e. predicted scaling
 
 
