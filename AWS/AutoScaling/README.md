@@ -27,10 +27,10 @@ As show above Cloud watch health check, AutoScaling and ELB work together to cre
 
 ## Auto Scaling basic lifecycle
 
-Launching an EC2 instance into AS group because of following:
+Launching an EC2 instance into AS group can be because of the following:
 
-* Due to cloud watch metric 
-* Scheduled Event i.e. predicted scaling
+* Triggered due to a cloud watch metric.
+* User Scheduled Event i.e. predicted scaling. Example a black friday sale.
 
 **Load Balancer Configurations**
 
