@@ -11,9 +11,9 @@ As show above Cloud watch health check, AutoScaling and ELB work together to cre
 
 ## How does Auto Scaling work 
 
-* **Launch configuration(what?)** - What needs to be launched? An AMI or and EC2 instance etc.
-* **Auto Scaling Group(where?)** - Where to launch the group. Like AZ, subnet etc.
-* **Auto Scaling policy(When?)** - Specifies when to increase or decrease EC2 instances based on cloud watch alarms. Example: Based on CPU utilization.
+* **Launch configuration (what?)** - What needs to be launched? An AMI or and EC2 instance etc.
+* **Auto Scaling Group (where?)** - Where to launch the group. Like AZ, subnet etc.
+* **Auto Scaling policy (When?)** - Specifies when to increase or decrease EC2 instances based on cloud watch alarms. Example: Based on CPU utilization.
 * A schedule action - Tells Auto Scaling to perform a scaling action at a certain time in the future. Example a black friday sale on Amazon website.
 
 ## Auto Scaling Groups
