@@ -43,6 +43,22 @@ Launching an EC2 instance into AS group can be because of the following:
 
 * Launch configuration(what part): Mention AMI or EC2 instance type, AZ, Security Group,IAM role, custom scripts etc.
 * Autoscaling groups(where and when parts)
+* Scaling policies: Reactive actions to be done when a cloud watch metric is met.
+* Create Scheduled Action - For configuring the black friday sale.
+
+## Amazon ECS (Elastic Container Service)
+* Fully managed container orchestration service to manage containers in AWS.
+* Amazon ECS for Kubernetes - For running and building kuberbetes infrastructure
+* Amazon Elastic Container Registery - Fully managed docker container registery to store, manage and deploy docker containers.
+* AWS Fargate - For deploying and managing without any configs for container management. i.e. Simply upload the container image and Fargate will manage everything.
+
+## AWS lambda
+* Serverless. Pay only for the compute time.
+* Zero administration. Focus in only on writing the code.
+* Can specify auto trigger other AWS services like S3
+
+
+
 
 
 
