@@ -19,16 +19,16 @@ Heap - Young generation, Old generation
 * Deletion + Compacting - Once objects are removed from heap, group the free memory location together so that the performance of memory allocation of subsequent new object creation will be faster.
 
 ## Garbage Collection Types
-* Serial GC - For simple standalone applications with low memory footprints. Not suitable for applications where lot if threads are running.
-* Parallel GC - Can spawn n number of threads based on the CPU cores. Also called throughput collectors as it used the CPU cycles to speed up the GC. Uses in thread for old generation and multiple threads for young generation.
-* Concurrent Mark Sweep - Low pause collectors. Minor GC uses parallel GC algo and CMS is used for old generation area. Uses concurrency to have less stop the world pauses.
+* Serial GC - For simple standalone applications with low memory footprints. Not suitable for applications where lot of threads are running.
+* Parallel GC - Can spawn n number of threads based on the CPU cores. Also called throughput collectors as it uses the CPU cycles to speed up the GC. Uses single thread for old generation and multiple threads for the young generation.
+* Concurrent Mark Sweep - Low pause collectors. Minor GC uses parallel GC algo and CMS is used for the old generation area. Uses concurrency to have less stop the world pauses.
 * G1 Garbage first GC - Divides the heap space into multiple equally sized areas and when a GC is required it first collects the area with lesser live data.
 
 ## PermGen vs Meta Space
 **Meta Space**
 * Part of native memory i.e OS level memory consuming the OS memory.
 * Process sizes can go large since the meta space goes to the OS.
-* Too many class loading can bring down the server. As memory is the OS memory and not allocated on the heap.
+* Too many class loading can bring down the server. Memory used is the OS memory and not allocated on the heap.
 
 **PermGen**
 * Used to store objects of methods and classes.
