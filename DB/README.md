@@ -23,14 +23,14 @@ declare
   i record;
 begin
   for i in 1..500 loop
-                with new_subject as (
-                INSERT INTO public.subject(subject_key, dob)
-                VALUES (nextval('subject_key'), '2015-01-26')
-                returning subject_key
+                with temp_table as (
+                INSERT INTO public.table_one(table_one_key, dob)
+                VALUES (nextval('table_one_key'), '2015-01-26')
+                returning table_one_key
                 )
-                INSERT INTO public.consent(
-                consent_key, subject_key, consent_type_key, start_time)
-                VALUES (nextval('consent_key'), (select subject_key from new_subject), 3, current_timestamp);            
+                INSERT INTO public.table_two(
+                table_two_key, table_one_key, table_two_type_key, start_time)
+                VALUES (nextval('table_two_key'), (select table_one_key from temp_table), 3, current_timestamp);            
   end loop;
 end;
 $$
