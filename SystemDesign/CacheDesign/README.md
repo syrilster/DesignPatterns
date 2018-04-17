@@ -86,9 +86,9 @@ In order to balance the traffic, you’d better make sure that keys are distribu
 ## System availability
 To evaluate a distributed system, one key metric is system availability. For instance, suppose one of our machines crashes for some reason (maybe hardware issue or program bugs), how does this affect our key-value storage system?
 
-Apparently, if someone requests resources from this machine, we won’t be able to return the correct response. You may not consider this issue when building a side project. However, if you are serving millions of users with tons of servers, this happens quite often and you can’t afford to manually restart the server every time. This is why availability is essential in every distributed system nowadays. So how to address this issue?
+Apparently, if someone requests resources from this machine, we won’t be able to return the correct response. You may not consider this issue when building a side project. However, if you are serving millions of users with tons of servers, this happens quite often and you can’t afford to manually restart the server every time. This is why availability is essential in every distributed system nowadays. How do we address this issue?
 
-The most common solution is replication. By setting machines with duplicate resources, we can significantly reduce the system downtime. If a single machine has 10% of chance to crash every month, then with a single backup machine, we reduce the probability to 1% when both are down.
+The most common solution is **replication.** By setting machines with duplicate resources, we can significantly reduce the system downtime. If a single machine has 10% of chance to crash every month, then with a single backup machine, we reduce the probability to 1% when both are down.
 
 ## Replica VS sharding
 At first glance, replica is quite similar to sharding. So what’s the relation of these two? And how would you choose between replica and sharding when designing a distributed key-value store?
@@ -100,7 +100,7 @@ By introducing replicas, we can make the system more robust. However, one issue 
 
 * First approach is to keep a local copy in coordinator. Whenever updating a resource, the coordinator will keep the copy of updated version. So in case the update fails, the coordinator is able to re-do the operation.
 
-* Another approach is commit log. If you have been using Git, the concept of commit log should be quite familiar to you. Basically, for each node machine, it’ll keep the commit log for each operation, which is like the history of all updates. Another example is **MongoDB.** The oplog (operations log) is a special capped collection that keeps a rolling record of all operations that modify the data stored in your databases. MongoDB applies database operations on the primary and then records the operations on the primary’s oplog. The secondary members then copy and apply these operations in an asynchronous process. All replica set members contain a copy of the oplog, which allows them to maintain the current state of the database.
+* Another approach is **commit log.** If you have been using Git, the concept of commit log should be quite familiar to you. Basically, for each node machine, it’ll keep the commit log for each operation, which is like the history of all updates. Another example is **MongoDB.** The oplog (operations log) is a special capped collection that keeps a rolling record of all operations that modify the data stored in your databases. MongoDB applies database operations on the primary and then records the operations on the primary’s oplog. The secondary members then copy and apply these operations in an asynchronous process. All replica set members contain a copy of the oplog, which allows them to maintain the current state of the database.
 
 * Suppose when the requested resource locates in A1, A2 and A3, the coordinator can ask from all three machines. If by any chance the data is different, the system can resolve the conflict on the fly.
 
