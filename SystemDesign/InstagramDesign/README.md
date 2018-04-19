@@ -62,16 +62,16 @@ Different schemes for metadata sharding:
 
 * **Partitioning based on UserID:** Let’s assume we shard based on the UserID so that we can keep all photos of a user on the same shard. If one DB shard is 4TB, we will have 712/4 => 178 shards. Let’s assume for future growths we keep 200 shards.
 
-So we will find the shard number by UserID % 200 and then store the data there. To uniquely identify any photo in our system, we can append shard number with each PhotoID.
+    So we will find the shard number by UserID % 200 and then store the data there. To uniquely identify any photo in our system, we can append shard number with each PhotoID.
 
-How can we generate PhotoIDs? Each DB shard can have its own auto-increment sequence for PhotoIDs, and since we will append ShardID with each PhotoID, it will make it unique throughout our system.
+    How can we generate PhotoIDs? Each DB shard can have its own auto-increment sequence for PhotoIDs, and since we will append ShardID with each PhotoID, it will make it unique throughout our system.
 
-**What are different issues with this partitioning scheme?**
+    **What are different issues with this partitioning scheme?**
 
-How would we handle hot users? Several people follow such hot users, and any photo they upload is seen by a lot of other people.
-Some users will have a lot of photos compared to others, thus making a non-uniform distribution of storage.
-What if we cannot store all pictures of a user on one shard? If we distribute photos of a user onto multiple shards, will it cause higher latencies?
-Storing all pictures of a user on one shard can cause issues like unavailability of all of the user’s data if that shard is down or higher latency if it is serving high load etc.
+    How would we handle hot users? Several people follow such hot users, and any photo they upload is seen by a lot of other people.
+    Some users will have a lot of photos compared to others, thus making a non-uniform distribution of storage.
+    What if we cannot store all pictures of a user on one shard? If we distribute photos of a user onto multiple shards, will it cause higher latencies?
+    Storing all pictures of a user on one shard can cause issues like unavailability of all of the user’s data if that shard is down or higher latency if it is serving high load etc.
 
 * **Partitioning based on PhotoID:** If we can generate unique PhotoIDs first and then find shard number through PhotoID % 200, this can solve above problems. We would not need to append ShardID with PhotoID in this case as PhotoID will itself be unique throughout the system.
 
