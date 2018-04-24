@@ -17,4 +17,6 @@ shape.Draw() --> to get the correct behavior for any shape.
 This is in contrast to the old way of doing things in which the code was separate from the data, and you would have had functions such as drawSquare() and drawCircle().
 
 ## Encapsulation
+* Encapsulation, strictly speaking, means something different; it means collecting a bunch of stuff together and putting it in one box, or capsule. The box may or may not have opaque walls, so this may or may not involve information hiding. In practice a "class" will both encapsulate (ie bundle code and data together) and hide information (namely, implementation detail), and some people get so used to doing both at once they no longer bother to distinguish. Example: access modifiers can be public, protected or private.
 * If encapsulation was the same thing as information hiding," then one might make the argument that "everything that was encapsulated was also hidden. This is obviously not true. For example, even though information may be encapsulated within record structures and arrays, this information is usually not hidden (unless hidden via some other mechanism).
+
