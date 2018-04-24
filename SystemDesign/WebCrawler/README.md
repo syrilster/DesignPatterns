@@ -148,7 +148,7 @@ Each host will perform checkpointing periodically and dump a snapshot of all the
 ## Crawler Traps
 There are many crawler traps, spam sites, and cloaked content. A crawler trap is a URL or set of URLs that cause a crawler to crawl indefinitely. Some crawler traps are unintentional. For example, a symbolic link within a file system can create a cycle. Other crawler traps are introduced intentionally. For example, people have written traps that dynamically generate an infinite Web of documents. The motivations behind such traps vary. Anti-spam traps are designed to catch crawlers used by spammers looking for email addresses, while other sites use traps to catch search engine crawlers to boost their search ratings.
 
-AOPIC algorithm (Adaptive Online Page Importance Computation), can help mitigating common types of bot-traps. AOPIC solves this problem by using a credit system.
+**AOPIC algorithm (Adaptive Online Page Importance Computation)**, can help mitigating common types of bot-traps. AOPIC solves this problem by using a credit system.
 
 * Get a set of N seed pages.
 * Allocate X amount of credit to each page, such that each page has X/N credit (i.e. equal amount of credit) before crawling has started.
@@ -157,7 +157,7 @@ AOPIC algorithm (Adaptive Online Page Importance Computation), can help mitigati
 * Extract all the links from page P (let's say there are 10 of them).
 * Set the credits of P to 0.
 * Take a 10% "tax" and allocate it to a Lambda page.
-* Allocate an equal amount of credits each link found on page P from P's original credit - the tax: so (100 (P credits) - 10 (10% tax))/10 (links) = 9 credits per each link.
+* Allocate an equal amount of credits to each link found on page P from P's original credit - the tax: so (100 (P credits) - 10 (10% tax))/10 (links) = 9 credits per each link.
 * Repeat from step 3.
 
 Since the Lambda page continuously collects tax, eventually it will be the page with the largest amount of credit and we'll have to "crawl" it. I say "crawl" in quotes, because we don't actually make an HTTP request for the Lambda page, we just take its credits and distribute them equally to all of the pages in our database.
