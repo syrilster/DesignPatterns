@@ -15,3 +15,6 @@ shape.Draw() --> to get the correct behavior for any shape.
 ```
 
 This is in contrast to the old way of doing things in which the code was separate from the data, and you would have had functions such as drawSquare() and drawCircle().
+
+## Encapsulation
+* If encapsulation was the same thing as information hiding," then one might make the argument that "everything that was encapsulated was also hidden. This is obviously not true. For example, even though information may be encapsulated within record structures and arrays, this information is usually not hidden (unless hidden via some other mechanism).
