@@ -18,3 +18,6 @@
 * Three arguments should be be avoided where possible. More than three requires special justification and shouldnt be used anyway.
 * Arguments are harder from a testing point of view. Imagine the difficulty of writing all the test cases to ensure that all the various combinations of arguments work properly.
 * If there are no arguments, this is trivial.
+* **Flag Arguments**: Passing a boolean into a function is truly terrible practice. It immediately complicates the signature of the method, loudly proclaiming that this function does more than one thing. It does one thing if the flag is true and another if the flag is false.
+
+## Command Query Seperation
