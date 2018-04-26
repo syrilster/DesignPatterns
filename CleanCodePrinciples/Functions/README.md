@@ -42,4 +42,8 @@ private void deletePageAndAllReferences(Page page) throws Exception {
 // Actual deletion logic here
 }
 
+private void logError(Exception e) {
+  logger.log(e.getMessage());
+}
+
 ```
