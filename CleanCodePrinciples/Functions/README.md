@@ -21,3 +21,25 @@
 * **Flag Arguments**: Passing a boolean into a function is truly terrible practice. It immediately complicates the signature of the method, loudly proclaiming that this function does more than one thing. It does one thing if the flag is true and another if the flag is false.
 
 ## Command Query Seperation
+* Functions should either do something or answer something, but not both.
+* A function --> change state of an object or return some information about that object.
+* Prefer Exceptions to returning error codes: Returning error codes from command functions is subtle violation of command query seperation.
+* Error handling is one thing: Functions should do one thing. Error handling is one thing. Thus, a function that handles errors should do nothing else.
+
+## Extract Try/Catch Blocks
+Try/Catch blocks are ugly and they confuse the structure of the code and mix error processing with normal processing. In the below snippet, delete function is all about error processing.
+
+```
+public void delete(Page page) {
+  try {
+    deletePageAndAllReferences(page);
+  } catch(Exception e) {
+    logError(e);
+  }
+}
+
+private void deletePageAndAllReferences(Page page) throws Exception {
+// Actual deletion logic here
+}
+
+```
