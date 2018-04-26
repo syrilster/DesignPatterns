@@ -11,3 +11,10 @@
 * Make sure that each swicth statement is buried in a low-level class and is never repeated.
 * The above can be achieved using polymorphism.
 * General rule for switch statements is that they can be tolerated if they appear only once, are used to create polymorphic objects, and are hidden behind an inheritance relationship so that the rest of the system can't see them.
+
+## Function Arguments
+* The ideal number of arguments for a function is zero (niladic).
+* Next comes one (monadic), followed closely by two (dyadic).
+* Three arguments should be be avoided where possible. More than three requires special justification and shouldnt be used anyway.
+* Arguments are harder from a testing point of view. Imagine the difficulty of writing all the test cases to ensure that all the various combinations of arguments work properly.
+* If there are no arguments, this is trivial.
