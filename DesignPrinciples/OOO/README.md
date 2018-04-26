@@ -1,4 +1,5 @@
-* **Inheritance:** "IS-A" kind of a relationship. To reuse functionality across different classes.
+## Inheritance:
+* "IS-A" kind of a relationship. To reuse functionality across different classes.
 * **Interface:** A java interface provides an abstraction. Implementations of this interface which do not exposed any other methods are employing information hiding; we cannot tell how they are implemented.
     Using an interface we can define the specification which can be implemented later. Example: JPA is an interface and hibernate or eclipselink will implement it in their own way.
 
@@ -23,3 +24,8 @@ This is in contrast to the old way of doing things in which the code was separat
 ## Abstraction
 * An abstraction denotes the essential characteristics of an object that distinguish it from all other kinds of object and thus provide crisply defined conceptual boundaries, relative to the perspective of the viewer.
 *  Abstraction is most often used as a complexity mastering technique. For example, we often hear people say such things as: "just give me the highlights" or "just the facts, please." What these people are asking for are abstractions.
+
+## Coupling and Cohesion
+* Coupling between modules/components is their degree of mutual interdependence; lower coupling is better.
+* Cohesion of a single module/component is the degree to which its responsibilities form a meaningful unit; higher cohesion is better. SIngle Responsibility principle.
+
