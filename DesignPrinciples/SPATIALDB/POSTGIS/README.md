@@ -1,3 +1,10 @@
+**PostGIS** is a spatial database extender for PostgreSQL object-relational database. It adds support for geographic objects allowing location queries to be run in SQL.
+```
+SELECT superhero.name
+FROM city, superhero
+WHERE ST_Contains(city.geom, superhero.geom)
+AND city.name = 'Gotham';
+```
 postgress - support for native full text search
 full text search --> Meaning the ability to identify that run and running are the same.
 
