@@ -17,5 +17,5 @@
 * REST locates the resources by using URL and it depends on the type of transport protocol(HTTP - GET, POST, PUT, DELETE etc) for the actions to be performed on the resources. 
 * The REST service locates the resource based on the URL and performs the action based on the transport action verb. It is more of architectural style and conventions based.
 
-For Example: In a RESTful architecture, this URL http://{serverAddress}/students/studentRollno/07 can be used to: Get student information by sending a REST call of GET type, and the service will return information of student with roll no as 07
+For Example: In a RESTful architecture, the URL **http://{serverAddress}/students/studentRollno/07** can be used to: Get student information by sending a REST call of GET type, and the service will return information of student with roll no as 07
 The same service can also be used to update the student data, by sending in the new values as Form data in a PUT request.
