@@ -39,3 +39,58 @@ The same service can also be used to update the student data, by sending in the 
 * Zero or more Headers
 * Empty line indicating the end of the header fields
 * Optional message Body.
+
+## HTTP Methods/Verbs
+* The most important part of a request is the HTTP Method (verbs). These methods tells the server what to do with the data received in the request. 
+* Although there are 8 different types of methods but the 4 most important HTTP methods will be discussed here which are equivalent to the CRUD operations. 
+
+**GET**
+The GET method is used to get the information from the server. This is equivalent to the SELECT statement in SQL. There is no message body in the GET request as it is meant to only fetch the data from the server. This is the simplest type, and is used by the browser every time you visit any link, to fetch the data. A GET request should never change the data on server, and should only be used to read data.
+
+GET /students
+The above should return the students data.
+
+**POST**
+This is used to send the data to the server. This can be students information, some XML file or some JPG file. The message body contains the data. POST requests are generally used to create but it can be used to update the existing data as well.
+
+POST /students
+
+The above should be able to create a new student entry, provided student data is sent in appropriate format in the message body. This can be used to update student data as well.
+
+**PUT**
+This should be used when we have to replace/update/create the data, which is already present/not present on the server with the data that we pass in the message body.
+
+**DELETE**
+This should be used to delete the data on the server. For example, the following URL when sent a DELETE request, should delete the student entry.
+
+DELETE /students/syril
+
+## HATEOAS - Important Concept For Designing
+* HATEOAS stands for Hypertext As The Engine Of Application State. 
+* A Rest API is said to be perfect if it doesn't need any documentation at all. It should be so crystal clear to the developer who is consuming the service that he/she should not even refer to the documentation. It should be designed like a website, like once we go to the Home page we can navigate to the different resources with the help of hyperlinks.
+
+**How do we achieve this?**
+The simple answer is providing as much related links as possible about the resource in the response. Lets take the case of our registration application.
+
+The typical response of the students resource /myApp/students/1:
+```
+<Student>
+    <rollno>10</rollno>
+    <firstName>Amit</firstName >
+    <lastName>Agarwal</lastName>
+    <age>25</age>
+</Student>
+```
+What if we give the additional information to the client, about how to check all the courses that this student (with the given roll no.) has enrolled into.
+```
+<Student>
+    <rollno>10</rollno>
+    <firstName>Amit</firstName >
+    <lastName>Agarwal</lastName>
+    <age>25</age>
+    <link rel = “courses” href =”/myApp/students/1/registrations”>
+</Student>
+```
+Now this will be very useful to the client as he will directly get the courses enrolled resource URI information from the students response itself. This is a HATEAOS concept. We can also include more options like, URI to Update student information, Delete the student data etc.
+
+So HATEOAS is a concept to provide links of the related sub resources to the resource which is requested by the client so that is becomes easier for the client to make further calls to the REST API.
