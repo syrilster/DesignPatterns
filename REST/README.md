@@ -19,3 +19,23 @@
 
 For Example: In a RESTful architecture, the URL **http://{serverAddress}/students/studentRollno/07** can be used to: Get student information by sending a REST call of GET type, and the service will return information of student with roll no as 07
 The same service can also be used to update the student data, by sending in the new values as Form data in a PUT request.
+
+## Understanding HTTP: The Backbone of REST
+* HTTP is all over the internet. Every time we hit a URL in our browser, an HTTP request is sent to the webserver and we receive the HTML content in response. An important thing to note here is that, while the website is usually for the human consumption the REST Api is usually for application consumption. Therefore, while requesting the data from a website, the data should be in a browser readable format, which is HTML, while in case of the REST API, response can be anything like XML/JSON or any other media type.
+* Since REST is very much inspired by the HTTP, HTTP can be said as the backbone of the REST.
+* HTTP is a TCP/IP based communication protocol, which is used to deliver data (HTML files, image files, query results etc.) accross the World Wide Web.
+* One very important point about REST is, that it is not connected to web, and will return no response when tried to access via a browser, although it is based on HTTP.
+
+**The basic features of HTTP are:**
+
+* HTTP is connectionless.
+* HTTP is media independent, which means any type of data can be sent through the http.
+* HTTP is stateless, neither the server nor the client keeps a track of the last request.
+* HTTP makes use of the Uniform Resource Identifier (URI) to identify any given resource and establish a connection. HTTP request and response, use a generic message format of RFC 822 for transferring the data.
+
+**The generic message of any HTTP request and response, consists of the following four items:**
+
+* A start line
+* Zero or more Headers
+* Empty line indicating the end of the header fields
+* Optional message Body.
