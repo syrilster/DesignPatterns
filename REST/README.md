@@ -45,12 +45,13 @@ The same service can also be used to update the student data, by sending in the 
 * Although there are 8 different types of methods but the 4 most important HTTP methods will be discussed here which are equivalent to the CRUD operations. 
 
 **GET**
+
 The GET method is used to get the information from the server. This is equivalent to the SELECT statement in SQL. There is no message body in the GET request as it is meant to only fetch the data from the server. This is the simplest type, and is used by the browser every time you visit any link, to fetch the data. A GET request should never change the data on server, and should only be used to read data.
 
-GET /students
-The above should return the students data.
+GET /students: Returns the students data.
 
 **POST**
+
 This is used to send the data to the server. This can be students information, some XML file or some JPG file. The message body contains the data. POST requests are generally used to create but it can be used to update the existing data as well.
 
 POST /students
@@ -58,9 +59,11 @@ POST /students
 The above should be able to create a new student entry, provided student data is sent in appropriate format in the message body. This can be used to update student data as well.
 
 **PUT**
+
 This should be used when we have to replace/update/create the data, which is already present/not present on the server with the data that we pass in the message body.
 
 **DELETE**
+
 This should be used to delete the data on the server. For example, the following URL when sent a DELETE request, should delete the student entry.
 
 DELETE /students/syril
