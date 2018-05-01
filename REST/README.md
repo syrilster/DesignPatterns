@@ -97,3 +97,15 @@ What if we give the additional information to the client, about how to check all
 Now this will be very useful to the client as he will directly get the courses enrolled resource URI information from the students response itself. This is a HATEAOS concept. We can also include more options like, URI to Update student information, Delete the student data etc.
 
 So HATEOAS is a concept to provide links of the related sub resources to the resource which is requested by the client so that is becomes easier for the client to make further calls to the REST API.
+
+## Richardson Maturity Model
+* Since REST is just a specification or a way of implementing web services, with no hard coded documentation, how do we know if the API which we have developed is fully RESTful. For this, there is Richardson Maturity Model, which is usually referred to analyse how RESTful the API is.
+* **The Richardson Model** is a way to grade your API according to the constraints of the REST. The more the API follows these constraints the more RESTful the API is.
+* The Richardson Maturity Model has 4 levels numbered from 0 to 3. Level 0 is not RESTful while Level 3 means your API is fully RESTful.
+
+## Level 3
+* This level suggests to use the concept of HATEOAS. The response should contain the logical links of all the resources which the current resource is related to.
+* For Example: In case of when the client request for the student information with the roll number 1, then in the response along with the response of the student, a link of all the URI of all the courses which that student has registered should also be sent.
+* If an API is at the level 3 this will be known as fully RESTful. This Richardson Model should be used while designing the REST API to make sure the web services are fully RESTful.
+
+
