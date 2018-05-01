@@ -20,32 +20,25 @@ A hypervisor is a program that would enable you to host several different virtua
 * S/w can be installed all in one container or multiple light weight isolated containers
 
 ## Docker Engine: 
-REST API + socket.io(websocket i.e. long polling) + TCP connection
-CLI
-|
-|
-REST API
-|
-Docker Deamon
-container 1
-container 2
-
-windows needs a docker toolbox
+* REST API + socket.io(websocket i.e. long polling) + TCP connection
+* CLI --> REST API --> Docker Deamon --> Container Details
+* windows needs a docker toolbox
 
 ## Docker Images and Containers
 Docker Registery to store images (docker hub or local registery)
 
-client             docker_host               registery
-docker build     container + images       cloud or local repo
+**client**             **docker_host**          **registery**    
+docker build          container + images       cloud or local repo
 docker pull 
 docker run
 
+```
 docker pull <image-name:tag> 
 docker run <image-id>
 docker images
 docker ps
 docker ps -a
-
+```
 ## Build own docker image
 * From --> Base image from which the container id built
 * RUN --> command to execute on this image
