@@ -27,10 +27,9 @@ A hypervisor is a program that would enable you to host several different virtua
 ## Docker Images and Containers
 Docker Registery to store images (docker hub or local registery)
 
-**client**             **docker_host**          **registery**    
-docker build          container + images       cloud or local repo
-docker pull 
-docker run
+**client**: docker build, docker pull, docker run
+**docker_host**: Container + images 
+**registery**: Cloud or local repo
 
 ```
 docker pull <image-name:tag> 
