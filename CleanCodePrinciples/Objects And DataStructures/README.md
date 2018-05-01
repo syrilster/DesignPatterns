@@ -4,14 +4,16 @@
 without having to know the implementation.
 
 Example:
-
+```
 public interface Vehicle {
 	double getFuelTankCapacityInGallons();
 	double getGallonsOfGasoline();
 }
-
+```
+```
 public interface Vehicle {
 	double getPercentFuelRemaining();
 }
+```
 
 Second one is preferrable as we dont want to expose details of data. Rather we want to express our data in abstract terms.
