@@ -105,7 +105,7 @@ So HATEOAS is a concept to provide links of the related sub resources to the res
 
 ## Level 3
 * This level suggests to use the concept of HATEOAS. The response should contain the logical links of all the resources which the current resource is related to.
-* For Example: In case of when the client request for the student information with the roll number 1, then in the response along with the response of the student, a link of all the URI of all the courses which that student has registered should also be sent.
+* For Example: When a client requests for the student information with the roll number 1, then in the response along with the response of the student, a link of all the URI of all the courses which that student has registered should also be sent.
 * If an API is at the level 3 this will be known as fully RESTful. This Richardson Model should be used while designing the REST API to make sure the web services are fully RESTful.
 
 
