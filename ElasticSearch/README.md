@@ -51,7 +51,9 @@ Example: ES by default stores the entire JSON source using this data structure.
 Example: 
 
 1 : 14
+
 2 : 42
+
 3 : 33
 
 ------- Setup
