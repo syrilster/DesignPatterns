@@ -57,6 +57,15 @@ Example:
 
 3 : 33
 
+* Inverted index + Stored Fields + Document values = Segments.
+* Segments are immutable. i.e. they never change. Example when a delete or update happens a re-indexing is required. So never have real time data like counters.
+* Lucene compresses data.
+* Having multiple shards means that data from different nodes needs to be merged to get the fiinal doc.
+* Log kind of data with timestamp can be partioned as one Lucene index per day. This will reduce the search time as each day is partitioned.
+
+![es](https://user-images.githubusercontent.com/6800366/39579775-2f98a4e6-4f05-11e8-8ef5-3a2f92e89e57.PNG)
+
+
 ------- Setup
 
 Jest is a Java HTTP Rest client for ElasticSearch.
