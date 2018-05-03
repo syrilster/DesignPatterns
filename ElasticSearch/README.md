@@ -4,6 +4,26 @@
 
 Elastic Search: ElasticSearch is an Open Source (Apache 2), Distributed, RESTful, Search Engine built on top of Apache Lucene.
 
+## Elastic Search Internals
+
+* ES has cluster of nodes and within the cluster there are ES indexes spanning multiple nodes through shards.
+* Each shard is essentially a Lucene index which is a full text search library on which ES is built on.
+* Lucene index has segments -> Segments have data structures called inverted index, stored fields, document values etc.
+
+Inverted Index:
+* Consists of a sorted dictionary (For the phrase frequency) and postings containing the document having this term or phrase.
+Example consider a text file as below:
+1. Winter is coming
+2. Ours is the fury
+3. The choice is yours
+
+| Phrase        | Frequency     | docs  |
+| ------------- |:-------------:| -----:|
+| Choice        | 1             |     3 |
+| coming        | 1             |     1 |
+| fury          | 1             |     2 |
+| is            | 3             | 1,2,3 |
+
 ------- Setup
 
 Jest is a Java HTTP Rest client for ElasticSearch.
