@@ -10,7 +10,7 @@
 * Each shard is essentially a Lucene index which is a full text search library on which ES is built on.
 * Lucene index has segments -> Segments have data structures called inverted index, stored fields, document values etc.
 
-Inverted Index:
+## Inverted Index:
 * Consists of a sorted dictionary (For the phrase frequency) and postings containing the document having this term or phrase.
 Example consider a text file as below:
 1. Winter is coming
@@ -23,6 +23,36 @@ Example consider a text file as below:
 | coming        | 1             |     1 |
 | fury          | 1             |     2 |
 | is            | 3             | 1,2,3 |
+
+Steps involved in search:
+* Look in the sorted dictionary and then return (intersect or union) the documents.
+* Index by lower casing the text and splitting or tokenizing based on white spaces.
+* For a prefix search - i.e starting with "c" its a binary search in the dictionary.
+* For wild card search like *ours --> ours, yours. 
+* want to search for suffix? Then index the reversed words i.e suffix -> xiffus
+* Geo location data search ? Lucene converts this to a Geo hash
+* Numeric search? 123 -> {1-hundreds, 12-tens, 123}
+* To handle searches with typo in phrases, ES uses Lucene's fuzzy queries based on Levenshtein edit distance.
+
+## Stored Fields 
+* Key value store for Given a document search the content. i.e given a doc get the title of it.
+Example: ES by default stores the entire JSON source using this data structure.
+
+1. _source = {"words": "winter is coming ..."} 
+2. _source = {"words": "ours is the ..."} 
+3. _source = {"words": "The choice is yours ..."} 
+
+* This is not helpful when you need to read millions of values from a field. Example: To sort or to aggregate.
+
+## Document Values
+* Highly optimized columnar store for storing values of the same type.
+* Used when you need to sort or aggregate millions of values.
+* Uses Field cache to have all values of a particular field loaded in memory.
+Example: 
+
+1 : 14
+2 : 42
+3 : 33
 
 ------- Setup
 
