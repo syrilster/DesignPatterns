@@ -48,6 +48,7 @@ Example: ES by default stores the entire JSON source using this data structure.
 * Highly optimized columnar store for storing values of the same type.
 * Used when you need to sort or aggregate millions of values.
 * Uses Field cache to have all values of a particular field loaded in memory.
+
 Example: 
 
 1 : 14
