@@ -1,8 +1,8 @@
+## Elastic Search
+* ElasticSearch is an Open Source (Apache 2), Distributed, RESTful, Search Engine built on top of Apache Lucene.
 * Open source search agent based on Apache lucene which includes full text search and uses REST Api.
 * Real time distributed and analytics engine.
 * Used for Single page applications(SPA) projects.
-
-Elastic Search: ElasticSearch is an Open Source (Apache 2), Distributed, RESTful, Search Engine built on top of Apache Lucene.
 
 ## Elastic Search Internals
 
