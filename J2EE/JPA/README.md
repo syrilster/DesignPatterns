@@ -17,4 +17,11 @@
 * POJO having @Entity annotation.
 * Id annotation for the primary key mapping.
 * No arg constructor required for JPA's new instances.
+* EntityManager to manage all the different entities.
+* EntityManagerFactory to boot strap JPA.
+* Need to handle transactions with JPA.
+
+# Persistence Provider
+* JPA needs a persistence provider like EclipseLink, Hibernate etc.
+
 
