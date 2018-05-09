@@ -20,8 +20,16 @@
 * EntityManager to manage all the different entities.
 * EntityManagerFactory to boot strap JPA.
 * Need to handle transactions with JPA.
+* @Transient: Field will not be saved in database
 
-# Persistence Provider
-* JPA needs a persistence provider like EclipseLink, Hibernate etc.
+## Relationship Mapping
+JPA allows to define relationships between classes. Classes can have one to one, one to many, many to one, and many to many relationships with other classes.
 
+A relationship can be bidirectional or unidirectional, e.g. in a bidirectional relationship both classes store a reference to each other while in an unidirectional case only one class has a reference to the other class. Within a bidirectional relationship you need to specify the owning side of this relationship in the other class with the attribute "mappedBy" eample: @ManyToMany(mappedBy="attributeOfTheOwningClass".
+
+**Relationship annotations:**
+* @OneToOne
+* @OneToMany
+* @ManyToOne
+* @ManyToMany
 
