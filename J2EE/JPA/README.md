@@ -46,17 +46,16 @@ A relationship can be bidirectional or unidirectional, e.g. in a bidirectional r
    * @JoinColumn is always defined on the owning side of relationship.
 * @ManyToMany: Consider a scenario that employees can belong to multiple projects. i.e. Multiple employees can work on multiple projects. Create a database such that Employee table has the primary key idemployee. Project table has primary key idproject. Employee_Project table which has columns as foreign keys to Employee and Project tables. Employee_Project table is a child table to store the mappings.
 
-```
-Employee.java:
-@ManyToMany(cascade = CascadeType.PERSIST)
-@JoinTable(name = "employee_project", joinColumns = @JoinColumn(name = "idemployee"), inverseJoinColumns = @JoinColumn(name = "idproject"))
-private List<Project> projects;
+	```
+	Employee.java:
+	@ManyToMany(cascade = CascadeType.PERSIST)
+	@JoinTable(name = "employee_project", joinColumns = @JoinColumn(name = "idemployee"), inverseJoinColumns = @JoinColumn(name = "idproject"))
+	private List<Project> projects;
 
-Project.java:
-@ManyToMany(mappedBy = "projects", cascade = CascadeType.PERSIST)
-private List<Employee> employees;
- 
-```
+	Project.java:
+	@ManyToMany(mappedBy = "projects", cascade = CascadeType.PERSIST)
+	private List<Employee> employees;
+	```
 	* @JoinColumn specifies the name of column that will refer to the Entity to be considered as owner of the association while **@inverseJoinColumn** specifies the name of inverse side of relationship. In this example we have chosen Employee as the owner so @JoinColumn refers to idemployee column in join table employee_project and @InverseJoinColumn refers to idproject which is inverse side of jpa many to many mapping.
 	* @ManyToMany annotation in Project entity shows inverse relationship hence it uses mappedBy=projects to refer to the field in Employee entity. 
 
