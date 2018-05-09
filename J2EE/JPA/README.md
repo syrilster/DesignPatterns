@@ -29,7 +29,11 @@ A relationship can be bidirectional or unidirectional, e.g. in a bidirectional r
 
 **Relationship annotations:**
 * @OneToOne: JPA one to one mapping is specified in cases where an entity is mapped to only one other entity. Consider a scenario such that every a Desk is allocated to a specific Employee.
-* @OneToMany
+* @OneToMany: JPA one to many mapping is just the reverse of ManyToOne. Taking the same example, i.e. multiple Employee entities belong to one department. We can say it that a Department entity can contain multiple Employee entities. 
+   ```
+   @OneToMany(mappedBy = "department")
+	private List<Employee> employees;
+   ```
 * @ManyToOne: Multiple Employee entities belong to One Department entity. i.e. There should be JPA Many to One mapping between      these two entities. Employee table contains a foreign key to Department table using column iddepartment. This means Employee    table has the ownership of Department table as it is referenced through the foreign key.
 
    ```
