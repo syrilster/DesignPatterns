@@ -28,7 +28,7 @@ JPA allows to define relationships between classes. Classes can have one to one,
 A relationship can be bidirectional or unidirectional, e.g. in a bidirectional relationship both classes store a reference to each other while in an unidirectional case only one class has a reference to the other class. Within a bidirectional relationship you need to specify the owning side of this relationship in the other class with the attribute "mappedBy" eample: @ManyToMany(mappedBy="attributeOfTheOwningClass".
 
 **Relationship annotations:**
-* @OneToOne:
+* @OneToOne: JPA one to one mapping is specified in cases where an entity is mapped to only one other entity. Consider a scenario such that every a Desk is allocated to a specific Employee.
 * @OneToMany
 * @ManyToOne: Multiple Employee entities belong to One Department entity. i.e. There should be JPA Many to One mapping between      these two entities. Employee table contains a foreign key to Department table using column iddepartment. This means Employee    table has the ownership of Department table as it is referenced through the foreign key.
 
