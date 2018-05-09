@@ -44,5 +44,5 @@ A relationship can be bidirectional or unidirectional, e.g. in a bidirectional r
    * The side having @JoinColumn annotation is called as the owning side of the relationship. Here, Employee is the owner.
    * The side which does not have @JoinColumn is the non-owning or inverse side. Here, Department is the inverse side.
    * @JoinColumn is always defined on the owning side of relationship.
-* @ManyToMany
+* @ManyToMany: Consider a scenario that employees can belong to multiple projects. i.e. Multiple employees can work on multiple projects. Create a database such that Employee table has the primary key idemployee. Project table has primary key idproject. Employee_Project table which has columns as foreign keys to Employee and Project tables. Employee_Project table is a child table to store the mappings.
 
