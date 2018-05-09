@@ -58,4 +58,21 @@ A relationship can be bidirectional or unidirectional, e.g. in a bidirectional r
 	```
 	* @JoinColumn specifies the name of column that will refer to the Entity to be considered as owner of the association while **@inverseJoinColumn** specifies the name of inverse side of relationship. In this example we have chosen Employee as the owner so @JoinColumn refers to idemployee column in join table employee_project and @InverseJoinColumn refers to idproject which is inverse side of jpa many to many mapping.
 	* @ManyToMany annotation in Project entity shows inverse relationship hence it uses mappedBy=projects to refer to the field in Employee entity. 
+	
+## Cascade Operations and Relationships
+* Entities that use relationships often have dependencies on the existence of the other entity in the relationship. For example, a line item is part of an order; if the order is deleted, the line item also should be deleted. This is called a cascade delete relationship.
+
+**Cascade Operation**
+* ALL: All cascade operations will be applied to the parent entity’s related entity. All is equivalent to specifying cascade={DETACH, MERGE, PERSIST, REFRESH, REMOVE}
+* DETACH:  If the parent entity is detached from the persistence context, the related entity will also be detached.
+* MERGE: If the parent entity is merged into the persistence context, the related entity will also be merged.
+* PERSIST: If the parent entity is persisted into the persistence context, the related entity will also be persisted.
+* REFRESH: If the parent entity is refreshed in the current persistence context, the related entity will also be refreshed.
+* REMOVE: If the parent entity is removed from the current persistence context, the related entity will also be removed.
+
+Cascade delete relationships are specified using the cascade=REMOVE element specification for @OneToOne and @OneToMany relationships. For example:
+```
+@OneToMany(cascade=REMOVE, mappedBy="customer")
+public Set<Order> getOrders() { return orders; }
+```
 
