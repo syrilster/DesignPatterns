@@ -30,7 +30,15 @@ A relationship can be bidirectional or unidirectional, e.g. in a bidirectional r
 **Relationship annotations:**
 * @OneToOne:
 * @OneToMany
-* @ManyToOne: Multiple Employee entities belong to One Department entity. i.e. There should be JPA Many to One mapping between these two entities. Employee table contains a foreign key to Department table using column iddepartment.
-  This means Employee table has the ownership of Department table as it is referenced through the foreign key.
+* @ManyToOne: Multiple Employee entities belong to One Department entity. i.e. There should be JPA Many to One mapping between      these two entities. Employee table contains a foreign key to Department table using column iddepartment. This means Employee    table has the ownership of Department table as it is referenced through the foreign key.
+
+   ```
+   @ManyToOne
+	 @JoinColumn(name = "iddepartment")
+	 private Department department;
+   ```
+   * The side having @JoinColumn annotation is called as the owning side of the relationship. Here, Employee is the owner.
+   * The side which does not have @JoinColumn is the non-owning or inverse side. Here, Department is the inverse side.
+   * @JoinColumn is always defined on the owning side of relationship.
 * @ManyToMany
 
