@@ -34,8 +34,8 @@ A relationship can be bidirectional or unidirectional, e.g. in a bidirectional r
 
    ```
    @ManyToOne
-	 @JoinColumn(name = "iddepartment")
-	 private Department department;
+   @JoinColumn(name = "iddepartment")
+   private Department department;
    ```
    * The side having @JoinColumn annotation is called as the owning side of the relationship. Here, Employee is the owner.
    * The side which does not have @JoinColumn is the non-owning or inverse side. Here, Department is the inverse side.
