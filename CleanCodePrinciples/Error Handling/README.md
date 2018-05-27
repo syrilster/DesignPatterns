@@ -31,3 +31,9 @@ public void retrieveSectionShouldThrowOnInvalidFileName() {
 * This means that a change at a low level of the software can force signature changes on many higher levels. The changed modules must be rebuilt and redeployed, even though nothing they care about changed.
 * Encapsulation is broken because all functions in the path of a throw must know about details of that low-level exception.
 * Checked exceptions can sometimes be useful if you are writing a critical library: you must catch them. But in general application development the dependency costs outweigh the benefits.
+
+## Provide Context with Exceptions
+* Each exception that you throw should provide enough context to determine the source and excat location of an error.
+* Having stack trace is not just enough. Stack trace can't tell you the intent of the operation that failed.
+* Create informative error messages and pass them along with your exceptions. Mention the operation that failed and the type of failure.
+
