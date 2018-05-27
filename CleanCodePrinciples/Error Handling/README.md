@@ -63,5 +63,27 @@ public void retrieveSectionShouldThrowOnInvalidFileName() {
         }
     }
     ```
-* This is called the **SPECIAL CASE PATTERN**. You create a class or configure an object so that it handles a special case for you. This helps as the client code need not handle the exceptional behavior. The behavior is encapsulated in the special case object.    
+* This is called the **SPECIAL CASE PATTERN**. You create a class or configure an object so that it handles a special case for you. This helps as the client code need not handle the exceptional behavior. The behavior is encapsulated in the special case object.   
+
+## Don't return Null
+
+```
+public void registerItem(Item item) {
+    if(item != null) {
+        ItemRegistery registery = peristentStore.getItemRegistery();
+        if(registery != null) {
+            Item existing = registery.getItem(item.getId());
+            if (existing.getBillingPeriod.hasRetailOwner()) {
+                existing.register(item);
+            }
+        }
+    }
+}
+```
+
+* When we return null, we are essentially creating work for ourselves and foisting problems upon callers. All it takes is one missing null check to send an application spinning out of control.
+* What would have happened if peristentStore is null ? We would have had a NullPointerException at runtime.
+* Its easy to say that the problem with the above code is missing a null check, but in actuality, the problem is that it has too many.
+* If you are tempted to return null from a method, consider throwing an exception or returning a SPECIAL CASE object instead.
+* Example: List<Employee> employees = getEmployees(); Here getEmployees() can return a null. We can use Java Collections.emptyList() instead as it returns a predefined immutable list.
         
