@@ -86,4 +86,19 @@ public void registerItem(Item item) {
 * Its easy to say that the problem with the above code is missing a null check, but in actuality, the problem is that it has too many.
 * If you are tempted to return null from a method, consider throwing an exception or returning a SPECIAL CASE object instead.
 * Example: List<Employee> employees = getEmployees(); Here getEmployees() can return a null. We can use Java Collections.emptyList() instead as it returns a predefined immutable list.
+    
+## Don't pass null
+* Returning null from methods is bad, but passing null into methods is worse.
+* Avoid passing null in your code whenever possible.
+
+    ```
+    public class MetricsCalculator {
+        public double xProjection(Point p1, Point p2) {
+            return (p2.x - p1.x) * 1.5;
+        }
+    }
+    ```
+* What happens when someone passes null as an argument ? calculator.xProjection(null, new Point(12, 13));
+* We get a NullPointerException and to fix it we can wrap it in a new exception type and throw it. Like say an InvalidArgumentException. This is a good documentation, but it does not solve the problem. If someone passes null, we'll still have a runtime error.
+* A rational approach is to forbid passing null by default.
         
