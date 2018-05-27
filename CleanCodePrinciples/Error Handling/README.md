@@ -37,3 +37,30 @@ public void retrieveSectionShouldThrowOnInvalidFileName() {
 * Having stack trace is not just enough. Stack trace can't tell you the intent of the operation that failed.
 * Create informative error messages and pass them along with your exceptions. Mention the operation that failed and the type of failure.
 
+## Define the normal Flow
+* Sometimes it is better to handle exceptions differently like the below code snippet:
+
+        ```
+        try {
+            MealExpense expenses = expenseReportDAO.getMeals(employee.getID());
+            mealTotal += expense.getTotal();
+        } catch(MealExpensesNotFound e) {
+            mTotal += getMealPerDiem();
+        }
+        
+        ```
+* In this business, if meals are expensed, they become part of the total. If they aren't, the employee gets a meal per diem amount for that day. Handling it like below is better:
+        ```
+        MealExpense expenses = expenseReportDAO.getMeals(employee.getID());
+        mealTotal += expense.getTotal();
+        ```
+* We can change the expenseReportDAO so that it always returns a MealExpense Object. If there are no meal expenses, it returns a MealExpense object that returns the per diem as its total.
+
+        ```
+        public class PerDiemMealExpenses implements MealExpenses {
+            public int getTotal() {
+                // return the per diem total
+            }
+        }
+        ```
+        
