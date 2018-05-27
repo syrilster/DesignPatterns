@@ -63,4 +63,5 @@ public void retrieveSectionShouldThrowOnInvalidFileName() {
         }
     }
     ```
+* This is called the **SPECIAL CASE PATTERN**. You create a class or configure an object so that it handles a special case for you. This helps as the client code need not handle the exceptional behavior. The behavior is encapsulated in the special case object.    
         
