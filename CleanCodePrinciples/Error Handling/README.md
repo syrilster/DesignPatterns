@@ -29,5 +29,5 @@ public void retrieveSectionShouldThrowOnInvalidFileName() {
 * It is clear now that checked exceptins are'nt necessary for the production of robust software. C# does not have checked exceptions. Neither do C++, python and ruby.
 * Checked exceptions is a violation of Open/Closed principle. Example: If you throw a checked exception from a method in your code and the catch is 3 levels above, you must declare that exception in the signature of each method between you and the catch.
 * This means that a change at a low level of the software can force signature changes on many higher levels. The changed modules must be rebuilt and redeployed, even though nothing they care about changed.
-* Encapsulation is broken because all finctions in the path of a throw must know about details of that low-level exception.
+* Encapsulation is broken because all functions in the path of a throw must know about details of that low-level exception.
 * Checked exceptions can sometimes be useful if you are writing a critical library: you must catch them. But in general application development the dependency costs outweigh the benefits.
