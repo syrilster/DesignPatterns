@@ -76,3 +76,17 @@ Cascade delete relationships are specified using the cascade=REMOVE element spec
 public Set<Order> getOrders() { return orders; }
 ```
 
+```
+JPA:
+
+@Inheritance(strategy = InheritanceType.JOINED)
+
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "document_request_type_key", discriminatorType = DiscriminatorType.INTEGER)
+
+@Cache(
+  type= CacheType.SOFT_WEAK, // Cache everything until the JVM decides memory is low.
+  size=100000  // Use 100,000 as the initial cache size.
+)
+@Table(name = "coded_element")
+```

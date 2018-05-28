@@ -25,7 +25,7 @@ public class ExecuteAroundMethod {
             resource.op2();
         }*/
 
-        //Caller has lot of pre amd post steps to do for the code he does not handle. Lets use a execute around pattern.
+        //Caller has lot of pre and post steps to do for the code he does not handle. Lets use a execute around pattern.
         //Use when boiler plate code is there in the use and other are called like below
         Resource.use(resource -> resource.op1()
                                          .op2());
