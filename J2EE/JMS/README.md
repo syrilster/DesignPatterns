@@ -12,3 +12,7 @@
 More about Queue here.
 
 https://github.com/syrilster/DesignPatterns/tree/94e9c0d0f537709ff175a9c1bbff0d5e90ea87ad/DesignPrinciples/Queue
+
+## More details
+* JMS connection factory as JNDI configuration in glassfish.
+* Destination resources also need to be registered.
