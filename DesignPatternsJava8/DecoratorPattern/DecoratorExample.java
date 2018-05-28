@@ -1,4 +1,4 @@
-package DesignPatternsJava8.DecoratorPattern;
+package DecoratorPattern;
 
 import java.awt.*;
 

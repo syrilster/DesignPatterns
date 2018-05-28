@@ -1,4 +1,4 @@
-package DesignPatternsUsingJava.DecoratorPattern;
+package DecoratorPattern;
 
 /**
  * Created by syrils on 2/29/16.

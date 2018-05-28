@@ -1,4 +1,4 @@
-package DesignPatternsUsingJava.Mediator;
+package Mediator;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package DesignPatternsUsingJava.StrategyPattern;
+package StrategyPattern;
 
 /**
  * Created by syrils on 3/28/16.

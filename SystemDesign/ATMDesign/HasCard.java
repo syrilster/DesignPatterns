@@ -1,4 +1,4 @@
-package SystemDesign.ATMDesign;
+package ATMDesign;
 
 /**
  * Created by Syril on 17-05-2016.
@@ -11,18 +11,17 @@ public class HasCard implements ATMState {
         this.atmMachine = atmMachine;
     }
 
-    @Override
+
     public void insertCard() {
         System.out.println("Cant insert more than one Card");
     }
 
-    @Override
+
     public void ejectCard() {
         System.out.println("Card Ejected");
         atmMachine.setAtmState(atmMachine.getNoCard());
     }
 
-    @Override
     public void insertPin(int pinEntered) {
         if (pinEntered == 1234) {
             System.out.println("Correct Pin");
@@ -34,7 +33,7 @@ public class HasCard implements ATMState {
         }
     }
 
-    @Override
+
     public void requestCash(int amount) {
         System.out.println("Enter Pin First");
     }

@@ -1,4 +1,4 @@
-package DesignPatternsUsingJava.DecoratorPattern;
+package DecoratorPattern;
 
 public class HouseBlend extends Beverage {
     @Override

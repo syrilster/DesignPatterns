@@ -1,4 +1,4 @@
-package DesignPatternsJava8.CascadeMethodPattern;
+package CascadeMethodPattern;
 
 import java.util.function.Consumer;
 

@@ -1,4 +1,4 @@
-package SystemDesign.ATMDesign;
+package ATMDesign;
 
 /**
  * Created by Syril on 17-05-2016.
@@ -7,12 +7,12 @@ public class Rupee500Dispenser implements CurrencyDispense {
 
     private CurrencyDispense chain;
 
-    @Override
+
     public void setNextChain(CurrencyDispense nextChain) {
         this.chain = nextChain;
     }
 
-    @Override
+
     public void dispense(Currency currency) {
         if (currency.getAmount() >= 500) {
             int number = currency.getAmount() / 500;

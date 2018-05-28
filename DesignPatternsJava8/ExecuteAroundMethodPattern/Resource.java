@@ -1,4 +1,4 @@
-package DesignPatternsJava8.ExecuteAroundMethodPattern;
+package ExecuteAroundMethodPattern;
 
 import java.util.function.Consumer;
 

@@ -1,4 +1,4 @@
-package SystemDesign.ATMDesign;
+package ATMDesign;
 
 import java.util.Scanner;
 

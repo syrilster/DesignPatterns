@@ -1,9 +1,9 @@
-package SystemDesign.ATMDesign;
+package ATMDesign;
 
 /**
  * Created by Syril on 17-05-2016.
  */
-public class ATMMachine implements GetATMData{
+public class ATMMachine implements GetATMData {
 
     ATMState hasCard;
     ATMState noCard;
@@ -74,12 +74,12 @@ public class ATMMachine implements GetATMData{
         return cashInMachine;
     }
 
-    @Override
+
     public ATMState getATMState() {
         return atmState;
     }
 
-    @Override
+
     public int getCashInATMMachine() {
         return cashInMachine;
     }

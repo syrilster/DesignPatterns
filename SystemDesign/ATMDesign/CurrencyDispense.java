@@ -1,4 +1,4 @@
-package SystemDesign.ATMDesign;
+package ATMDesign;
 
 /**
  * Created by Syril on 17-05-2016.

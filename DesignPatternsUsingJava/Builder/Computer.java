@@ -1,4 +1,4 @@
-package DesignPatternsUsingJava.Builder;
+package Builder;
 
 /**
  * Created by syrils on 5/10/16.

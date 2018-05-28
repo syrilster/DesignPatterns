@@ -1,4 +1,4 @@
-package DesignPatternsUsingJava.Mediator;
+package Mediator;
 
 /**
  * Created by syrils on 5/13/16.

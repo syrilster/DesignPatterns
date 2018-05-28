@@ -1,4 +1,4 @@
-package DesignPatternsUsingJava.FactoryPattern;
+package FactoryPattern;
 
 /**
  * Created by syrils on 5/10/16.

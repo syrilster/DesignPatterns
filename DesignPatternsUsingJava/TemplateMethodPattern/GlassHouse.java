@@ -1,4 +1,4 @@
-package DesignPatternsUsingJava.TemplateMethodPattern;
+package TemplateMethodPattern;
 
 /**
  * Created by syrils on 2/29/16.

@@ -1,4 +1,4 @@
-package DesignPatternsUsingJava.ChainOfResponsibility;
+package ChainOfResponsibility;
 
 /**
  * Created by syrils on 4/1/16.

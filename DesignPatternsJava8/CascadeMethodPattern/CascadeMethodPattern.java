@@ -1,4 +1,4 @@
-package DesignPatternsJava8.CascadeMethodPattern;
+package CascadeMethodPattern;
 
 /**
  * Created by Syril on 06-05-2018.
