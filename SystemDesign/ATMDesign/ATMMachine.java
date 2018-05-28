@@ -46,8 +46,8 @@ public class ATMMachine implements GetATMData {
         return atmState.insertPin(pinEntered);
     }
 
-    public void requestCash(int cashToWithDraw) {
-        atmState.requestCash(cashToWithDraw);
+    public String requestCash(int cashToWithDraw) {
+        return atmState.requestCash(cashToWithDraw);
     }
 
     public ATMState getHasCard() {

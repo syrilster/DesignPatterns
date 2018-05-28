@@ -1,9 +1,13 @@
 package ATMDesign;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Created by Syril on 17-05-2016.
  */
 public class Rupee100Dispenser implements CurrencyDispense {
+    private Logger logger = LoggerFactory.getLogger(Rupee100Dispenser.class);
     private CurrencyDispense chain;
 
 
@@ -16,7 +20,7 @@ public class Rupee100Dispenser implements CurrencyDispense {
         if (currency.getAmount() >= 100) {
             int number = currency.getAmount() / 100;
             int remainder = currency.getAmount() % 100;
-            System.out.println("Dispensing " + number + " 100 INR note");
+            logger.info("Dispensing " + number + " 100 INR note");
             if (remainder != 0)
                 this.chain.dispense(new Currency(remainder));
         } else {

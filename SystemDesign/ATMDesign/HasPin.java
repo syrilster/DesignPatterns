@@ -43,7 +43,7 @@ public class HasPin implements ATMState {
             if (atmMachine.getCashInMachine() <= 0) {
                 atmMachine.setAtmState(atmMachine.getNoCashState());
             }
-            return "Card Ejected";
+            return "Amount Processed successfully, Card Ejected";
         }
     }
 }
