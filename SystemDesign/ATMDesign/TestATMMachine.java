@@ -1,10 +1,14 @@
 package ATMDesign;
 
+import org.junit.*;
+
 /**
  * Created by Syril on 17-05-2016.
  */
 public class TestATMMachine {
-    public static void main(String[] args) {
+
+    @Test
+    public void basicTestMethod() {
         ATMMachine atmMachine = new ATMMachine();
         atmMachine.insertCard();
         atmMachine.insertPin(1234);
@@ -13,6 +17,5 @@ public class TestATMMachine {
         GetATMData atmProxy = new ATMProxy();
         System.out.println("Current ATM State " + atmProxy.getATMState());
         System.out.println(atmProxy.getCashInATMMachine());
-
     }
 }
