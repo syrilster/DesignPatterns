@@ -2,6 +2,8 @@ package ATMDesign;
 
 import org.junit.*;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Created by Syril on 17-05-2016.
  */
@@ -10,12 +12,12 @@ public class TestATMMachine {
     @Test
     public void basicTestMethod() {
         ATMMachine atmMachine = new ATMMachine();
+        GetATMData atmProxy = new ATMProxy(atmMachine);
+
         atmMachine.insertCard();
-        atmMachine.insertPin(1234);
+        assertEquals("User has entered the correct pin", atmMachine.insertPin(1234));
         atmMachine.requestCash(1500);
 
-        GetATMData atmProxy = new ATMProxy();
-        System.out.println("Current ATM State " + atmProxy.getATMState());
-        System.out.println(atmProxy.getCashInATMMachine());
+        assertEquals(500, atmProxy.getCashInATMMachine());
     }
 }

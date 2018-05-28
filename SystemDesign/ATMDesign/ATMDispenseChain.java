@@ -14,16 +14,17 @@ public class ATMDispenseChain {
 
     public ATMDispenseChain() {
         this.currencyChain = new Rupee1000Dispenser();
-        CurrencyDispense d2 = new Rupee500Dispenser();
-        CurrencyDispense d3 = new Rupee100Dispenser();
+        CurrencyDispense rupee500Dispenser = new Rupee500Dispenser();
+        CurrencyDispense rupee100Dispenser = new Rupee100Dispenser();
 
-        currencyChain.setNextChain(d2);
-        d2.setNextChain(d3);
+        currencyChain.setNextChain(rupee500Dispenser);
+        rupee500Dispenser.setNextChain(rupee100Dispenser);
     }
+
     public static void main(String[] args) {
         ATMDispenseChain atmDispenser = new ATMDispenseChain();
         while (true) {
-            int amount = 0;
+            int amount;
             System.out.println("Enter amount to dispense");
             Scanner input = new Scanner(System.in);
             amount = input.nextInt();

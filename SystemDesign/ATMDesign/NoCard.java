@@ -12,23 +12,23 @@ public class NoCard implements ATMState {
     }
 
 
-    public void insertCard() {
-        System.out.println("Card inserted");
+    public String insertCard() {
         atmMachine.setAtmState(atmMachine.getHasCard());
+        return "Card inserted";
     }
 
 
-    public void ejectCard() {
-        System.out.println("Card not inserted");
+    public String ejectCard() {
+        return "Card not inserted";
     }
 
 
-    public void insertPin(int pinEntered) {
-        System.out.println("Please insert the card first");
+    public String insertPin(int pinEntered) {
+        return "Please insert the card first";
     }
 
 
-    public void requestCash(int amount) {
-        System.out.println("Please insert the card first");
+    public String requestCash(int amount) {
+        return "Please insert the card first";
     }
 }

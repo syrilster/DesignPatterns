@@ -12,29 +12,29 @@ public class HasCard implements ATMState {
     }
 
 
-    public void insertCard() {
-        System.out.println("Cant insert more than one Card");
+    public String insertCard() {
+        return "Cant insert more than one Card";
     }
 
 
-    public void ejectCard() {
-        System.out.println("Card Ejected");
+    public String ejectCard() {
         atmMachine.setAtmState(atmMachine.getNoCard());
+        return "Card Ejected";
     }
 
-    public void insertPin(int pinEntered) {
+    public String insertPin(int pinEntered) {
         if (pinEntered == 1234) {
-            System.out.println("Correct Pin");
             atmMachine.setCorrectPinEntered(true);
             atmMachine.setAtmState(atmMachine.getHasCorrectPin());
+            return "User has entered the correct pin";
         } else {
-            System.out.println("Wrong Pin");
             atmMachine.setAtmState(atmMachine.getNoCard());
+            return "Wrong Pin entered by the User";
         }
     }
 
 
-    public void requestCash(int amount) {
-        System.out.println("Enter Pin First");
+    public String requestCash(int amount) {
+        return "Enter Pin First";
     }
 }

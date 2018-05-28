@@ -12,22 +12,22 @@ public class NoCash implements ATMState {
     }
 
 
-    public void insertCard() {
-        System.out.println("ATM is out of money");
+    public String insertCard() {
+        return "ATM is out of money";
     }
 
 
-    public void ejectCard() {
-        System.out.println("ATM is out of money");
+    public String ejectCard() {
+        return "ATM is out of money";
     }
 
 
-    public void insertPin(int pinEntered) {
-        System.out.println("ATM is out of money");
+    public String insertPin(int pinEntered) {
+        return "ATM is out of money";
     }
 
 
-    public void requestCash(int amount) {
-        System.out.println("ATM is out of money");
+    public String requestCash(int amount) {
+        return "ATM is out of money";
     }
 }

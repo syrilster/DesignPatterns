@@ -12,39 +12,38 @@ public class HasPin implements ATMState {
     }
 
 
-    public void insertCard() {
-        System.out.println("Cant insert more than one Card");
+    public String insertCard() {
+        return "Cant insert more than one Card";
     }
 
 
-    public void ejectCard() {
-        System.out.println("Card Ejected");
+    public String ejectCard() {
         atmMachine.setAtmState(atmMachine.getNoCard());
+        return "Card Ejected";
     }
 
 
-    public void insertPin(int pinEntered) {
-        System.out.println("Pin Already Entered");
+    public String insertPin(int pinEntered) {
+        return "Pin Already Entered";
     }
 
 
-    public void requestCash(int amount) {
+    public String requestCash(int amount) {
         ATMDispenseChain atmDispenser = new ATMDispenseChain();
 
         if (amount > atmMachine.getCashInMachine()) {
-            System.out.println("Amount cant be processed !!");
-            System.out.println("Card Ejected");
             atmMachine.setAtmState(atmMachine.getNoCard());
+            return "Amount cant be processed !!, Card Ejected";
         } else {
             atmDispenser.getCurrencyChain().dispense(new Currency(amount));
 
             atmMachine.setCashInMachine(atmMachine.getCashInMachine() - amount);
-            System.out.println("Card Ejected");
             atmMachine.setAtmState(atmMachine.getNoCard());
 
             if (atmMachine.getCashInMachine() <= 0) {
                 atmMachine.setAtmState(atmMachine.getNoCashState());
             }
+            return "Card Ejected";
         }
     }
 }

@@ -42,8 +42,8 @@ public class ATMMachine implements GetATMData {
         atmState.ejectCard();
     }
 
-    public void insertPin(int pinEntered) {
-        atmState.insertPin(pinEntered);
+    public String insertPin(int pinEntered) {
+        return atmState.insertPin(pinEntered);
     }
 
     public void requestCash(int cashToWithDraw) {
