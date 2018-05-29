@@ -119,14 +119,14 @@ NONE and CACHE options do not preserve object identity and should only be used i
 JPA:
 
 @Inheritance(strategy = InheritanceType.JOINED)
-
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "document_request_type_key", discriminatorType = DiscriminatorType.INTEGER)
 
 
 ```
 
+## Inheritance Strategies
 JPA support three types of inheritance strategies such as:
+
 * SINGLE_TABLE: Single-Table strategy takes all classes fields (both super and sub classes) and map them down into a single table known as SINGLE_TABLE strategy. Here discriminator value plays key role in differentiating the values of three entities in one table.
 Example: In the below mapping there is only one table code and it is used by many entities depending on the change in discriminator value in the column code_type_key
 ```
@@ -135,5 +135,37 @@ Example: In the below mapping there is only one table code and it is used by man
 @DiscriminatorColumn(name = "code_type_key", discriminatorType = DiscriminatorType.INTEGER)
 @DiscriminatorValue(Constants.CODE_ADDRESS_TYPE + "")
 ```
-* JOINED_TABLE 
+* JOINED_TABLE: Joined table strategy is to share the referenced column which contains unique values to join the table and make easy transactions. Example: In the below example there are 3 tables in the DB document_request, outbound_document_request and inbound_document_request and we use inheritence to share the column document_request_type_key from document_request table. The tables outbound_document_request and inbound_document_request have document_request_key but in the java entity it is not present as this value is populated from the parent.
+
+```
+DocumentRequest.java
+
+@Entity
+@Cacheable(false)
+@Table(name = "document_request")
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "document_request_type_key", discriminatorType = DiscriminatorType.INTEGER)
+public abstract class DocumentRequest {
+}
+-------------------------------------------
+
+InboundRequest.java
+
+@Entity
+@Cacheable(false)
+@Table(name = "inbound_document_request")
+@DiscriminatorValue(DocumentRequestType.DOCUMENT_REQUEST_INBOUND_TYPE)
+public class InboundDocumentRequest extends DocumentRequest {
+}
+
+OutboundDocumentRequest.java
+
+@Entity
+@Cacheable(false)
+@Table(name = "outbound_document_request")
+@DiscriminatorValue(DocumentRequestType.DOCUMENT_REQUEST_OUTBOUND_TYPE)
+public class OutboundDocumentRequest extends DocumentRequest {
+}
+
+```
 * TABLE_PER_CONCRETE_CLASS.
