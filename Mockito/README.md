@@ -19,3 +19,18 @@
             }
        });
 ```
+
+**To call a real method for a mock object**
+
+```
+when(someBeanMock.myMethodName()).thenCallRealMethod();
+
+```
+
+**Using argument captor to verify that a method was called using the given parameters**
+
+```
+ArgumentCaptor<String> argument = ArgumentCaptor.forClass(MyActualBean.class);
+verify(someBean, atLeastOnce()).findAllByFilter(argument.capture());
+assertEquals(someExpectedValues, argument.getValue().getClinicalItemTypeKeys());
+```
