@@ -31,11 +31,6 @@ A relationship can be bidirectional or unidirectional, e.g. in a bidirectional r
 
 **Relationship annotations:**
 * @OneToOne: JPA one to one mapping is specified in cases where an entity is mapped to only one other entity. Consider a scenario such that every a Desk is allocated to a specific Employee.
-* @OneToMany: JPA one to many mapping is just the reverse of ManyToOne. Taking the same example, i.e. multiple Employee entities belong to one department. We can say it that a Department entity can contain multiple Employee entities. 
-   ```
-   @OneToMany(mappedBy = "department")
-	private List<Employee> employees;
-   ```
 * @ManyToOne: Multiple Employee entities belong to One Department entity. i.e. There should be JPA Many to One mapping between      these two entities. Employee table contains a foreign key to Department table using column iddepartment. This means Employee    table has the ownership of Department table as it is referenced through the foreign key.
 
    ```
@@ -46,6 +41,12 @@ A relationship can be bidirectional or unidirectional, e.g. in a bidirectional r
    * The side having @JoinColumn annotation is called as the owning side of the relationship. Here, Employee is the owner.
    * The side which does not have @JoinColumn is the non-owning or inverse side. Here, Department is the inverse side.
    * @JoinColumn is always defined on the owning side of relationship.
+   
+* @OneToMany: JPA one to many mapping is just the reverse of ManyToOne. Taking the same example, i.e. multiple Employee entities belong to one department. We can say it that a Department entity can contain multiple Employee entities. 
+   ```
+   @OneToMany(mappedBy = "department")
+	private List<Employee> employees;
+   ```
 * @ManyToMany: Consider a scenario that employees can belong to multiple projects. i.e. Multiple employees can work on multiple projects. Create a database such that Employee table has the primary key idemployee. Project table has primary key idproject. Employee_Project table which has columns as foreign keys to Employee and Project tables. Employee_Project table is a child table to store the mappings.
 
 	```
