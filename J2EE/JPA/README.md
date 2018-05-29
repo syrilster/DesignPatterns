@@ -127,6 +127,13 @@ JPA:
 ```
 
 JPA support three types of inheritance strategies such as:
-* SINGLE_TABLE 
+* SINGLE_TABLE: Single-Table strategy takes all classes fields (both super and sub classes) and map them down into a single table known as SINGLE_TABLE strategy. Here discriminator value plays key role in differentiating the values of three entities in one table.
+Example: In the below mapping there is only one table code and it is used by many entities depending on the change in discriminator value in the column code_type_key
+```
+@Table(name = "code")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "code_type_key", discriminatorType = DiscriminatorType.INTEGER)
+@DiscriminatorValue(Constants.CODE_ADDRESS_TYPE + "")
+```
 * JOINED_TABLE 
 * TABLE_PER_CONCRETE_CLASS.
