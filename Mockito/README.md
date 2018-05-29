@@ -1,17 +1,21 @@
 **To Mock a DB call kind of method using thenAnswer**
 
 ```
-when(someBeanMock.someClass.findAllByFilter(any(ClinicalItemFilter.class))).thenAnswer(
-                new Answer<List<ClinicalItem>>() {
-                    @Override
-                    public List<ClinicalItem> answer(InvocationOnMock invocationOnMock) {
-                        ClinicalItemFilter clinicalItemFilter = (ClinicalItemFilter) invocationOnMock.getArguments()[0];
-                        if (clinicalItemFilter.getClinicalItemTypeKeys().containsAll(clinicalItemTypeKeys)) {
-                            return clinicalItemsWhenPatientAlertEnabled;
-                        } else if (clinicalItemFilter.getClinicalItemTypeKey().equals(CLINICAL_ITEM_ADVANCE_DIRECTIVE_TYPE)) {
-                            return clinicalItemWhenPatientAlertDisabled;
-                        }
-                        return new ArrayList<>();
-                    }
-                });
+              
+    @Before
+    public void setUp() {
+        when(mockObject.myMethod(anyString())).thenAnswer(
+            new Answer<String>(){
+            @Override
+            public String answer(InvocationOnMock invocation){
+                String theProperty = invocationOnMock.getArguments()[0];
+                if ("value".equals(theProperty)){
+                    return "result";
+                }
+                else if("otherValue".equals(theProperty)) {
+                    return "otherResult";
+                }
+                return theProperty;
+            }
+       });
 ```
