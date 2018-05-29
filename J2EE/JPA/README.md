@@ -76,6 +76,42 @@ Cascade delete relationships are specified using the cascade=REMOVE element spec
 public Set<Order> getOrders() { return orders; }
 ```
 
+## Cache Types
+EclipseLink provides several different cache types which have different memory requirements. The size of the cache (in number of cached objects) can also be configured. The cache type and size to use depends on the application, the possibility of stale data, the amount of memory available in the JVM and on the machine, the garbage collection cost, and the amount of data in the database.
+
+By default, EclipseLink uses a SOFT_WEAK with an initial size of 100 objects. The cache size is not fixed, but just the initial size, EclipseLink will never eject an object from the cache until it has been garbage collected from memory. It will eject the object if the CACHE type is used, but this is not recommended. 
+
+**FULL Cache Type**
+This option provides full caching and guaranteed identity: objects are never flushed from memory unless they are deleted. This method may be memory-intensive when many objects are read. Do not use this option on batch operations.
+
+**WEAK Cache Type**
+This option only caches objects that have not been garbage collected. Any object still referenced by the application will still be cached. The weak cache type uses less memory than full identity map but also does not provide a durable caching strategy across client/server transactions. Objects are available for garbage collection when the application no longer references them on the server side (that is, from within the server JVM).
+
+**SOFT Cache Type**
+This option is similar to the weak cache type, except that the cache uses soft references instead of weak references. Any object still referenced by the application will still be cached, and objects will only be removed from the cache when memory is low.
+
+The soft identity map allows for optimal caching of the objects, while still allowing the JVM to garbage collect the objects if memory is low.
+
+**SOFT_WEAK and HARD_WEAK Cache Type**
+These options are similar to the weak cache except that they maintain a most frequently used sub-cache. The sub-cache uses soft or hard references to ensure that these objects are not garbage collected, or only garbage collected only if the JVM is low on memory.
+
+The soft cache and hard cache provide more efficient memory use. They release objects as they are garbage-collected, except for a fixed number of most recently used objects. Note that weakly cached objects might be flushed if the transaction spans multiple client/server invocations. The size of the sub-cache is proportional to the size of the cache as specified by the @Cache size attribute. You should set the cache size to the number of objects you wish to hold in your transaction.
+
+Oracle recommends using this cache in most circumstances as a means to control memory used by the cache.
+
+Example:
+
+```
+@Cache(
+  type= CacheType.SOFT_WEAK, // Cache everything until the JVM decides memory is low.
+  size=100000  // Use 100,000 as the initial cache size.
+)
+@Table(name = "coded_element")
+```
+
+**NONE and CACHE**
+NONE and CACHE options do not preserve object identity and should only be used in very specific circumstances. NONE does not cache any objects. CACHE only caches a fixed number of objects in an LRU fashion. These cache types should only be used if there are no relationships to the objects.Oracle does not recommend using these options. To disable caching, set the cache isolation to ISOLATED instead.
+
 ```
 JPA:
 
@@ -84,11 +120,10 @@ JPA:
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "document_request_type_key", discriminatorType = DiscriminatorType.INTEGER)
 
-@Cache(
-  type= CacheType.SOFT_WEAK, // Cache everything until the JVM decides memory is low.
-  size=100000  // Use 100,000 as the initial cache size.
-)
-@Table(name = "coded_element")
+
 ```
 
-JPA support three types of inheritance strategies such as SINGLE_TABLE, JOINED_TABLE, and TABLE_PER_CONCRETE_CLASS.
+JPA support three types of inheritance strategies such as:
+* SINGLE_TABLE 
+* JOINED_TABLE 
+* TABLE_PER_CONCRETE_CLASS.
