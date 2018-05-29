@@ -90,3 +90,5 @@ JPA:
 )
 @Table(name = "coded_element")
 ```
+
+JPA support three types of inheritance strategies such as SINGLE_TABLE, JOINED_TABLE, and TABLE_PER_CONCRETE_CLASS.
