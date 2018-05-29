@@ -135,7 +135,7 @@ Example: In the below mapping there is only one table code and it is used by man
 @DiscriminatorColumn(name = "code_type_key", discriminatorType = DiscriminatorType.INTEGER)
 @DiscriminatorValue(Constants.CODE_ADDRESS_TYPE + "")
 ```
-* JOINED_TABLE: Joined table strategy is to share the referenced column which contains unique values to join the table and make easy transactions. Example: In the below example there are 3 tables in the DB document_request, outbound_document_request and inbound_document_request and we use inheritence to share the column document_request_type_key from document_request table. The tables outbound_document_request and inbound_document_request have document_request_key but in the java entity it is not present as this value is populated from the parent.
+* JOINED_TABLE: Joined table strategy is to share the referenced column which contains unique values to join the table and make easy transactions. Example: In the below code snippet there are 3 tables in the DB: document_request, outbound_document_request and inbound_document_request and we use inheritence to share the column document_request_key from document_request table. The tables outbound_document_request and inbound_document_request have document_request_key but in the java entity it is not present as this value is populated from the parent.
 
 ```
 DocumentRequest.java
@@ -168,4 +168,4 @@ public class OutboundDocumentRequest extends DocumentRequest {
 }
 
 ```
-* TABLE_PER_CONCRETE_CLASS.
+* TABLE_PER_CONCRETE_CLASS: Table per class strategy is to create a table for each sub entity.
