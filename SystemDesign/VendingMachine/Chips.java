@@ -1,4 +1,4 @@
-package SystemDesign.VendingMachine;
+package VendingMachine;
 
 /**
  * Created by Syril on 19-07-2016.

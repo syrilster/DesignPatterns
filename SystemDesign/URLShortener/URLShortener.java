@@ -1,4 +1,4 @@
-package SystemDesign.URLShortener;
+package URLShortener;
 
 import java.util.concurrent.ThreadLocalRandom;
 

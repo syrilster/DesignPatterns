@@ -1,10 +1,10 @@
-package SystemDesign.VendingMachine;
+package VendingMachine;
 
 /**
  * Created by Syril on 19-07-2016.
  */
 public class NoCommand implements Command {
-    @Override
+
     public void execute() {
         try {
             throw new Exception("Invalid Request");

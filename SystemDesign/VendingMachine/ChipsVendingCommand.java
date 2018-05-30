@@ -1,4 +1,4 @@
-package SystemDesign.VendingMachine;
+package VendingMachine;
 
 /**
  * Created by syrils on 7/19/16.
@@ -12,7 +12,6 @@ public class ChipsVendingCommand implements Command{
         this.vendingMachine = vendingMachine;
     }
 
-    @Override
     public void execute() {
         chips.dispense();
         int capacity = this.vendingMachine.getChipsCapacity();

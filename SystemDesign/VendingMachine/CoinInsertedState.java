@@ -1,4 +1,4 @@
-package SystemDesign.VendingMachine;
+package VendingMachine;
 
 /**
  * Created by syrils on 7/19/16.
@@ -11,12 +11,12 @@ public class CoinInsertedState implements VendingState {
         this.vendingMachine = vendingMachine;
     }
 
-    @Override
+
     public void insertCoin(int amount) {
         System.out.println("Coin already inserted");
     }
 
-    @Override
+
     public void dispense(int slot) {
         int itemCapacity = vendingMachine.getItemCapacity(slot);
         int itemPrice = vendingMachine.getItemCost(slot);

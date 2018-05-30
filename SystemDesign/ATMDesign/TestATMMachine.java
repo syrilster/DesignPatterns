@@ -49,5 +49,6 @@ public class TestATMMachine {
         atmMachine.insertCard();
         logger.info(atmMachine.insertPin(11223));
         assertEquals("Please insert the card first", atmMachine.requestCash(8000));
+        logger.info("" + atmProxy.getATMState());
     }
 }
