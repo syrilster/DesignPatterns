@@ -17,5 +17,14 @@ public class VendingMachineTest {
         vendingMachine.selectItemAndGetPrice(Item.CHIPS);
         List<Coin> change = vendingMachine.getItemAndChange().getCoin();
         assertEquals(4, change.size());
+        assertEquals(13, getTotal(change));
+    }
+
+    private int getTotal(List<Coin> coins) {
+        return coins.stream()
+                //.mapToInt(e -> e.getDenomination())
+                .mapToInt(Coin::getDenomination)
+                .reduce(0, Integer::sum);
+
     }
 }

@@ -37,7 +37,11 @@ public class VendingMachineImpl implements VendingMachine {
     }
 
     public List<Coin> getRefund() {
-        return null;
+        List<Coin> refund = getChange();
+        updateCashInventory(refund);
+        currentBalance = 0;
+        currentItem = null;
+        return refund;
     }
 
     public Bucket<Item, List<Coin>> getItemAndChange() {
