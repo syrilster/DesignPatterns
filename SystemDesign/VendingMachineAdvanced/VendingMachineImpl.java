@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VendingMachineImpl implements VendingMachine {
-    private Inventory<Coin> cashInventory = new Inventory<Coin>();
-    private Inventory<Item> itemInventory = new Inventory<Item>();
+    private Inventory<Coin> cashInventory = new Inventory<>();
+    private Inventory<Item> itemInventory = new Inventory<>();
     private Item currentItem;
     private long currentBalance;
+    private long totalSales;
 
     public VendingMachineImpl() {
         init();
@@ -50,6 +51,7 @@ public class VendingMachineImpl implements VendingMachine {
         if (hasSufficientFunds()) {
             if (inventoryHasSufficientChange()) {
                 item = dispenseItem();
+                totalSales = totalSales + currentItem.getPrice();
                 change = getChange();
                 updateCashInventory(change);
                 currentBalance = 0;
@@ -109,6 +111,16 @@ public class VendingMachineImpl implements VendingMachine {
 
     public void reset() {
 
+    }
+
+    public void printStats() {
+        System.out.println("Total Sales : " + totalSales);
+        System.out.println("Current Item Inventory : " + itemInventory.getAllItems());
+        System.out.println("Current Cash Inventory : " + cashInventory.getAllItems());
+    }
+
+    public long getTotalSales() {
+        return totalSales;
     }
 
     public long getCurrentBalance() {

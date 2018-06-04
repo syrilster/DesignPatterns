@@ -11,6 +11,8 @@ public class VendingMachineTest {
     @Test
     public void basicTest() {
         VendingMachineImpl vendingMachine = new VendingMachineImpl();
+        vendingMachine.printStats();
+
         System.out.println(vendingMachine.selectItemAndGetPrice(Item.COOKIE));
         vendingMachine.insertCoin(Coin.QUARTER);
         System.out.println(vendingMachine.getCurrentBalance());
@@ -18,6 +20,7 @@ public class VendingMachineTest {
         List<Coin> change = vendingMachine.getItemAndChange().getCoin();
         assertEquals(4, change.size());
         assertEquals(13, getTotal(change));
+        vendingMachine.printStats();
     }
 
     private int getTotal(List<Coin> coins) {

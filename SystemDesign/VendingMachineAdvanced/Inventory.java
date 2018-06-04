@@ -2,6 +2,7 @@ package VendingMachineAdvanced;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * An Adapter over a HashMap to create Inventory to hold cash and
@@ -36,4 +37,9 @@ public class Inventory<T> {
             inventory.put(item, count - 1);
         }
     }
+
+    public Set<Map.Entry<T, Integer>> getAllItems() {
+        return inventory.entrySet();
+    }
+
 }
