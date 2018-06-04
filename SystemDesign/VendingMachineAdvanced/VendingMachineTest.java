@@ -2,6 +2,10 @@ package VendingMachineAdvanced;
 
 import org.junit.Test;
 
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+
 public class VendingMachineTest {
 
     @Test
@@ -11,6 +15,7 @@ public class VendingMachineTest {
         vendingMachine.insertCoin(Coin.QUARTER);
         System.out.println(vendingMachine.getCurrentBalance());
         vendingMachine.selectItemAndGetPrice(Item.CHIPS);
-        vendingMachine.getItemAndChange();
+        List<Coin> change = vendingMachine.getItemAndChange().getCoin();
+        assertEquals(4, change.size());
     }
 }

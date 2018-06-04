@@ -41,26 +41,33 @@ public class VendingMachineImpl implements VendingMachine {
     }
 
     public Bucket<Item, List<Coin>> getItemAndChange() {
+        Item item = null;
+        List<Coin> change = new ArrayList<>();
         if (hasSufficientFunds()) {
             if (inventoryHasSufficientChange()) {
-                dispenseItem();
-                List<Coin> coinList = returnChange();
+                item = dispenseItem();
+                change = getChange();
+                updateCashInventory(change);
+                currentBalance = 0;
+                currentItem = null;
             }
         }
-        return null;
+        return new Bucket<>(item, change);
+    }
+
+    private void updateCashInventory(List<Coin> change) {
+        for (Coin coin : change) {
+            cashInventory.deduct(coin);
+        }
     }
 
     private boolean inventoryHasSufficientChange() {
-        if (false) {
-            throw new NotSufficientChangeException("Sufficient change not available in the inventory");
-        }
-
-        return true;
+        return !getChange().contains(Coin.NO_COIN);
     }
 
-    private List<Coin> returnChange() {
+    private List<Coin> getChange() {
         List<Coin> changes = new ArrayList<>();
-        long amount = currentItem.getPrice() - currentBalance;
+        long amount = currentBalance - currentItem.getPrice();
         if (amount > 0) {
             long balance = amount;
             while (balance > 0) {
@@ -77,16 +84,17 @@ public class VendingMachineImpl implements VendingMachine {
                     changes.add(Coin.CENT);
                     balance = balance - Coin.CENT.getDenomination();
                 } else {
-                    throw new NotSufficientChangeException("Change not available in inventory. Please try other product");
+                    //throw new NotSufficientChangeException("Change not available in inventory. Please try other product");
+                    changes.add(Coin.NO_COIN);
                 }
             }
         }
         return changes;
     }
 
-    private void dispenseItem() {
+    private Item dispenseItem() {
         itemInventory.deduct(currentItem);
-        currentBalance = currentBalance - currentItem.getPrice();
+        return currentItem;
     }
 
     private boolean hasSufficientFunds() {
