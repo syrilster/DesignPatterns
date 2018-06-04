@@ -91,6 +91,7 @@ public class VendingMachineImpl implements VendingMachine {
                     balance = balance - Coin.CENT.getDenomination();
                 } else {
                     //throw new NotSufficientChangeException("Change not available in inventory. Please try other product");
+                    // Making use of Special case pattern instead of throwing an exception.
                     changes.add(Coin.NO_COIN);
                 }
             }
