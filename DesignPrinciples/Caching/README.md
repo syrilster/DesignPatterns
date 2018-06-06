@@ -51,6 +51,18 @@ On a sharded database, there are certain extra constraints on the different oper
 
 One of the key differences between Redis and other key-value databases is Redis’s ability to store and manipulate high-level data types. These data types are fundamental data structures (lists, maps, sets, and sorted sets) that most developers are familiar with. Redis’s exceptional performance, simplicity, and atomic manipulation of data structures lends itself to solving problems that are difficult or perform poorly when implemented with traditional relational databases.
 
+## Redis DataStructures
+* Lists
+* Sets
+* Sorted Sets
+* Hashes
+* Hyperloglogs
+* BitMaps
+* Geospatial Indexes
+* Bitfields
+* Streams
+* Strings
+
 ## Common Use Cases
 
 * Caching – Due to its high performance, developers have turned to Redis when the volume of read and write operations exceed the capabilities of traditional databases. With Redis’s capability to easily persist the data to disk, it is a superior alternative to the traditional memcached solution for caching.
