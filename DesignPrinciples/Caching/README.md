@@ -51,12 +51,27 @@ On a sharded database, there are certain extra constraints on the different oper
 
 One of the key differences between Redis and other key-value databases is Redis’s ability to store and manipulate high-level data types. These data types are fundamental data structures (lists, maps, sets, and sorted sets) that most developers are familiar with. Redis’s exceptional performance, simplicity, and atomic manipulation of data structures lends itself to solving problems that are difficult or perform poorly when implemented with traditional relational databases.
 
+## Redis DataStructures
+* Lists
+* Sets
+* Sorted Sets
+* Hashes
+* Hyperloglogs
+* BitMaps
+* Geospatial Indexes
+* Bitfields
+* Streams
+* Strings
+
 ## Common Use Cases
 
 * Caching – Due to its high performance, developers have turned to Redis when the volume of read and write operations exceed the capabilities of traditional databases. With Redis’s capability to easily persist the data to disk, it is a superior alternative to the traditional memcached solution for caching.
 * Publish and Subscribe – Since version 2.0, Redis provides the capability to distribute data utilizing the Publish/Subscribe messaging paradigm. Some organizations have moved to Redis and away from other message queuing systems (i.e., RabbitMQ, zeromq) due to Redis’s simplicity and performance.
-* Queues – Projects such as Resque use Redis as the backend for queueing background jobs.
+* Message Queues – Projects such as Resque use Redis as the backend for queueing background jobs.
 * Counters – Atomic commands such as HINCRBY(HINCRBY key field increment), allow for a simple and thread-save implementation of counters. Creating a counter is as simple as determining a name for a key and issuing the HINCRBY command. There is no need to read the data before incrementing, and there are no database schemas to update. Since these are atomic operations, the counters will maintain consistency when accessed from multiple application servers.
+* Session Storage
+* Real time Analytics
+* High speed transaction
 
 ## Companies Using Redis
 
