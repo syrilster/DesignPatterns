@@ -23,6 +23,19 @@ Suppose we want to implement simple search functionality for a web app. Say, for
 
 The requirements for this search implementation state that we should be able to search via partial matches, and search via multiple columns (e.g. first_name, last_name). More concretely, if we have the following users: "Hank Lillard" and "Lilly Adams", an input query of "Lil" should return both users. We can solve this problem using a Gin index with a special option in order to achieve extremely performant searches.
 
+Example of creating a GIN index with gin_trm_options for trigram search: (A trigram is a group of three consecutive characters taken from a string)
+
+```
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+CREATE INDEX users_search_idx ON users USING gin (first_name gin_trgm_ops, last_name gin_trgm_ops);
+```
+
+**What is gin_trgm_ops?**
+This option tells Postgres to index using trigrams over our selected columns. A trigram is a data structure that hold 3 letters of a word. Essentially, Postgres will break down each text column down into trigrams and use that in the index when we search against it.
+
+**Caveats**
+The only downside of this approach is that the input query must be at least 3 letters, as Postgres will need to be able to extract at least one trigram from the input query in order to use our trigram index.
+
 ## If you have a problem that involves finding the things within X distance of other things 
 Finding closest things within 1609 meters (~1 mile)
 
