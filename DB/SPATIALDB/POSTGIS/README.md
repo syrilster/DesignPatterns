@@ -31,9 +31,11 @@ CREATE INDEX users_search_idx ON users USING gin (first_name gin_trgm_ops, last_
 ```
 
 **What is gin_trgm_ops?**
+
 This option tells Postgres to index using trigrams over our selected columns. A trigram is a data structure that hold 3 letters of a word. Essentially, Postgres will break down each text column down into trigrams and use that in the index when we search against it.
 
 **Caveats**
+
 The only downside of this approach is that the input query must be at least 3 letters, as Postgres will need to be able to extract at least one trigram from the input query in order to use our trigram index.
 
 ## If you have a problem that involves finding the things within X distance of other things 
