@@ -5,7 +5,7 @@ FROM city, superhero
 WHERE ST_Contains(city.geom, superhero.geom)
 AND city.name = 'Gotham';
 ```
-postgress - support for native full text search.
+postgres - support for native full text search.
 
 full text search --> Meaning the ability to identify that run and running are the same.
 
