@@ -18,6 +18,11 @@ Implementing a table that has a column with a data type of **tsvector** and I am
 
 * Gin consists of a B-tree index constructed over entries (ET, entries tree), where each entry is an element of the indexed value (element of array, lexeme for tsvector) and where each tuple in a leaf page is either a pointer to a B-tree over item pointers (PT, posting tree), or a list of item pointers (PL, posting list) if the tuple is small enough.
 
+## Leveraging PostgreSQL Gin index
+Suppose we want to implement simple search functionality for a web app. Say, for example, we wanted to search through all users in the system. Also imagine that we have ~ 1 million users currently stored in the system.
+
+The requirements for this search implementation state that we should be able to search via partial matches, and search via multiple columns (e.g. first_name, last_name). More concretely, if we have the following users: "Hank Lillard" and "Lilly Adams", an input query of "Lil" should return both users. We can solve this problem using a Gin index with a special option in order to achieve extremely performant searches.
+
 ## If you have a problem that involves finding the things within X distance of other things 
 Finding closest things within 1609 meters (~1 mile)
 
