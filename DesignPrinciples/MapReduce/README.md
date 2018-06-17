@@ -22,6 +22,10 @@
 ![mr advantage](https://user-images.githubusercontent.com/6800366/41507162-92c39c16-724a-11e8-9a5b-2a2dae155ead.PNG)
 
 ## Map reduce in detail
+A MapReduce framework (or system) is usually composed of three operations (or steps):
+* **Map:** each worker node applies the map function to the local data, and writes the output to a temporary storage. A master node ensures that only one copy of redundant input data is processed.
+* **Shuffle:** worker nodes redistribute data based on the output keys (produced by the map function), such that all data belonging to one key is located on the same worker node.
+* **Reduce:** worker nodes now process each group of output data, per key, in parallel.
 * Below is the example of a Map Reduce word count process.
 
 ![mr word count](https://user-images.githubusercontent.com/6800366/41507253-b31fdc48-724c-11e8-82dd-3b9857f0b33b.PNG)
