@@ -15,7 +15,9 @@
 
 ## Map Reduce Advantage
 * Data is processed in parallel among several different clusters and hence processing is fast.
-* Moving data to processing is costly. In MapReduce, processing is moved to the place where data resides.
+* Moving data to processing is costly due to network latency. In MapReduce, processing is moved to the place where data resides.
+* The slave machines showed below do the processing parallely and send the results to the master. These results are not as big as the data itself and hence consume less bandwidth.
+* The master then aggregates the results and sends the final result to the client who submitted the job.
 
 ![mr advantage](https://user-images.githubusercontent.com/6800366/41507162-92c39c16-724a-11e8-9a5b-2a2dae155ead.PNG)
 
