@@ -13,4 +13,10 @@
 * Recommendation (Ex: Sort)
 * Classification (Top N records)
 
+## Map Reduce Advantage
+* Data is processed in parallel among several different clusters and hence processing is fast.
+
+![mr advantage](https://user-images.githubusercontent.com/6800366/41507162-92c39c16-724a-11e8-9a5b-2a2dae155ead.PNG)
+
+
 
