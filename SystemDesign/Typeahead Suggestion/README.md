@@ -41,7 +41,7 @@ Assuming five billion searches every day, which would give us approximately 60K 
 
 As the new queries come in, we can log them and also track their frequencies. Either we can log every query or do sampling and log every 1000th query. For example, if we don’t want to show a term which is searched for less than 1000 times, it’s safe to log every 1000th searched term.
 
-We can have a **Map-Reduce (MR)** setup to process all the logging data periodically, say every hour. These MR jobs will calculate frequencies of all searched terms in the past hour. We can then update our trie with this new data. We can take the current snapshot of the trie and update it with all the new terms and their frequencies. We should do this offline, as we don’t want our read queries to be blocked by update trie requests. We can have two options:
+We can have a **[Map-Reduce (MR)]** setup to process all the logging data periodically, say every hour. These MR jobs will calculate frequencies of all searched terms in the past hour. We can then update our trie with this new data. We can take the current snapshot of the trie and update it with all the new terms and their frequencies. We should do this offline, as we don’t want our read queries to be blocked by update trie requests. We can have two options:
 
 We can make a copy of the trie on each server to update it offline. Once done we can switch to start using it and discard the old one.
 
@@ -67,4 +67,5 @@ In addition to a simple count, for terms ranking, we have to consider other fact
 
 
 [here]: https://github.com/syrilster/DataStructuresAndAlgo/tree/master/src/Trie
+[Map-Reduce (MR)]: https://github.com/syrilster/DesignPatterns/blob/master/DesignPrinciples/MapReduce/README.md
 
