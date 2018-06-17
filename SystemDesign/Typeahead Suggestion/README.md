@@ -15,7 +15,14 @@ One of the most appropriate data structure that can serve our purpose would be t
 
 ![trie](https://user-images.githubusercontent.com/6800366/41505471-a3ebe0a2-7227-11e8-8745-cd6cf3e3ffe5.PNG)
 
-Implementation of Trie [here].
+Custom Implementation of Trie DS can be found [here].
+
+Now if the user has typed ‘cap’, our service can traverse the trie to go to the node ‘P’ to find all the terms that start with this prefix (e.g., cap-tion, cap-ital etc).
+
+We can merge nodes that have only one branch to save storage space. The above trie can be stored like this:
+
+![trie merged](https://user-images.githubusercontent.com/6800366/41505565-3bad53e8-7229-11e8-8e0a-c7eb54e02a6c.PNG)
+
 
 
 
