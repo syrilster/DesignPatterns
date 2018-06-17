@@ -28,7 +28,16 @@ A MapReduce framework (or system) is usually composed of three operations (or st
 * **Reduce:** worker nodes now process each group of output data, per key, in parallel.
 * Below is the example of a Map Reduce word count process.
 
-![mr word count](https://user-images.githubusercontent.com/6800366/41507253-b31fdc48-724c-11e8-82dd-3b9857f0b33b.PNG)
+  ![mr word count](https://user-images.githubusercontent.com/6800366/41507253-b31fdc48-724c-11e8-82dd-3b9857f0b33b.PNG)
+
+* MapReduce can be applied to significantly larger datasets than "commodity" servers can handle – a large server farm can use MapReduce to sort a petabyte of data in only a few hours. The parallelism also offers some possibility of recovering from partial failure of servers or storage during the operation: if one mapper or reducer fails, the work can be rescheduled – assuming the input data is still available.
+
+## Performance consideration
+* MapReduce programs are not guaranteed to be fast. The main benefit of this programming model is to exploit the optimized shuffle operation of the platform, and only having to write the Map and Reduce parts of the program. 
+* In practice, the author of a MapReduce program has to take the shuffle step into consideration; in particular the partition function and the amount of data written by the Map function can have a large impact on the performance and scalability. 
+* For processes that complete quickly, and where the data fits into main memory of a single machine or a small cluster, using a MapReduce framework usually is not effective. 
+* Since MR frameworks are designed to recover from the loss of whole nodes during the computation, they write interim results to distributed storage. This crash recovery is expensive, and only pays off when the computation involves many computers and a long runtime of the computation.
+* On such problems, implementations keeping all data in memory and simply restarting a computation on node failures or —when the data is small enough— non-distributed solutions will often be faster than a MapReduce system.
 
 
 
