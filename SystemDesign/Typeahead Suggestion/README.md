@@ -15,5 +15,5 @@ One of the most appropriate data structure that can serve our purpose would be t
 
 ![trie](https://user-images.githubusercontent.com/6800366/41505471-a3ebe0a2-7227-11e8-8745-cd6cf3e3ffe5.PNG)
 
-Implementation of Trie [here]: ![trie](https://user-images.githubusercontent.com/6800366/41505471-a3ebe0a2-7227-11e8-8745-cd6cf3e3ffe5.PNG).
+Implementation of Trie [here]: https://github.com/syrilster/DataStructuresAndAlgo/tree/master/src/Trie
 
