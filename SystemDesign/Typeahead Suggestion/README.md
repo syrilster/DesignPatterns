@@ -43,10 +43,8 @@ As the new queries come in, we can log them and also track their frequencies. Ei
 
 We can have a **[Map-Reduce (MR)]** setup to process all the logging data periodically, say every hour. These MR jobs will calculate frequencies of all searched terms in the past hour. We can then update our trie with this new data. We can take the current snapshot of the trie and update it with all the new terms and their frequencies. We should do this offline, as we don’t want our read queries to be blocked by update trie requests. We can have two options:
 
-We can make a copy of the trie on each server to update it offline. Once done we can switch to start using it and discard the old one.
-
-
-Another option is we can have a master-slave configuration for each trie server. We can update slave while the master is serving traffic. Once the update is complete, we can make the slave our new master. We can later update our old master, which can then start serving traffic too.
+* We can make a copy of the trie on each server to update it offline. Once done we can switch to start using it and discard the old one.
+* Another option is we can have a master-slave configuration for each trie server. We can update slave while the master is serving traffic. Once the update is complete, we can make the slave our new master. We can later update our old master, which can then start serving traffic too.
 
 
 ## How can we update the frequencies of typeahead suggestions? 
