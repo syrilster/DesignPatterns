@@ -1,6 +1,6 @@
 ## Single-responsiblity principle
 
-A class should have one and only one reason to change. i.e don't have more tha one core functionality.
+A class should have one and only one reason to change. i.e don't have more than one core functionality.
 
 In the below picture, SRP can be used effectively: 
 
