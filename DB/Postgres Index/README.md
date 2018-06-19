@@ -27,5 +27,17 @@ Postgres has a number of index types. Each of these indexes can be useful, but w
   Special note: GIN and GiST indexes can often be beneficial on the same column types. One can often boast better performance but larger disk footprint in the case of GIN and vice versa for GiST. When it comes to GIN vs. GiST there isn’t a perfect one size fits all, but the broad rules above apply
   
 * Space partitioned GiST (SP-GiST)
-* Block Range Indexes (BRIN)
-* Hash
+* **Block Range Indexes (BRIN):** BRIN indexes, for larger data Block range indexes can focus on some similar use cases to SP-GiST in that they’re best when there is some natural ordering to the data, and the data tends to be very large. Have a billion record table especially if it’s time series data? BRIN may be able to help. If you’re querying against a large set of data that is naturally grouped together such as data for several zip codes (which then roll up to some city) BRIN helps to ensure that similar zip codes are located near each other on disk.
+
+  When you have very large datasets that are ordered such as dates or zip codes BRIN indexes allow you to skip or exclude a lot of the unnecessary data very quickly. BRIN additionally are maintained as smaller indexes relative to the overall datasize making them a big win for when you have a large dataset.
+* **Hash:** Hash indexes have been around for years within Postgres, but until Postgres 10 came with a giant warning that they were not WAL-logged. This meant if your server crashed and you failed over to a stand-by or recovered from archives using something like wal-g then you’d lose that index until you recreated it. With Postgres 10 they’re now WAL-logged so you can start to consider using them again, but the real question is should you?
+
+  Hash indexes at times can provide faster lookups than B-Tree indexes, and can boast faster creation times as well. The big issue with them is they’re **limited to only equality operators** so you need to be looking for exact matches. This makes hash indexes far less flexible than the more commonly used B-Tree indexes and something you won’t want to consider as a drop-in replacement but rather a special case. 
+  
+## Which index to use?
+* B-Tree - For most datatypes and queries
+* GIN - For JSONB/hstore/arrays
+* GiST - For full text search and geospatial datatypes
+* SP-GiST - For larger datasets with natural but uneven clustering
+* BRIN - For really large datasets that line up sequentially
+* Hash - For equality operations, and generally B-Tree still what you want here  
