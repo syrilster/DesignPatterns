@@ -17,3 +17,8 @@ public class Sensors {
 ```
 
 The interface at the boundary(Map) is hidden. It is able to evolve with very little impact on the rest of the application. This does not mean thate every use of Map be encapsulated in this form.
+
+## Add learning tests when exploring a third party API
+* Learning tests end up costing nothing. We had to learn a API anyway, and writing those tests was an easy and isolated way to get that knowledge.
+* Not only learning tests are free, they have a positive return on investment. When there are new releases of the third-party package, we run the learning tests to see whether there are behavioral differences.
+* Learning tests verify that the third-party packages we are using work the way we expect them to.
