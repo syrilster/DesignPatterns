@@ -28,5 +28,9 @@ Another kind of boundary is the one that separates the known from the unknown. S
 
 ![adapter pattern](https://user-images.githubusercontent.com/6800366/41607295-557ae322-7403-11e8-9e6c-540acab04301.PNG)
 
+* In the above, the details of the Transmitter API was not clear and hence the TransmitterAdapter was written to bridge the gap. The ADAPTER encapsulated the interaction with the API and provides a single place to vhange when the API evolves.
+* This design also gives the convienence during testing. Using a suitable FakeTransmitter, we can test the CommunicationController classes. We can also create boundary tests once we have the TransmitterAPI to make sure the API is correctly used.
+* This way of managing third party boundaries promotes internally consistent usage across the boundary, and has fewer maintainance points when the third party code changes.
+
 
 
