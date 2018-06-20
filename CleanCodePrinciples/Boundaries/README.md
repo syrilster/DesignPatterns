@@ -16,7 +16,7 @@ public class Sensors {
 }
 ```
 
-The interface at the boundary(Map) is hidden. It is able to evolve with very little impact on the rest of the application. This does not mean thate every use of Map be encapsulated in this form.
+The interface at the boundary(Map) is hidden. It is able to evolve with very little impact on the rest of the application. This does not mean that every use of Map be encapsulated in this form.
 
 ## Add learning tests when exploring a third party API
 * Learning tests end up costing nothing. We had to learn a API anyway, and writing those tests was an easy and isolated way to get that knowledge.
