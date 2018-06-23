@@ -105,7 +105,7 @@ public class VendingMachineImpl implements VendingMachine {
     }
 
     private boolean hasSufficientFunds() {
-        if (currentBalance <= currentItem.getPrice())
+        if (currentBalance < currentItem.getPrice())
             throw new NotFullPaidException("Funds not available", (currentItem.getPrice() - currentBalance));
         return true;
     }

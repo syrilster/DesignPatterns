@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class VendingMachineTest {
 
@@ -34,6 +35,22 @@ public class VendingMachineTest {
         assertEquals(4, change.size());
         assertEquals(13, getTotal(change));
         vendingMachine.printStats();
+    }
+
+    @Test
+    public void testBuyWithExactPrice() {
+        long price = vendingMachine.selectItemAndGetPrice(Item.CHIPS);
+
+        assertEquals("Price Should be the CHIPS price", Item.CHIPS.getPrice(), price);
+        vendingMachine.insertCoin(Coin.NICKLE);
+        vendingMachine.insertCoin(Coin.CENT);
+        vendingMachine.insertCoin(Coin.CENT);
+        Container<Item, List<Coin>> container = vendingMachine.getItemAndChange();
+        Item item = container.getItem();
+        List<Coin> change = container.getCoin();
+
+        assertEquals("Item should CHIPS", Item.CHIPS, item);
+        assertTrue("Change should be empty", change.isEmpty());
     }
 
     private int getTotal(List<Coin> coins) {
