@@ -45,7 +45,7 @@ public class VendingMachineImpl implements VendingMachine {
         return refund;
     }
 
-    public Bucket<Item, List<Coin>> getItemAndChange() {
+    public Container<Item, List<Coin>> getItemAndChange() {
         Item item = null;
         List<Coin> change = new ArrayList<>();
         if (hasSufficientFunds()) {
@@ -58,7 +58,7 @@ public class VendingMachineImpl implements VendingMachine {
                 currentItem = null;
             }
         }
-        return new Bucket<>(item, change);
+        return new Container<>(item, change);
     }
 
     private void updateCashInventory(List<Coin> change) {

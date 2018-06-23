@@ -9,7 +9,9 @@ public interface VendingMachine {
 
     List<Coin> getRefund();
 
-    Bucket<Item, List<Coin>> getItemAndChange();
+    Container<Item, List<Coin>> getItemAndChange();
 
     void reset();
+
+    void printStats();
 }
