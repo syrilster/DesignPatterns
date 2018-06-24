@@ -16,12 +16,14 @@ public class VendingMachineImpl implements VendingMachine {
 
     private void init() {
         for (Coin coin : Coin.values()) {
-            cashInventory.put(coin, 5);
+            cashInventory.put(coin, 2);
         }
 
         for (Item item : Item.values()) {
             itemInventory.put(item, 5);
         }
+        // Override the CENT quantity to simulate some tests.
+        cashInventory.put(Coin.CENT, 3);
     }
 
     public long selectItemAndGetPrice(Item item) {
@@ -39,36 +41,30 @@ public class VendingMachineImpl implements VendingMachine {
 
     public List<Coin> getRefund() {
         List<Coin> refund = getChange();
-        updateCashInventory(refund);
+        //updateCashInventory(refund);
         currentBalance = 0;
         currentItem = null;
         return refund;
     }
 
-    public Container<Item, List<Coin>> getItemAndChange() {
+    public Knapsack<Item, List<Coin>> getItemAndChange() {
         Item item = null;
         List<Coin> change = new ArrayList<>();
         if (hasSufficientFunds()) {
-            if (inventoryHasSufficientChange()) {
-                item = dispenseItem();
-                totalSales = totalSales + currentItem.getPrice();
-                change = getChange();
-                updateCashInventory(change);
-                currentBalance = 0;
-                currentItem = null;
-            }
+            item = dispenseItem();
+            totalSales = totalSales + currentItem.getPrice();
+            change = collectChange();
         }
-        return new Container<>(item, change);
+        return new Knapsack<>(item, change);
     }
 
-    private void updateCashInventory(List<Coin> change) {
-        for (Coin coin : change) {
-            cashInventory.deduct(coin);
-        }
-    }
-
-    private boolean inventoryHasSufficientChange() {
-        return !getChange().contains(Coin.NO_COIN);
+    private List<Coin> collectChange() {
+        List<Coin> change = getChange();
+        if (change.contains(Coin.NO_COIN))
+            throw new NotSufficientChangeException("Change not available in inventory. Please try other product");
+        currentBalance = 0;
+        currentItem = null;
+        return change;
     }
 
     private List<Coin> getChange() {
@@ -79,20 +75,25 @@ public class VendingMachineImpl implements VendingMachine {
             while (balance > 0) {
                 if (balance >= Coin.QUARTER.getDenomination() && cashInventory.hasItem(Coin.QUARTER)) {
                     changes.add(Coin.QUARTER);
+                    cashInventory.deduct(Coin.QUARTER);
                     balance = balance - Coin.QUARTER.getDenomination();
                 } else if (balance >= Coin.NICKLE.getDenomination() && cashInventory.hasItem(Coin.NICKLE)) {
                     changes.add(Coin.NICKLE);
+                    cashInventory.deduct(Coin.NICKLE);
                     balance = balance - Coin.NICKLE.getDenomination();
                 } else if (balance >= Coin.PENNY.getDenomination() && cashInventory.hasItem(Coin.PENNY)) {
                     changes.add(Coin.PENNY);
+                    cashInventory.deduct(Coin.PENNY);
                     balance = balance - Coin.PENNY.getDenomination();
                 } else if (balance >= Coin.CENT.getDenomination() && cashInventory.hasItem(Coin.CENT)) {
                     changes.add(Coin.CENT);
+                    cashInventory.deduct(Coin.CENT);
                     balance = balance - Coin.CENT.getDenomination();
                 } else {
                     //throw new NotSufficientChangeException("Change not available in inventory. Please try other product");
                     // Making use of Special case pattern instead of throwing an exception.
                     changes.add(Coin.NO_COIN);
+                    break;
                 }
             }
         }
@@ -111,7 +112,11 @@ public class VendingMachineImpl implements VendingMachine {
     }
 
     public void reset() {
-
+        cashInventory.clear();
+        itemInventory.clear();
+        totalSales = 0;
+        currentItem = null;
+        currentBalance = 0;
     }
 
     public void printStats() {

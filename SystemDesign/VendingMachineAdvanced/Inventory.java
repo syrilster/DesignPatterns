@@ -42,4 +42,7 @@ public class Inventory<T> {
         return inventory.entrySet();
     }
 
+    public void clear(){
+        inventory.clear();
+    }
 }

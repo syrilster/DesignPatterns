@@ -9,7 +9,7 @@ public interface VendingMachine {
 
     List<Coin> getRefund();
 
-    Container<Item, List<Coin>> getItemAndChange();
+    Knapsack<Item, List<Coin>> getItemAndChange();
 
     void reset();
 
