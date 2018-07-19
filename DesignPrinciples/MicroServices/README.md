@@ -85,5 +85,6 @@ Usually big companies organize their teams around technology i.e UI, Server, DBA
 * Rapid Application Deployment - Have your deployment done in minutes and not accross several days.
 * Devops culture - Team members need to be able to do devops related work.
 
-
+## Microservices on AWS
+https://d1.awsstatic.com/whitepapers/microservices-on-aws.pdf
 
