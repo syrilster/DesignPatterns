@@ -8,7 +8,6 @@ Consider the following criteria for when to use one instead of the other.
 * Only one column in a table requires automatically generated values
 * Each row requires a separate value
 * An automatic generator is desired for a primary key of a table
-* The LOAD utility is not used to load data into the table
 * The process of generating a new value is tied closely to inserting into a table, regardless of how the insert happens
 
 ## SEQUENCE objects are useful when:
