@@ -1,6 +1,6 @@
 ## Entity State Transitions
 
-![entity-lifecycle-state-tiny](https://user-images.githubusercontent.com/6800366/43621948-1b467ad0-971d-11e8-85c9-c712231160ec.png)
+![entity-lifecycle-state-tiny](https://user-images.githubusercontent.com/6800366/43622045-aa5dd16e-971d-11e8-8971-c004dacc9df5.png)
 
 
 * If an entity is attached to the current persistence context, it has the lifecycle state managed. 
