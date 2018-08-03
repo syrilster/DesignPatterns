@@ -56,11 +56,11 @@ A relationship can be bidirectional or unidirectional, e.g. in a bidirectional r
 	private List<Project> projects;
 
 	Project.java:
-	@ManyToMany(mappedBy = "idproject", cascade = CascadeType.PERSIST)
+	@ManyToMany(mappedBy = "projects", cascade = CascadeType.PERSIST)
 	private List<Employee> employees;
 	```
 	* @JoinColumn specifies the name of column that will refer to the Entity to be considered as owner of the association while **@inverseJoinColumn** specifies the name of inverse side of relationship. In this example we have chosen Employee as the owner so @JoinColumn refers to idemployee column in join table employee_project and @InverseJoinColumn refers to idproject which is inverse side of jpa many to many mapping.
-	* @ManyToMany annotation in Project entity shows inverse relationship hence it uses mappedBy=projects to refer to the field in Employee entity. 
+	* @ManyToMany annotation in Project entity shows inverse relationship hence it uses mappedBy=projects to refer to the projects attribute in Employee entity. 
 	
 ## Here's a quick cheat sheet of the JPA world:
 
