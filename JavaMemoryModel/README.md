@@ -32,13 +32,13 @@ All we are doing here, is to nullify the references to an object and once there 
 
 An example.
 ```
-public class RefrenceGarbage{
-public static void main(String [] args) {
-StringBuffer greeting = new StringBuffer("Hello");
-System.out.println(greeting);
-greeting = null;
-}
-}
+  public class RefrenceGarbage {
+        public static void main(String[] args) {
+            StringBuffer greeting = new StringBuffer("Hello");
+            System.out.println(greeting);
+            greeting = null;
+        }
+    }
 ```
 
 In the example code above, we can see that before the reference to the StringBuffer object “Hello” is removed or nulled by setting 'greeting' to null, there can be seen on the console the output of println(), which is “Hello”, but it no longer refers to “Hello” after 'greeting' = null;
@@ -48,13 +48,13 @@ In the example code above, we can see that before the reference to the StringBuf
 Another way, in effect, to remove the reference to a particular object and making it eligible for Garbage Collection is to set the reference variable which currently refers to it to a new object. Thus, re-assigning the reference variable. Example:
 
 ```
-class RefrenceGarbage{
-	public static void main(String [] args) {
-		StringBuffer greeting = new StringBuffer("Hello");
-		StringBuffer greeting2 = new StringBuffer("Howdy");
-		System.out.println(greeting);
-		greeting = greeting2;
-		}
+class RefrenceGarbage {
+public static void main(String[] args) {
+    StringBuffer greeting = new StringBuffer("Hello");
+    StringBuffer greeting2 = new StringBuffer("Howdy");
+    System.out.println(greeting);
+    greeting = greeting2;
+}
 }
 ```
 
