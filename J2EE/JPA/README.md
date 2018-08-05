@@ -60,7 +60,15 @@ A relationship can be bidirectional or unidirectional, e.g. in a bidirectional r
 	private List<Employee> employees;
 	```
 	* @JoinColumn specifies the name of column that will refer to the Entity to be considered as owner of the association while **@inverseJoinColumn** specifies the name of inverse side of relationship. In this example we have chosen Employee as the owner so @JoinColumn refers to idemployee column in join table employee_project and @InverseJoinColumn refers to idproject which is inverse side of jpa many to many mapping.
-	* @ManyToMany annotation in Project entity shows inverse relationship hence it uses mappedBy=projects to refer to the field in Employee entity. 
+	* @ManyToMany annotation in Project entity shows inverse relationship hence it uses mappedBy=projects to refer to the projects attribute in Employee entity. 
+	
+## Here's a quick cheat sheet of the JPA world:
+
+* A Cache is a copy of data, copy meaning pulled from but living outside the database.
+* Flushing a Cache is the act of putting modified data back into the database.
+* A **PersistenceContext** is essentially a Cache. It also tends to have it's own non-shared database connection.
+* An EntityManager represents a PersistenceContext (and therefore a Cache)
+* An EntityManagerFactory creates an EntityManager (and therefore a PersistenceContext/Cache)	
 	
 ## Cascade Operations and Relationships
 Entities that use relationships often have dependencies on the existence of the other entity in the relationship. For example, a line item is part of an order; if the order is deleted, the line item also should be deleted. This is called a cascade delete relationship.
@@ -169,3 +177,19 @@ public class OutboundDocumentRequest extends DocumentRequest {
 
 ```
 * TABLE_PER_CONCRETE_CLASS: Table per class strategy is to create a table for each sub entity.
+
+## JPA entity versioning (@Version and Optimistic Locking)
+* Optimistic locking is a mechanism that prevents an application from being affected by the "lost update" phenomenon in a concurrent environment while allowing some high degree of concurrency at the same time. This is achieved without actually resorting to any locks: Optimistic locking relies on checks that are made against the existing data on the data store by transactions during update time.
+* The main concept is to check if another existing transaction has made any concurrent changes against the same data that a given transaction may be trying to change at a given time. If that concurrent changes happen to exist, the current transaction aborts because there is the possibility of the updates made by the other transaction being lost (or not taken into account).
+* http://www.byteslounge.com/tutorials/jpa-entity-versioning-version-and-optimistic-locking
+
+## Referring the right entity type in the base repository
+In the base repository you can referring the actual entity type inside a custom query (@Query annotation) using the #{#entityName} SpEL variable, for example:
+
+```
+public interface PublicationBaseRepository<T extends Publication> extends JpaRepository<T, Long> {
+    @Query("select u from #{#entityName} as u where u.title = ?1 ")
+    T findByTitle(String title);
+}
+```
+The value of #{#entityName} will be the entity type T.
