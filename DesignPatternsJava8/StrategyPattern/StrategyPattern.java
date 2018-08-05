@@ -14,8 +14,9 @@ public class StrategyPattern {
     public static void main(String[] args) {
         List<Integer> numbers = asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         System.out.println("Sum of all the numbers is " + totalValues(numbers, e -> true));
-        //System.out.println(totalEvenValues(numbers));
-        //System.out.println(totalOddValues(numbers));
+        /*Instead of using redundant methods like below we could use one method for all purposes with a predicate
+        System.out.println(totalEvenValues(numbers));
+        System.out.println(totalOddValues(numbers));*/
         System.out.println("Sum of Even numbers is = " + totalValues(numbers, Util::isEven));
         System.out.println("Sum of Odd numbers is = " + totalValues(numbers, Util::isOdd));
     }
