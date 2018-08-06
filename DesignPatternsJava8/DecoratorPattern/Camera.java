@@ -16,9 +16,12 @@ public class Camera {
 
     private void setFilters(Function<Color, Color>... filters) {
         //filter = color -> color;
+        //Stream.of is used  because filters is an array of objects
         filter = Stream.of(filters)
-                //.reduce(initialValue, lambda);
+                /*reduce is to go to all values of this collection and reduce to one value.
+                /.reduce(initialValue, lambda); -- > This is the reduce's two parameters*/
                 //.reduce(color -> color, (theFilters, aFilter) -> theFilters.andThen(aFilter));
+                //color -> color replaced by the Function.identity()
                 .reduce(Function.identity(), Function::andThen);
     }
 

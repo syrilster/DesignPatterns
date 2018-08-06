@@ -15,7 +15,7 @@ public class DecoratorExample {
         printSnap(new Camera());
         printSnap(new Camera(Color::brighter));
         printSnap(new Camera(Color::darker));
-        // Chain things like a decorator without the scary new, new, new in Java 7 world
+        // Chain things like a decorator without the scary new, new, new in Java 7 world. This is combining multiple logics
         printSnap(new Camera(Color::brighter, Color::darker));
     }
 }
