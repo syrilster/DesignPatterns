@@ -11,22 +11,22 @@ public class Mailer {
     }
 
     public Mailer from(String address) {
-        print("from");
+        print(address);
         return this;
     }
 
     public Mailer to(String address) {
-        print("to");
+        print(address);
         return this;
     }
 
     public Mailer subject(String message) {
-        print("subject");
+        print(message);
         return this;
     }
 
     public Mailer body(String message) {
-        print("body");
+        print(message);
         return this;
     }
 

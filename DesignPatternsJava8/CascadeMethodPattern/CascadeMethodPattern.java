@@ -25,5 +25,8 @@ public class CascadeMethodPattern {
                 .to("syril.sadasivan@gmail.com")
                 .subject("Your code Rocks !!")
                 .body(".. Here is why .."));
+
+        /*Also in this line we don't even have a mailer object to be used/reused as the mailer was
+        in the send method as a lambda and it did not return anything (In this example)*/
     }
 }
