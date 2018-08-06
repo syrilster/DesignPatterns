@@ -25,8 +25,9 @@ public class ExecuteAroundMethod {
             resource.op2();
         }*/
 
-        //Caller has lot of pre and post steps to do for the code he does not handle. Lets use a execute around pattern.
-        //Use when boiler plate code is there in the use and other are called like below
+        /*Caller has lot of pre and post steps to do for the code he does not handle. Let's use a execute around pattern.
+        This is used when boiler plate code is there in the some method and before the user does the actual operation, some pre and post
+        step is taken care of by the original author*/
         Resource.use(resource -> resource.op1()
                                          .op2());
     }

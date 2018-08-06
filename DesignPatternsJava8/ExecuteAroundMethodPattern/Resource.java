@@ -11,17 +11,17 @@ public class Resource implements AutoCloseable {
     }
 
     public Resource op1() {
-        System.out.println("OP1");
+        System.out.println("Operation One");
         return this;
     }
 
     public Resource op2() {
-        System.out.println("OP2");
+        System.out.println("Operation Two");
         return this;
     }
 
     public void close() {
-        System.out.println("Cleaning..");
+        System.out.println("Cleaning up in the close method..");
     }
 
     public static void use(Consumer<Resource> block) {
