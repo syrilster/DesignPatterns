@@ -30,6 +30,7 @@ public class StrategyPattern {
         return result;*/
 
         return numbers.stream()
+                //Behind the scenes this just acts like the above condition
                 .filter(predicateCondition)
                 .reduce(0, Integer::sum);
     }
