@@ -4,8 +4,8 @@
 
 ## Types of Enterprise Java Beans
 * **Session beans**, whether stateful or stateless, are not designed to be persistent. The data maintained by stateful session beans is intended to be transitional. It is used solely for a particular session with a particular client.
-* Stateless session Bean - Contains bussiness logic but no client state.
-* Stateful session Bean - Contains bussiness logic and maintains client state. Stateful session beans are by definition tied to a single client, so for each new client that requests its services, a new instance is created.
+* Stateless session Bean - Generally, stateless beans are intended to perform individual operations automatically and don’t maintain state across method invocations. They’re also amorphous, in that any client can use any instance of a stateless bean at any time at the container’s discretion. They are the lightest weight and easiest to manage of the various EJB component configurations.
+* Stateful session Bean - A session bean represents work performed by a single client. That work can be performed within a single method invocation, or it may span multiple method invocations. If the work does span more than one method, the object must retain the user’s object state across the method calls, and a stateful session bean would therefore be required.
 * Singleton session Bean - Instantiated once per application.
 * Message Driven Bean - Listen for messages on a JMS queue or topic.
 
