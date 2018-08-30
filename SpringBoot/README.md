@@ -9,4 +9,19 @@
   * @Configuration
   * @ComponentScan
   * @EnableAutoConfiguration
-* All the above 3 annotations has been clubbed as one **@SpringBootApplication**
+* All the above 3 annotations has been clubbed as one **@SpringBootApplication**.
+
+## Generating an Auto Configuration
+* Intelligent Decision making based on conditions:
+   * Prescence/Abscence of a jar.
+   * Prescence/Abscence of a Bean.
+   * Prescence/Abscence of a Property.
+   * Many More.
+* **Auto-configuration report** to check what was auto configured and which one was not
+  * Positive matches
+  * Negative matches
+  * Exclusions: Explicitly configured by the user.
+  * Unconditional classes: Things which are auto configured by Spring regardless of any conditions
+* Enable Auto configuration report:
+  * debug=true
+  * logging.level=debug
