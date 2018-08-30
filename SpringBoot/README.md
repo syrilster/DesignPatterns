@@ -28,7 +28,7 @@
 
 ## Excluding Unnecessary or Misconfigured Auto Configurations
 * Example to exclude using Annotations:
-``
+```
 @EnableAutoConfiguration(exclude = {SomeAutoConfig.class})
 public class SomeApplication {
 ...
@@ -39,11 +39,11 @@ public class SomeApplication {
 public class SomeApplication {
 ...
 }
-``
+```
 
 OR
 
-``
+```
 @SpringBootApplication(exclude = {SomeAutoConfig.class})
 public class SomeApplication {
 ...
@@ -53,4 +53,4 @@ public class SomeApplication {
 public class SomeApplication {
 ...
 }
-``
+```
