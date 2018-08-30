@@ -13,9 +13,9 @@
 
 ## Generating an Auto Configuration
 * Intelligent Decision making based on conditions:
-   * Prescence/Abscence of a jar.
-   * Prescence/Abscence of a Bean.
-   * Prescence/Abscence of a Property.
+   * Presence/Absence of a jar.
+   * Presence/Absence of a Bean.
+   * Presence/Absence of a Property.
    * Many More.
 * **Auto-configuration report** to check what was auto configured and which one was not
   * Positive matches
