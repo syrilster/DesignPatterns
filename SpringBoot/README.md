@@ -54,3 +54,7 @@ public class SomeApplication {
 ...
 }
 ```
+* Using the application.properties
+```
+spring.autoconfigure.exclude=my.company.someAutoConfig
+```
