@@ -25,3 +25,32 @@
 * Enable Auto configuration report:
   * debug=true
   * logging.level=debug
+
+## Excluding Unnecessary or Misconfigured Auto Configurations
+* Example to exclude using Annotations:
+``
+@EnableAutoConfiguration(exclude = {SomeAutoConfig.class})
+public class SomeApplication {
+...
+}
+
+//This would be used when not to have a compile time dependency on the Sprin framework itself
+@EnableAutoConfiguration(excludeName = {"Comma seperated FullyQualifiedClassName"})
+public class SomeApplication {
+...
+}
+``
+
+OR
+
+``
+@SpringBootApplication(exclude = {SomeAutoConfig.class})
+public class SomeApplication {
+...
+}
+
+@SpringBootApplication(excludeName = {"Comma seperated FullyQualifiedClassName"})
+public class SomeApplication {
+...
+}
+``
