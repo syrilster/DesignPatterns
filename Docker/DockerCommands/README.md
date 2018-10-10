@@ -6,25 +6,24 @@ FROM jenkins
 MAINTAINER Syril Sadasivan
 
 USER root
-ARG MAVEN_VERSION=3.5.2
+ARG MVN_VERSION=3.5.4
 ARG USER_HOME_DIR="/opt"
-ARG SHA=707b1f6e390a65bde4af4cdaf2a24d45fc19a6ded00fff02e91626e3e42ceaff
-ARG BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
+ARG MVN_MD5=89eea39183139e5f8a0c1601d495b3b6
 
-RUN mkdir -p /opt/maven /opt/maven/ref \
-  && curl -fsSL -o /tmp/apache-maven.tar.gz ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
-  && echo "${SHA}  /tmp/apache-maven.tar.gz" | sha256sum -c - \
-  && tar -xzf /tmp/apache-maven.tar.gz -C /opt/maven --strip-components=1 \
-  && rm -f /tmp/apache-maven.tar.gz \
-  && ln -s /opt/maven/bin/mvn /usr/bin/mvn
+RUN wget http://apache.claz.org/maven/maven-3/$MVN_VERSION/binaries/apache-maven-$MVN_VERSION-bin.tar.gz
+
+RUN mkdir /opt/maven \
+&& tar -xzf apache-maven-$MVN_VERSION-bin.tar.gz \
+&& cp -r apache-maven-$MVN_VERSION /opt/maven \
+&& rm -f apache-maven-$MVN_VERSION-bin.tar.gz
 
 ENV MAVEN_HOME /opt/maven
 ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 
-RUN wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u162-b12/0da788060d494f5095bf8624735fa2f1/jdk-8u162-linux-x64.tar.gz \
+RUN wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz  \
   && mkdir -p /opt/java8 \
-  && tar -xzf jdk-8u162-linux-x64.tar.gz -C /opt/java8 --strip-components=1 \
-  && rm -f jdk-8u162-linux-x64.tar.gz
+  && tar -xzf jdk-8u181-linux-x64.tar.gz -C /opt/java8 --strip-components=1 \
+  && rm -f jdk-8u181-linux-x64.tar.gz
 
 ENV PATH /opt/java8/bin:$PATH
 
