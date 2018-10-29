@@ -6,4 +6,6 @@
 * Avoid testing things beyond the context of the UT. Example a timezone. Always inject this into the test.
 
 ## Three Laws of TDD
-* 
+* Do not write a production code until you have written a failing unit test.
+* You may not write more of a unit test than is sufficient to fail, and not compiling is failing.
+* You may not write more production code than is sufficient to pass the currently failing test.
