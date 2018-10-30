@@ -14,3 +14,14 @@
 * It's not just about testing; It's about software development. Helps to think like a user of your library or class etc.
 * TDD creates better API because it starts with the user than the used code.
 * Test first hides the implementation and avoids exposing internal implementation details. It avoids tightly coupled tests.
+* In the below example bug can be noticed if tests were written first. Here the test is not actually running as its not annotated using @Test. In TDD this would have been noticed immediately as the tests should fail first and in this case it will be running.
+  ```
+  public class ListTest {
+    private List<String> list = new ArrayList<>();
+    
+    public void testAdd(){
+      list.add("Foo");
+      Assert.assertEquals(1, list.size());
+    }
+  }
+  ```
