@@ -22,4 +22,4 @@ in the field of web application security.
     http://localhost:3421/Users/MyProfile/3
     ```
     * Can be avoided by having correct authentication and authorization mechanisms.
-*  **Security Misconfiguration** - 
+*  **Security Misconfiguration** - If some security settings were turned off and if it was not enabled again this can be a potential issue as users can gain access to critical server variables or some cross site scripting settings etc.
