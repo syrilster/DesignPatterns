@@ -21,3 +21,5 @@ in the field of web application security.
     ```
     http://localhost:3421/Users/MyProfile/3
     ```
+    * Can be avoided by having correct authentication and authorization mechanisms.
+*  **Security Misconfiguration** - 
