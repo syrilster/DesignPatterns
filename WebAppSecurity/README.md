@@ -17,7 +17,7 @@ in the field of web application security.
 * **XSS - Cross Site Scripting** - Compromising the site by injecting custom javascript to change the behaviour. Like redirect the current user to a similar looking site, or adding custom CSS to manipulate the site behavior or in e-commerce site to increase a product rating etc.
     * Could be avoided by proper validation of the input to avoid scripts entered in free form text fields and by checking against a whitelist chars.
     * Proper encoding of the output.
-* **Insecure Direct Object References** - A user can try to access a resource they are not supposed to access by guessing the next user id if this information is present in the URL. Example below a user can try by hitting the same URL with /MyProfile/4
+* **Insecure Direct Object References** - A user can try to access a resource they are not supposed to access by guessing the next user id if this information is present in the URL. Example below a user can try by hitting the same URL with /MyProfile/4 to get access to an other account.
     ```
     http://localhost:3421/Users/MyProfile/3
     ```
