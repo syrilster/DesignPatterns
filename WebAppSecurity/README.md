@@ -14,4 +14,4 @@ in the field of web application security.
     * Also a user might pass various different input to find out the encoding logic itself. This can be avoided by introducing randmoness using salting.
     * A session can be hijacked by an other user using the cookie information and requesting the request again to gain access.
     * This can be avoided by using HTTPS instead of HTTP and having session timeouts.
-* 
+* **Cross Site Scripting** - Compromising the site by injecting custom javascript to change the behaviour. Like redirect the current user to a similar looking site, or adding custom CSS to manipulate the site behavior etc.
