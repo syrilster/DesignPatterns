@@ -23,4 +23,5 @@ in the field of web application security.
     ```
     * Can be avoided by having correct authentication and authorization mechanisms.
 *  **Security Misconfiguration** - If some security settings were turned off and if it was not enabled again this can be a potential issue as users can gain access to critical server variables or some cross site scripting settings etc.
-* **Sensitive data Exposure** - This is not just about displaying sesitive content on the UI but also about how it is actually stored. For example: passwords and credit card information should be always encoded using reputed Algorithm along with the introduction of simple hashing and salting techniques to make it difficult for an hacker to crack.
+* **Sensitive data Exposure** - This is not just about displaying sesitive content on the UI but also about how it is actually stored in DB. For example: passwords and credit card information should always be encrypted using reputed Algorithm along with the introduction of simple hashing and salting techniques to make it difficult for an hacker to crack. 
+  * If the data is not encrypted and a hacker gets hold of a **SQL backup file**, the password and credit card information can be compromised. So the hacker does not necessarily need to have access to SQL server itself.
