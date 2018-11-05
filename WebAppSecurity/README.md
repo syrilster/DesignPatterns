@@ -32,3 +32,5 @@ in the field of web application security.
   * If the victim is a normal user, a successful CSRF attack can force the user to perform state changing requests like transferring funds, changing their email address, and so forth. If the victim is an administrative account, CSRF can compromise the entire web application.
 * **Using components with known exploits in action** - Products and framweorks used in the application development can have security loopholes. This should be know in prior and custom actions/solutions should be developed to avoid malicious activities.
 * **Unvalidated redirects and forwards in action** -  A Site may be vulnerable to attackers putting in different redirect URL's to access restricted pages or redirect a user to a different website. Example: A US government website was hacked and the users were redirected to a fake site using URL shorterner service by making it look like a legitimate site.
+  * This risk can be mitigated by validating the redirected URL before the actual redirection itself.
+  * By passing a token which has a list of URL's relative to the current website and not the full URL.
