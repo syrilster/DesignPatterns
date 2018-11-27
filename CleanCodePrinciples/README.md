@@ -6,3 +6,4 @@ Some of the principles covered here:
 * How to format code for maximum readability
 * How to implement complete error handling without obscuring code logic
 * How to unit test and practice test-driven development
+* https://itnext.io/clean-code-in-outsystems-570eaa78d1b2
