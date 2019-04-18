@@ -50,3 +50,20 @@
     NAME                DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
     currency-exchange   1         1         1            1           2h
     ```
+* Expose the deployed app as a service using yaml
+    ```
+    apiVersion: "v1"
+    kind: "Service"
+    metadata:
+      name: "currency-exchange-service"
+      namespace: "default"
+      labels:
+        app: "currency-exchange"
+    spec:
+      ports:
+      - protocol: "TCP"
+        port: 8000
+      selector:
+        app: "currency-exchange"
+      type: "NodePort"     
+    ```
