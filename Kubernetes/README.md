@@ -46,7 +46,7 @@
     ```
 * To check the deployments
     ```
-    **kubectl get deployments**
+    kubectl get deployments
     NAME                DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
     currency-exchange   1         1         1            1           2h
     ```
