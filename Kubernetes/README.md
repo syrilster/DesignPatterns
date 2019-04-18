@@ -1,7 +1,6 @@
 ## what is kubernetes? 
 * Container orchestrator.
 * Groups containers that make up an application into logical units for easy management and discovery.
-
 ## How powerful is kuberneteses (K8)
 * Horizontal scaling - scale containers automatically
 * Self healing - Restarts the containers, replaces the containers when a node dies and automatically kills old containers which do not respond to user queries. Also has configurable health checks.
@@ -10,9 +9,10 @@
 * Storage Orchestration - Can automatically mount storage systems based on user choice be it local or a cloud EBS of AWS or any other network storage.
 * Batch execution - CI workloads i.e replace failed containers.
 * Configuration management - Deploy containers without rebuilding the image via custom configs.
-
-# Deploying spring boot applications in Kubernetes (GCP)
+# Deploying a containerized web application
 * Refer: https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
+* This shows you how to package a web application in a Docker container image, and run that container image on a Google Kubernetes Engine cluster as a load-balanced set of replicas that can scale to the needs of your users.
+# Deploying spring boot application in Kubernetes (GCP) using yaml config file
 * Create a container cluster using below command:
     ```
     gcloud container clusters create currency-conversion-service --num-nodes=2
