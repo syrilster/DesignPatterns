@@ -67,3 +67,22 @@
         app: "currency-exchange"
       type: "NodePort"     
     ```
+* Expose the deployed app with a LB to public internet using yaml
+    ```
+    apiVersion: "v1"
+    kind: "Service"
+    metadata:
+      name: "currency-conversion-app-service"
+      namespace: "default"
+      labels:
+        app: "currency-conversion-app"
+    spec:
+      ports:
+      - protocol: "TCP"
+        port: 8100
+        targetPort: 8100
+      selector:
+        app: "currency-conversion-app"
+      type: "LoadBalancer"
+      loadBalancerIP: ""
+    ```
