@@ -12,7 +12,7 @@
 # Deploying a containerized web application
 * Refer: https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
 * This shows you how to package a web application in a Docker container image, and run that container image on a Google Kubernetes Engine cluster as a load-balanced set of replicas that can scale to the needs of your users.
-# Deploying spring boot application in Kubernetes (GCP) using yaml config file
+# Deploying spring boot application in GKE using yaml
 * Create a container cluster using below command:
     ```
     gcloud container clusters create currency-conversion-service --num-nodes=2
