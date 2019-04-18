@@ -11,4 +11,9 @@
 * Batch execution - CI workloads i.e replace failed containers.
 * Configuration management - Deploy containers without rebuilding the image via custom configs.
 
-# Deploying spring boot applications in Kubernetes
+# Deploying spring boot applications in Kubernetes (GCP)
+* Refer: https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
+* Create a container cluster using below command:
+    ```
+    gcloud container clusters create currency-conversion-service --num-nodes=2
+    ```
