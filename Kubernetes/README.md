@@ -17,3 +17,26 @@
     ```
     gcloud container clusters create currency-conversion-service --num-nodes=2
     ```
+* Prepare a yaml file for application deployment
+    ```
+    apiVersion: "extensions/v1beta1"
+    kind: "Deployment"
+    metadata:
+      name: "currency-conversion-app"
+      namespace: "default"
+      labels:
+        app: "currency-conversion-app"
+    spec:
+      replicas: 2
+      selector:
+        matchLabels:
+          app: "currency-conversion-app"
+      template:
+        metadata:
+          labels:
+            app: "currency-conversion-app"
+        spec:
+          containers:
+          - name: "ccs-sha256"
+            image: "gcr.io/spring-boot-projects/ccs@sha256:01c840326017dde6da713009ee3cb7f3bcf492a3a5f7dfcdd3b9f2599578b808"
+    ```
