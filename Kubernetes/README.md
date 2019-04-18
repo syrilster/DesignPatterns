@@ -17,7 +17,7 @@
     ```
     gcloud container clusters create currency-conversion-service --num-nodes=2
     ```
-* Prepare a yaml file for application deployment
+* Prepare a yaml file for application deployment like below:
     ```
     apiVersion: "extensions/v1beta1"
     kind: "Deployment"
@@ -39,4 +39,14 @@
           containers:
           - name: "ccs-sha256"
             image: "gcr.io/spring-boot-projects/ccs@sha256:01c840326017dde6da713009ee3cb7f3bcf492a3a5f7dfcdd3b9f2599578b808"
+    ```
+* To apply the deployment using the yaml file:
+    ```
+    kubectl apply -f ces-deployment.yaml
+    ```
+* To check the deployments
+    ```
+    AMBAUS00264:spring-currency-exchange-service 728055$ kubectl get deployments
+    NAME                DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+    currency-exchange   1         1         1            1           2h
     ```
