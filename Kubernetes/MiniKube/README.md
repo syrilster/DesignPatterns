@@ -37,3 +37,6 @@
   ```
   minikube service currency-exchange-service
   ```
+# References:
+* https://medium.com/@shivraj.jadhav82/microservice-using-spring-boot-docker-and-kubernetes-or-minikube-in-linux-mint-5b0859770baf
+* https://medium.com/@brianbmathews/getting-started-with-minikube-docker-container-images-for-testing-kubernetes-locally-on-mac-e39adb60bd41
