@@ -33,4 +33,3 @@
   ```
   docker build -t currency-exchange-service:v1 .
   ```
-
