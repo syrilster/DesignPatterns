@@ -25,3 +25,7 @@
   ```
   eval $(minikube docker-env)
   ```
+* Later, when you no longer wish to use the Minikube host, you can undo this change by running:
+  ```
+  eval $(minikube docker-env -u)
+  ```
