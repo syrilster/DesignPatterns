@@ -17,3 +17,7 @@
   Kubernetes master is running at https://192.168.99.102:8443
   KubeDNS is running at https://192.168.99.102:8443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
   ```
+* Open Kubernetes dashboard using:
+  ```
+  minikube dashboard
+  ```
