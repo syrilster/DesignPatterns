@@ -33,3 +33,7 @@
   ```
   docker build -t currency-exchange-service:v1 .
   ```
+* To launch the service. This automatically opens up a browser window using a local IP address that serves your app endpoint
+  ```
+  minikube service currency-exchange-service
+  ```
