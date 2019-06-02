@@ -4,3 +4,11 @@
   ```
   minikube start — vm-driver=hyperkit
   ```
+* To set the context to use minikube we will use the following command:
+  ```
+  kubectl config use-context minikube
+  ```
+* verify that kubectl is configured to communicate with your cluster:
+  ```
+  kubectl cluster-info
+  ```
