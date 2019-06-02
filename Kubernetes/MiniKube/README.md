@@ -29,3 +29,8 @@
   ```
   eval $(minikube docker-env -u)
   ```
+* Build a Docker image, using the Minikube Docker daemon. Now the Minikube VM can run the docker image you have built.
+  ```
+  docker build -t currency-exchange-service:v1 .
+  ```
+
