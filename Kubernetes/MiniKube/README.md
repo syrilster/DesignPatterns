@@ -40,3 +40,4 @@
 # References:
 * https://medium.com/@shivraj.jadhav82/microservice-using-spring-boot-docker-and-kubernetes-or-minikube-in-linux-mint-5b0859770baf
 * https://medium.com/@brianbmathews/getting-started-with-minikube-docker-container-images-for-testing-kubernetes-locally-on-mac-e39adb60bd41
+* Related to endpoint resolution in minikube: https://medium.com/@nieldw/rbac-and-spring-cloud-kubernetes-847dd0f245e4
