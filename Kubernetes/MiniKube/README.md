@@ -2,7 +2,7 @@
 * Install minikube, kubectl-cli on Mac using brew
 * Start minikube using:
   ```
-  minikube start — vm-driver=hyperkit
+  minikube start --vm-driver=none --bootstrapper=kubeadm --extra-config=apiserver.authorization-mode=RBAC
   ```
 * To set the context to use minikube we will use the following command:
   ```
@@ -46,3 +46,10 @@
 * https://medium.com/@brianbmathews/getting-started-with-minikube-docker-container-images-for-testing-kubernetes-locally-on-mac-e39adb60bd41
 * Spring Feign Kubernetes: https://github.com/nhatthai/spring-feign-kubernetes
 * Related to endpoint resolution in minikube: https://medium.com/@nieldw/rbac-and-spring-cloud-kubernetes-847dd0f245e4
+
+# Errors:
+* operation: [get] for kind: [endpoints] with name: [hello-service] in namespace: [default] failed: This is related to minikube RBAC. Starting minikube like below solved the issue:
+  ```
+  minikube start --vm-driver=none --bootstrapper=kubeadm --extra-config=apiserver.authorization-mode=RBAC
+  kubectl create clusterrolebinding add-on-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
+  ```
