@@ -12,6 +12,10 @@
   ```
   kubectl cluster-info
   ```
+* Spring Cloud Kubernetes requires access to Kubernetes API in order to be able to retrieve a list of address of pods running for a single service. Execute the following command:
+  ```
+  kubectl create clusterrolebinding admin --clusterrole=cluster-admin --serviceaccount=default:default
+  ```
 * This will output the below:
   ```
   Kubernetes master is running at https://192.168.99.102:8443
