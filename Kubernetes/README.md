@@ -86,3 +86,5 @@
       type: "LoadBalancer"
       loadBalancerIP: ""
     ```
+# Errors:
+* Forbidden!Configured service account doesn't have access. Service account may have been revoked. endpoints "hello-service" is forbidden: https://github.com/fabric8io/fabric8/issues/6840
